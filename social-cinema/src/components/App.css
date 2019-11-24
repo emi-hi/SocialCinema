@@ -20,3 +20,46 @@
 .App-link {
   color: #09d3ac;
 }
+
+.list {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.movie_box {
+  width: 8vw;
+  height: 150px;
+  border: 2px solid plum;
+  margin-left: .75vw;
+  margin-right: .75vw;
+}
+
+.favorite_add {
+  margin: 25px;
+}
+
+.empty {
+  width: 8vw;
+  height: 150px;
+  background-color: brown;
+}
+
+.list_name {
+  background-color: rgb(177, 151, 177);
+  border: 2px solid rgb(14, 10, 14);
+}
+
+.nav {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding-right: 10px;
+  background-color: rgb(89, 74, 95);
+}
+
+
+.logo {
+  display: flex;
+  flex-direction: row;
+}
