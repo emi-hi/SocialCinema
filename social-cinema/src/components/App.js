@@ -2,6 +2,7 @@ import React from 'react';
 import './App.css';
 
 import Suggested from "./Suggested";
+import Genre from "./Genre";
 
 function App() {
 
@@ -10,6 +11,7 @@ function App() {
       <header className="App-header">
         Welcome to this react App.
       </header>
+      <Genre/>
       <Suggested/>
     </div>
   );

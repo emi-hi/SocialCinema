@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 
-export default function Suggested(props) {
+export default function Suggested() {
   const [movieTitle, setMovieTitle] = useState("");
   const [movieDescription, setMovieDescription] = useState("");
   const [moviePoster, setMoviePoster] = useState("");

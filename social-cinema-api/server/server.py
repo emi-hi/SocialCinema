@@ -22,7 +22,7 @@ def index():
 
   selected_result = tmdb_result["results"][result_index]
 
-  result_title = selected_result["original_title"]
+  result_title = selected_result["title"]
   result_poster = "https://image.tmdb.org/t/p/w500" + selected_result["poster_path"]
   result_description = selected_result["overview"]
   result_release_date = selected_result["release_date"]
