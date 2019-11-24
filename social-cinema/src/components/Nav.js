@@ -5,7 +5,7 @@ export default function Nav(props) {
   return (
     <div class="nav">
       <div class="logo">
-        <img id="cinema-logo"  src="images/cinema-movie.jpg" width="150px"/>
+        <img id="cinema-logo"  src="images/popcorn.png" width="150px"/>
         <h1>Social Cinema</h1>
       </div>
       <h1>Emily</h1>

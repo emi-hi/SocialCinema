@@ -2,9 +2,9 @@
   text-align: center;
 }
 
-.App-logo {
+/* .App-logo {
   height: 40vmin;
-}
+} */
 
 .App-header {
   background-color: #282c34;
@@ -30,7 +30,7 @@
 .movie_box {
   width: 8vw;
   height: 150px;
-  border: 2px solid plum;
+  border: 2px solid rgb(0, 0, 0);
   margin-left: .75vw;
   margin-right: .75vw;
 }
@@ -46,7 +46,7 @@
 }
 
 .list_name {
-  background-color: rgb(177, 151, 177);
+  background-color: rgb(158, 158, 158);
   border: 2px solid rgb(14, 10, 14);
 }
 
@@ -55,7 +55,7 @@
   flex-direction: row;
   justify-content: space-between;
   padding-right: 10px;
-  background-color: rgb(89, 74, 95);
+  background-color: rgb(92, 92, 92);
 }
 
 
