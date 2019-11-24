@@ -1,39 +1,10 @@
-# server.py
-import os
-
-from dotenv import load_dotenv
-from pathlib import Path
-from flask import Flask, render_template, request
-from flask_sqlalchemy import SQLAlchemy
-
-env_path = Path(".") / ".env"
-print(env_path)
-load_dotenv(dotenv_path=env_path)
-
-app = Flask(__name__)
-
-ENV = "dev"
-
-if ENV == "dev":
-  app.debug = True
-  print("I AM A BANANA")
-  fruit = os.getenv("PGHOST")
-  print(fruit)
-  app.config["SQLALCHEMY_DATABASE_URI"] = "postgresql://{}:{}@{}/{}".format(os.getenv("PGUSER"), os.getenv("PGPASSWORD"), os.getenv("PGHOST"), os.getenv("PGDATABASE"))
-else:
-  app.debug = False
-
-app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
-
-db = SQLAlchemy(app)
-
-
+from app import app, db
+from app.models import User
 from flask_cors import CORS
 import requests
 import json
 import random
 
-app = Flask(__name__)
 CORS(app)
 
 @app.route("/")
@@ -67,9 +38,5 @@ def index():
 
 @app.route("/hello")
 def hello():
-  return "Hello World!"
-
-if __name__ == "__main__":
-  app.debug = True
-  app.run()
-  
+  u = User.query.all()[0]
+  return "Hello World! {}".format(u.name)
