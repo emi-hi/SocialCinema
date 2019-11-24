@@ -1,11 +1,10 @@
-# server.py
-from flask import Flask, render_template, request
+from app import app, db
+from app.models import User
 from flask_cors import CORS
 import requests
 import json
 import random
 
-app = Flask(__name__)
 CORS(app)
 
 @app.route("/")
@@ -39,9 +38,5 @@ def index():
 
 @app.route("/hello")
 def hello():
-  return "Hello World!"
-
-if __name__ == "__main__":
-  app.debug = True
-  app.run()
-  
+  u = User.query.all()[0]
+  return "Hello World! {}".format(u.name)
