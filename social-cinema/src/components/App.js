@@ -3,6 +3,9 @@ import './App.css';
 import List from './List'
 import Nav from './Nav'
 
+import Suggested from "./Suggested";
+import Genre from "./Genre";
+
 const tempFaves = [
   {id: 1, name: 'Titanic', img: 'images/movies/titanic.jpg' },
   {id: 2, name: 'Scary Movie', img: 'images/movies/scary.jpg' },
@@ -16,8 +19,6 @@ const tempLater = [
   {id: 3, name: 'Jaws 2', img: 'images/movies/jaws.jpg'},
   {id: 4, name: 'Baby Driver 2', img: 'images/movies/baby.jpeg' },
 ]
-
-
 
 function App() {
 
@@ -51,6 +52,8 @@ function App() {
       <List type="laters" data={tempLater}/> 
       }
       </div>
+      <Genre/>
+      <Suggested/>
     </div>
   );
 }
