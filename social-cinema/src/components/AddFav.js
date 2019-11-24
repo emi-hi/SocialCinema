@@ -7,6 +7,7 @@ export default function AddFav(props) {
       <img
         src="images/add.png"
         alt="Add" 
+        onClick={console.log("Click!")}
       />
     </main>
   );
