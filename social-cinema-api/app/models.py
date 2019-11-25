@@ -6,6 +6,8 @@ class User(db.Model):
   name = db.Column(db.String(64), index=True)
   icon = db.Column(db.String(64))
   genres = db.relationship('Genre', secondary='user_genres')
+  fav_movies = db.relationship('Movie', secondary='favorited_movies')
+  later_movies = db.relationship('Movie', secondary='later_movies')
 
   def __repr__(self):
     return "<User {}>".format(self.name)
@@ -31,3 +33,31 @@ class User_genre(db.Model):
 
   def __repr__(self):
     return "<User_genre {}>".format(self.preference)
+
+class Movie(db.Model):
+  __tablename__ = 'movies'
+  id = db.Column(db.Integer, primary_key=True)
+  title = db.Column(db.String(64))
+  movie_api_id = db.Column(db.String(64))
+  image = db.Column(db.String(64))
+  users_fav = db.relationship('User', secondary='favorited_movies')
+  users_later = db.relationship('User', secondary='later_movies')
+
+  def __repr__(self):
+    return "<Movie {}>".format(self.title)
+
+class Favorited_movie(db.Model):
+  __tablename__ = 'favorited_movies'
+  id = db.Column(db.Integer, primary_key=True)
+  user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+  movie_id = db.Column(db.Integer, db.ForeignKey('movies.id'))
+  user = db.relationship(User, backref=db.backref("favorited_movies", cascade="all, delete-orphan"))
+  movie = db.relationship(Genre, backref=db.backref("favorited_movies", cascade="all, delete-orphan"))
+
+class Later_movie(db.Model):
+  __tablename__ = 'later_movies'
+  id = db.Column(db.Integer, primary_key=True)
+  user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+  movie_id = db.Column(db.Integer, db.ForeignKey('movies.id'))
+  user = db.relationship(User, backref=db.backref("later_movies", cascade="all, delete-orphan"))
+  movie = db.relationship(Genre, backref=db.backref("later_movies", cascade="all, delete-orphan"))
