@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import './App.css';
 
 export default function Suggested() {
   const [movieTitle, setMovieTitle] = useState("");
@@ -19,11 +20,19 @@ export default function Suggested() {
 
   return (
     <section>
-      <img src={moviePoster} height="200px"></img>
-      <h2>{movieTitle}</h2>
-      <h4>{movieReleaseDate}</h4>
-      <p>{movieDescription}</p>
-      <button type="button" onClick={()=> newMovie()}>Suggest a Movie</button>
+      <div className="suggestion-buttons">
+        <button type="button" onClick={()=>console.log("add this movie to later list!")}>Add This to Later List</button>
+        <button type="button" onClick={()=> newMovie()}>Suggest a Movie</button>
+      </div>
+      <div className="suggestion-all">
+        <img alt={movieTitle} src={moviePoster} className="poster"></img>
+        <div className="suggestion-text">
+          <h2 className="movie-title">{movieTitle}</h2>
+          <h4>{movieReleaseDate.slice(0,4)}</h4>
+          <p>{movieDescription}</p> 
+        </div>
+      </div>
+
     </section>
   );
 }

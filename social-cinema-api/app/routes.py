@@ -4,6 +4,7 @@ from flask_cors import CORS
 import requests
 import json
 import random
+from flask import request
 
 CORS(app)
 
@@ -52,3 +53,26 @@ def genres():
   print(genres)
   genres_json = json.dumps(wee)
   return genres_json
+
+@app.route("/movies/title/")
+def title():
+  movie_title = request.args['title']
+  movies = requests.get("https://api.themoviedb.org/3/search/movie?api_key=53312c532da4333f7a5578a89b56dfc5&language=en-US&query={}&page=1&include_adult=false".format(movie_title))
+  movies_dict = movies.json()
+  first_result = movies_dict["results"][0]
+  
+  result_title = first_result["title"]
+  result_poster = "https://image.tmdb.org/t/p/w500" + first_result["poster_path"]
+  result_description = first_result["overview"]
+  result_release_date = first_result["release_date"]
+
+  movie_info = {
+    "title": result_title,
+    "poster": result_poster,
+    "description": result_description,
+    "release_date": result_release_date
+  }
+
+  movie_info_json = json.dumps(movie_info)
+
+  return movie_info_json
