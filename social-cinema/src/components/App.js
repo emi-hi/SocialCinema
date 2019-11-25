@@ -7,6 +7,8 @@ import Nav from './Nav'
 import Suggested from "./Suggested";
 import Genres from "./Genres";
 
+import useApplicationData from "../hooks/useApplicationData";
+
 const tempFaves = [
   {id: 1, title: 'Titanic', img: 'images/movies/titanic.jpg' },
   {id: 2, title: 'Scary Movie', img: 'images/movies/scary.jpg' },
@@ -22,7 +24,11 @@ const tempLater = [
 ]
 
 function App() {
-  const [user, setUser] = useState("")
+  const { state, setUser, setGenres } = useApplicationData();
+
+  const user = state.user;
+  // const genreList = state.genres;
+
   const [favList, setFavList] = useState("hide")
   const [laterList, setLaterList] = useState("hide")
   const [genreList, setGenreList] = useState("hide")
@@ -55,16 +61,18 @@ function App() {
   const getUser = (name) => {
     axios.post("http://localhost:5000/login", { name: name })
       .then(response => {
-        console.log(response.data)
-        const user = response.data
-        setUser(user.name)
+        setUser(response.data);
       })
+  }
+
+  const removeUser = () => {
+    setUser("");
   }
 
   return (
     
     <div className="App">
-      <Nav user={user} getUser={getUser} />
+      <Nav user={user} getUser={getUser} removeUser={removeUser} />
       <div className="list_name" onClick={() => setFavList(toggleList)}>
         Favorite Movies
       </div>
@@ -86,7 +94,7 @@ function App() {
       </div>
       <div>
       {genreList === "show" &&
-        <Genres userGenres = {userGenres}/>
+        <Genres userGenres = {userGenres} />
       }
       </div> 
       <div className="list_name" onClick={() => setFriendList(toggleList)}>
