@@ -6,8 +6,8 @@ class User(db.Model):
   name = db.Column(db.String(64), index=True)
   icon = db.Column(db.String(64))
   genres = db.relationship('Genre', secondary='user_genres')
-  fav_movies = db.relationship('Movie', secondary='favorited_movies')
-  later_movies = db.relationship('Movie', secondary='later_movies')
+  movie_favs = db.relationship('Movie', secondary='favorited_movies')
+  movie_laters = db.relationship('Movie', secondary='later_movies')
 
   def __repr__(self):
     return "<User {}>".format(self.name)
@@ -40,8 +40,8 @@ class Movie(db.Model):
   title = db.Column(db.String(64))
   movie_api_id = db.Column(db.String(64))
   image = db.Column(db.String(64))
-  users_fav = db.relationship('User', secondary='favorited_movies')
-  users_later = db.relationship('User', secondary='later_movies')
+  user_favs = db.relationship('User', secondary='favorited_movies')
+  user_laters = db.relationship('User', secondary='later_movies')
 
   def __repr__(self):
     return "<Movie {}>".format(self.title)
@@ -52,7 +52,7 @@ class Favorited_movie(db.Model):
   user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
   movie_id = db.Column(db.Integer, db.ForeignKey('movies.id'))
   user = db.relationship(User, backref=db.backref("favorited_movies", cascade="all, delete-orphan"))
-  movie = db.relationship(Genre, backref=db.backref("favorited_movies", cascade="all, delete-orphan"))
+  movie = db.relationship(Movie, backref=db.backref("favorited_movies", cascade="all, delete-orphan"))
 
 class Later_movie(db.Model):
   __tablename__ = 'later_movies'
@@ -60,4 +60,4 @@ class Later_movie(db.Model):
   user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
   movie_id = db.Column(db.Integer, db.ForeignKey('movies.id'))
   user = db.relationship(User, backref=db.backref("later_movies", cascade="all, delete-orphan"))
-  movie = db.relationship(Genre, backref=db.backref("later_movies", cascade="all, delete-orphan"))
+  movie = db.relationship(Movie, backref=db.backref("later_movies", cascade="all, delete-orphan"))
