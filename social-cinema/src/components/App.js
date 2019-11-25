@@ -68,7 +68,6 @@ function App() {
       console.log(response.data)
       setFriends(response.data)
     })  
-
   }, [user])
 
   return (  
