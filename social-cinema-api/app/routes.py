@@ -1,5 +1,5 @@
 from app import app, db
-from app.models import User
+from app.models import User, Genre
 from flask_cors import CORS
 import requests
 import json
@@ -40,3 +40,15 @@ def index():
 def hello():
   u = User.query.all()[0]
   return "Hello World! {}".format(u.name)
+
+@app.route("/api/genres")
+def genres():
+  genres = Genre.query.all()
+  wee = []
+  for genre in genres:
+    wee.append(genre.genre_name)
+    print(genre)
+
+  print(genres)
+  genres_json = json.dumps(wee)
+  return genres_json
