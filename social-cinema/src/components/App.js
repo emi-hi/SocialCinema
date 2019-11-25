@@ -6,6 +6,7 @@ import Nav from './Nav'
 
 import Suggested from "./Suggested";
 import Genres from "./Genres";
+import FriendList from './FriendList';
 
 const tempFaves = [
   {id: 1, title: 'Titanic', img: 'images/movies/titanic.jpg' },
@@ -28,6 +29,8 @@ function App() {
   const [genreList, setGenreList] = useState("hide")
   const [friendList, setFriendList] = useState("hide")
   const [suggested, setSuggested] = useState("hide")
+
+  const [friends, setFriends] = useState([])
 
   const userGenres =[
     {
@@ -61,8 +64,16 @@ function App() {
       })
   }
 
-  return (
-    
+  useEffect(() => {
+    axios.get("http://localhost:5000/api/users")
+    .then(response => {
+      console.log(response.data)
+      setFriends(response.data)
+    })  
+
+  })
+
+  return (  
     <div className="App">
       <Nav user={user} getUser={getUser} />
       <div className="list_name" onClick={() => setFavList(toggleList)}>
@@ -94,7 +105,7 @@ function App() {
       </div>
       <div>
       {friendList === "show" &&
-        "friends"
+        <FriendList friends={friends}/>
       }
       </div>
       <div className="main-container">
