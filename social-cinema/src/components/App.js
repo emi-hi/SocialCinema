@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import './App.css';
 import List from './lists/List.js'
 import Nav from './Nav'
-import FavoriteForm from './lists/FavoriteForm'
 
 import Suggested from "./Suggested";
 import Genres from "./Genres";
@@ -25,6 +24,8 @@ function App() {
   const [favList, setFavList] = useState("hide")
   const [laterList, setLaterList] = useState("hide")
   const [genreList, setGenreList] = useState("hide")
+  const [friendList, setFriendList] = useState("hide")
+  const [suggested, setSuggested] = useState("hide")
 
   const userGenres =[
     {
@@ -75,8 +76,27 @@ function App() {
       {genreList === "show" &&
         <Genres userGenres = {userGenres}/>
       }
+      </div> 
+      <div className="list_name" onClick={() => setFriendList(toggleList)}>
+        My Friends
       </div>
-      <Suggested/>
+      <div>
+      {friendList === "show" &&
+        "friends"
+      }
+      </div>
+      <div className="main-container">
+        <div className="friends-container">
+          FRIENDS FOR MOVIE NIGHT!
+        </div>
+        <div className="suggested-container">
+          
+          <Suggested/>
+        </div>
+        <div className="recent-suggestion-list-container">
+          RECENTLY SUGGESTED LIST
+        </div>
+      </div>
     </div>
   );
 }
