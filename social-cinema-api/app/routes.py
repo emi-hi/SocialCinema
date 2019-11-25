@@ -55,13 +55,11 @@ def users():
 @app.route("/api/genres")
 def genres():
   genres = Genre.query.all()
-  wee = []
+  genre_arr = []
   for genre in genres:
-    wee.append(genre.genre_name)
-    print(genre)
+    genre_arr.append({"id": genre.genre_api_id, "name": genre.genre_name})
 
-  print(genres)
-  genres_json = json.dumps(wee)
+  genres_json = json.dumps(genre_arr)
   return genres_json
 
 @app.route("/movies/title/")
