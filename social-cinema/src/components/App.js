@@ -4,7 +4,7 @@ import List from './List'
 import Nav from './Nav'
 
 import Suggested from "./Suggested";
-import Genre from "./Genre";
+import Genres from "./Genres";
 
 const tempFaves = [
   {id: 1, name: 'Titanic', img: 'images/movies/titanic.jpg' },
@@ -21,9 +21,23 @@ const tempLater = [
 ]
 
 function App() {
-
   const [favList, setFavList] = useState("hide")
   const [laterList, setLaterList] = useState("hide")
+
+  const userGenres =[
+    {
+      "id": 28,
+      "preference": true
+    },
+    {
+      "id": 12,
+      "preference": true
+    },
+    {
+      "id": 80,
+      "preference": false
+    }
+  ];
 
   const toggleList = function(status) {
     if (status === "show") {
@@ -52,7 +66,9 @@ function App() {
       <List type="laters" data={tempLater}/> 
       }
       </div>
-      <Genre/>
+      <Genres
+        userGenres = {userGenres}
+      />
       <Suggested/>
     </div>
   );
