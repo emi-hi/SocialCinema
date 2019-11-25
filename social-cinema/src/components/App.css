@@ -64,6 +64,26 @@
   flex-direction: row;
 }
 
+button.unselected {
+  background-color: lightsalmon;
+  border: none;
+}
+
+button.selected {
+  background-color: lightgreen;
+  border: 2px solid #4CAF50;
+}
+
+
+div.genre {
+  padding:40px;
+}
+section.genres {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
 
 .favorite-form{
  
