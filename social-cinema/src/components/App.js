@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 import './App.css';
 import List from './List'
 import Nav from './Nav'
@@ -21,7 +22,7 @@ const tempLater = [
 ]
 
 function App() {
-
+  const [user, setUser] = useState("")
   const [favList, setFavList] = useState("hide")
   const [laterList, setLaterList] = useState("hide")
 
@@ -32,10 +33,20 @@ function App() {
       return "show"
     }
   }
+
+  const getUser = (name) => {
+    axios.post("http://localhost:5000/login", { name: name })
+      .then(response => {
+        console.log(response.data)
+        const user = response.data
+        setUser(user.name)
+      })
+  }
+
   return (
     
     <div className="App">
-      <Nav/>
+      <Nav user={user} getUser={getUser} />
       <div className="list_name" onClick={() => setFavList(toggleList)}>
       <h3>Favorite Movies</h3>
       </div>

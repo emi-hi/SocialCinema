@@ -8,7 +8,7 @@ export default function Suggested() {
   const [movieReleaseDate, setMovieReleaseDate] = useState("");
 
   const newMovie = () => {
-    axios.get("http://localhost:5000/")
+    axios.get("http://localhost:5000/suggestion")
       .then(response => {
         setMovieTitle(response.data.title);
         setMovieDescription(response.data.description);

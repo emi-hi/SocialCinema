@@ -1,5 +1,6 @@
 from app import app, db
 from app.models import User, Genre
+from flask import request
 from flask_cors import CORS
 import requests
 import json
@@ -7,8 +8,8 @@ import random
 
 CORS(app)
 
-@app.route("/")
-def index():
+@app.route("/suggestion")
+def suggestions():
 
   genres = [28, 12, 16, 35, 80, 99, 18, 10751, 14, 36, 27, 10402, 9648, 10749, 878, 10770, 53, 10752, 37]
   genre_index = (random.randint(0,18))
@@ -52,3 +53,23 @@ def genres():
   print(genres)
   genres_json = json.dumps(wee)
   return genres_json
+
+@app.route("/login", methods=['GET', 'POST'])
+def login():
+  req = json.loads(request.data)
+
+  user = User.query.filter(User.name == req['name']).one_or_none()
+  if user == None:
+    user = User(name=req['name'], icon="https://ui-avatars.com/api/?name={}".format(req['name']))
+    db.session.add(user)
+    db.session.commit()
+
+  print(user.name)
+  res = {
+    "name": user.name,
+    "avatar": user.icon
+  }
+
+  res_json = json.dumps(res)
+
+  return res_json
