@@ -24,6 +24,7 @@ const tempLater = [
 function App() {
   const [favList, setFavList] = useState("hide")
   const [laterList, setLaterList] = useState("hide")
+  const [genreList, setGenreList] = useState("hide")
 
   const userGenres =[
     {
@@ -52,24 +53,29 @@ function App() {
     <div className="App">
       <Nav/>
       <div className="list_name" onClick={() => setFavList(toggleList)}>
-      <h3>Favorite Movies</h3>
+        Favorite Movies
       </div>
       <div>
-      {favList === "show" &&
-      <List type="favorites" data={tempFaves}/> 
-      }
+        {favList === "show" &&
+        <List type="favorites" data={tempFaves}/> 
+        }
       </div>
       <div className="list_name" onClick={() => setLaterList(toggleList)}>
-      <h3>Later Movies</h3>
+        Later Movies
       </div>
       <div>
-      {laterList === "show" &&
-      <List type="laters" data={tempLater}/> 
+        {laterList === "show" &&
+        <List type="laters" data={tempLater}/> 
+        }
+      </div>
+      <div className="list_name" onClick={() => setGenreList(toggleList)}>
+        My Genre Preferences
+      </div>
+      <div>
+      {genreList === "show" &&
+        <Genres userGenres = {userGenres}/>
       }
       </div>
-      <Genres
-        userGenres = {userGenres}
-      />
       <Suggested/>
     </div>
   );
