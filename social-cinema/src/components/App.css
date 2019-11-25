@@ -85,7 +85,41 @@ section.genres {
 }
 
 
-.favorite-form{
- 
+.favorite-form {
   background-color: white;
+}
+
+.main-container{
+  display: flex;
+  flex-direction: row;
+  height: 70vh;
+}
+
+.main-container .friends-container{
+  width:20%;
+  border: 2px dotted rgb(138, 100, 100);
+}
+.main-container .suggested-container{
+  width:60%;
+  border: 2px dotted rgb(54, 151, 120);
+}
+.main-container .recent-suggestion-list-container{
+  width:20%;
+  border: 2px dotted rgb(92, 196, 31);
+}
+.suggestion-all {
+  border: 2px solid rgb(0, 0, 0);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.poster{
+  height: 65vh;
+}
+
+.suggestion-text{
+  height: 60vh;
+  border: 2px dashed rgb(0, 0, 0);
+  width: 50%;
 }
