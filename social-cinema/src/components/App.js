@@ -28,8 +28,6 @@ function App() {
   const [laterList, setLaterList] = useState("hide")
   const [genreList, setGenreList] = useState("hide")
   const [friendList, setFriendList] = useState("hide")
-  const [suggested, setSuggested] = useState("hide")
-
   const [friends, setFriends] = useState([])
 
   const userGenres =[
@@ -113,7 +111,6 @@ function App() {
           FRIENDS FOR MOVIE NIGHT!
         </div>
         <div className="suggested-container">
-          
           <Suggested/>
         </div>
         <div className="recent-suggestion-list-container">
