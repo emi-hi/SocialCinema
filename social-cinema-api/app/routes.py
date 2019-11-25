@@ -43,6 +43,15 @@ def hello():
   u = User.query.all()[0]
   return "Hello World! {}".format(u.name)
 
+@app.route("/api/users")
+def users():
+  users = User.query.all()
+  user_list = []
+  for user in users:
+    user_list.append({"id":user.id, "name":user.name, "icon":user.icon})
+  users_json = json.dumps(user_list)
+  return users_json
+
 @app.route("/api/genres")
 def genres():
   genres = Genre.query.all()
