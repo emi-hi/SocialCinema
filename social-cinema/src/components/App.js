@@ -1,23 +1,24 @@
 import React, { useState } from 'react';
 import './App.css';
-import List from './List'
+import List from './lists/List.js'
 import Nav from './Nav'
+import FavoriteForm from './lists/FavoriteForm'
 
 import Suggested from "./Suggested";
 import Genre from "./Genre";
 
 const tempFaves = [
-  {id: 1, name: 'Titanic', img: 'images/movies/titanic.jpg' },
-  {id: 2, name: 'Scary Movie', img: 'images/movies/scary.jpg' },
-  {id: 3, name: 'Jaws', img: 'images/movies/jaws.jpg'},
-  {id: 4, name: 'Baby Driver', img: 'images/movies/baby.jpeg' },
+  {id: 1, title: 'Titanic', img: 'images/movies/titanic.jpg' },
+  {id: 2, title: 'Scary Movie', img: 'images/movies/scary.jpg' },
+  {id: 3, title: 'Jaws', img: 'images/movies/jaws.jpg'},
+  {id: 4, title: 'Baby Driver', img: 'images/movies/baby.jpeg' }
 ]
 
 const tempLater = [
-  {id: 1, name: 'Titanic 2', img: 'images/movies/titanic.jpg' },
-  {id: 2, name: 'Scary Movie 2', img: 'images/movies/scary.jpg' },
-  {id: 3, name: 'Jaws 2', img: 'images/movies/jaws.jpg'},
-  {id: 4, name: 'Baby Driver 2', img: 'images/movies/baby.jpeg' },
+  {id: 1, title: 'Titanic 2', img: 'images/movies/titanic.jpg' },
+  {id: 2, title: 'Scary Movie 2', img: 'images/movies/scary.jpg' },
+  {id: 3, title: 'Jaws 2', img: 'images/movies/jaws.jpg'},
+  {id: 4, title: 'Baby Driver 2', img: 'images/movies/baby.jpeg' }
 ]
 
 function App() {
