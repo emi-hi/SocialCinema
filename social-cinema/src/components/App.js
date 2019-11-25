@@ -71,7 +71,7 @@ function App() {
       setFriends(response.data)
     })  
 
-  })
+  }, [user])
 
   return (  
     <div className="App">
