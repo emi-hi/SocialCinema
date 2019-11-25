@@ -84,3 +84,8 @@ section.genres {
   flex-wrap: wrap;
 }
 
+
+.favorite-form{
+ 
+  background-color: white;
+}

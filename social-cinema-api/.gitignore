@@ -1,5 +1,3 @@
+__pycache__/
 .env
-social-cinema-api/app/__pycache__/
-social-cinema-api/__pycache__/
-social-cinema-api/__pycache__/config.cpython-38.pyc
-social-cinema-api/__pycache__/socialsinema.cpython-38.pyc
+*.pyc
