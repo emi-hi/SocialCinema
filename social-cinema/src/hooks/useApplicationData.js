@@ -20,7 +20,7 @@ export default function useApplicationData() {
         setGenres(all[0].data.genres)
       })
     }
-  }, [])
+  }, [state.user])
 
   const setUser = user => {
     localStorage.setItem('user', JSON.stringify(user));

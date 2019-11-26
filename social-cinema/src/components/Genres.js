@@ -17,30 +17,34 @@ export default function Genres(props) {
   const lovedGenres = [];
   const hatedGenres = [];
 
+  
   for (const genre of props.userGenres) {
+    console.log(`Genre ${genre.id} pref ${genre.preference}`)
     if (genre.preference) {
-      lovedGenres.push(genre.id)
-    } else if (!genre.preference) {
-      hatedGenres.push(genre.id)
+      lovedGenres.push(genre.id);
+    } else if (genre.preference === false) {
+      hatedGenres.push(genre.id);
     }
-  };
+  }
 
   const genreOptions = [];
 
   for(const genre of genres) {
     genreOptions.push(
-      <Genre 
+      <Genre
+        key={genre.id}
+        id={genre.id}
         name={genre.name}
         love_class={lovedGenres.includes(genre.id)? "selected": "unselected"}
         meh_class={lovedGenres.includes(genre.id)? "unselected": hatedGenres.includes(genre.id)? "unselected" : "selected"}
         hate_class={hatedGenres.includes(genre.id)? "selected": "unselected"}
+        setGenre={props.setGenre}
       /> 
     )
   }
 
   return (
     <div>
-      
       <section class="genres">
         {genreOptions}
       </section>

@@ -1,5 +1,5 @@
 from app import app, db
-from app.models import User, Genre
+from app.models import User, Genre, User_genre
 from flask import request
 from flask_cors import CORS
 import requests
@@ -67,24 +67,33 @@ def genres():
   genres_json = json.dumps(genre_arr)
   return genres_json
 
-@app.route("/api/<user>/genres")
+@app.route("/api/<user>/genres", methods=['GET', 'POST'])
 def userGenres(user):
-  genres = [
-    {
-      "id": 28,
-      "preference": False
-    },
-    {
-      "id": 12,
-      "preference": True
-    },
-    {
-      "id": 80,
-      "preference": False
-    }
-  ]
+  user = User.query.filter(User.name == user).one_or_none()
 
-  print(user)
+  if request.method == 'POST':
+    req = json.loads(request.data)
+
+    genre = Genre.query.filter(Genre.genre_api_id == req['id']).first()
+
+    user.genres.append(genre)
+    if req['preference'] == "":
+      user.genres[-1].user_genres[0].preference = None
+    else:
+      user.genres[-1].user_genres[0].preference = req['preference']
+
+    db.session.add(user)
+    db.session.commit()
+
+  genres = []
+
+  for genre in user.user_genres:
+    genres.append(
+      {
+        "id": genre.genre.genre_api_id,
+        "preference": genre.preference
+      }
+    )
 
   res = {
     "genres": genres
@@ -94,12 +103,12 @@ def userGenres(user):
 
   return res_json
 
-@app.route("/api/<user>/favmovies")
+@app.route("/api/<user>/favmovies", methods=['GET', 'POST'])
 def userFavmovies(user):
 
   return "potatoe"
 
-@app.route("/api/<user>/latermovies")
+@app.route("/api/<user>/latermovies", methods=['GET', 'POST'])
 def userLatemovies(user):
 
   return "tomatoe"
@@ -137,26 +146,21 @@ def login():
     db.session.add(user)
     db.session.commit()
 
+  genres = []
+
+  for genre in user.user_genres:
+    genres.append(
+      {
+        "id": genre.genre.genre_api_id,
+        "preference": genre.preference
+      }
+    )
+
   user = {
     "name": user.name,
     "avatar": user.icon
   }
-
-  genres = [
-    {
-      "id": 28,
-      "preference": False
-    },
-    {
-      "id": 12,
-      "preference": True
-    },
-    {
-      "id": 80,
-      "preference": False
-    }
-  ]
-
+  
   res = {
     "user": user,
     "genres": genres
