@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
 import './App.css';
-import Loading from "./Loading";
 
 export default function Suggested() {
   const [movieTitle, setMovieTitle] = useState("");
