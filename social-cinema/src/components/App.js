@@ -36,8 +36,22 @@ function App() {
   const [genreList, setGenreList] = useState("hide")
   const [friendList, setFriendList] = useState("hide")
   const [friends, setFriends] = useState([])
+  const [group, addToGroup] = useState([{"friend":
+    {"icon": "https://ui-avatars.com/api/?name=Alan",
+    "id": 5,
+    "name": "Alan"}}])
+ 
 
   const userGenres = state.genres;
+
+  const useMovieNight = function(friend) {
+    addToGroup([
+      ...group, {
+        friend
+      }
+    ])
+    console.log(group)
+  }
 
   const toggleList = function(status) {
     if (status === "show") {
@@ -58,10 +72,11 @@ function App() {
   useEffect(() => {
     axios.get("http://localhost:5000/api/users")
     .then(response => {
-      console.log(response.data)
       setFriends(response.data)
     })  
   }, [user])
+
+
  
   const removeUser = () => {
     setUser("");
@@ -101,13 +116,13 @@ function App() {
       </div>
       <div>
       {friendList === "show" &&
-        <FriendList friends={friends}/>
+        <FriendList friends={friends} useMovieNight={useMovieNight} group={group} action="add" classname="list"/>
       }
       </div>
       <div className="main-container">
         <div className="friends-container">
           FRIENDS FOR MOVIE NIGHT!
-          <MovieNightFriends  user={user}/>
+          <MovieNightFriends  user={user} group={group} action="remove" classname="columnlist"/>
         </div>
         <div className="suggested-container">
           <Suggested/>
