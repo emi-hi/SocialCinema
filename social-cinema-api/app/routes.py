@@ -6,6 +6,11 @@ import requests
 import json
 import random
 from flask import request
+import dotenv
+import os
+
+dotenv.load_dotenv()
+TMDB_key = os.getenv('TMDB_KEY')
 
 CORS(app)
 
@@ -16,7 +21,7 @@ def suggestions():
   genre_index = (random.randint(0,18))
   genre = genres[genre_index]
 
-  r = requests.get("https://api.themoviedb.org/3/discover/movie?api_key=53312c532da4333f7a5578a89b56dfc5&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres={}".format(genre))
+  r = requests.get("https://api.themoviedb.org/3/discover/movie?api_key={}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres={}".format(TMDB_key, genre))
   tmdb_result = json.loads(r.text)
 
   result_index = (random.randint(0, 10))
@@ -65,7 +70,7 @@ def genres():
 @app.route("/movies/title/")
 def title():
   movie_title = request.args['title']
-  movies = requests.get("https://api.themoviedb.org/3/search/movie?api_key=53312c532da4333f7a5578a89b56dfc5&language=en-US&query={}&page=1&include_adult=false".format(movie_title))
+  movies = requests.get("https://api.themoviedb.org/3/search/movie?api_key={}&language=en-US&query={}&page=1&include_adult=false".format(TMDB_key, movie_title))
   movies_dict = movies.json()
   first_result = movies_dict["results"][0]
   
