@@ -7,6 +7,7 @@ import Nav from './Nav'
 import Suggested from "./Suggested";
 import Genres from "./Genres";
 import FriendList from './FriendList';
+import MovieNightFriends from './MovieNightFriends';
 
 const tempFaves = [
   {id: 1, title: 'Titanic', img: 'images/movies/titanic.jpg' },
@@ -108,6 +109,7 @@ function App() {
       <div className="main-container">
         <div className="friends-container">
           FRIENDS FOR MOVIE NIGHT!
+          <MovieNightFriends  user={user}/>
         </div>
         <div className="suggested-container">
           <Suggested/>
