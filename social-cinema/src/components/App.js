@@ -37,20 +37,7 @@ function App() {
   const [friendList, setFriendList] = useState("hide")
   const [friends, setFriends] = useState([])
 
-  const userGenres =[
-    {
-      "id": 28,
-      "preference": true
-    },
-    {
-      "id": 12,
-      "preference": true
-    },
-    {
-      "id": 80,
-      "preference": false
-    }
-  ];
+  const userGenres = state.genres;
 
   const toggleList = function(status) {
     if (status === "show") {
@@ -63,7 +50,8 @@ function App() {
   const getUser = (name) => {
     axios.post("http://localhost:5000/login", { name: name })
       .then(response => {
-        setUser(response.data);
+        setUser(response.data.user);
+        setGenres(response.data.genres)
       })
   }
 
@@ -77,6 +65,7 @@ function App() {
  
   const removeUser = () => {
     setUser("");
+    setGenres([]);
   }
 
   return (
