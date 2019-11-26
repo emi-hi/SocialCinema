@@ -36,21 +36,28 @@ function App() {
   const [genreList, setGenreList] = useState("hide")
   const [friendList, setFriendList] = useState("hide")
   const [friends, setFriends] = useState([])
-  const [group, addToGroup] = useState([{"friend":
-    {"icon": "https://ui-avatars.com/api/?name=Alan",
-    "id": 5,
-    "name": "Alan"}}])
+  const [group, setGroup] = useState([])
  
 
   const userGenres = state.genres;
 
-  const useMovieNight = function(friend) {
-    addToGroup([
-      ...group, {
-        friend
+  const useMovieNight = function(friend, action) {
+    if (action === "add") {
+      setGroup([
+        ...group, {
+          friend
+        }
+      ])
+    } else if (action === "remove") {
+      let newGroup = []
+      for (let each of group) {
+        if (!(friend["id"] === each["friend"]["id"])) {
+          newGroup.push(each)
+        }
       }
-    ])
-    console.log(group)
+      setGroup(newGroup)
+    }
+
   }
 
   const toggleList = function(status) {
@@ -133,7 +140,7 @@ function App() {
       <div className="main-container">
         <div className="friends-container">
           FRIENDS FOR MOVIE NIGHT!
-          <MovieNightFriends  user={user} group={group} action="remove" classname="columnlist"/>
+          <MovieNightFriends  user={user} group={group} action="remove" classname="columnlist" useMovieNight={useMovieNight}/>
         </div>
         <div className="suggested-container">
           <Suggested/>

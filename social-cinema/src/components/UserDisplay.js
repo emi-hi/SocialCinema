@@ -1,29 +1,34 @@
 import React from "react";
 
 export default function UserDisplay(props) {
-  const checkIfInGroup = function() {
+  const addOrRemove = function(action) {
     let addEnabled = true;
-      for (let friend of props.group) {
-        if (props.friend["id"] === friend["friend"]["id"]) {
+    //for each object in the group that's passsed in 
+      for (let each of props.group) {
+        //if the id of the user that is being displayed is equal to the id of that object
+        if (props.friend["id"] === each["friend"]["id"]) {
+          //they're already in the group, cannot add them
           addEnabled = false
         }
       }
-      if (addEnabled === true) {
-        return props.useMovieNight(props.friend)
-      } else {
-        console.log("remove friend!")
+      //if add enabled is not false, it's true, or it's false
+      // addEnabled !== false? addEnabled=true: addEnabled=false;
+      if (addEnabled === true && action==="add") {
+        return props.useMovieNight(props.friend, "add")
+      } else if (addEnabled ===false && action === "remove") {
+        return props.useMovieNight(props.friend, "remove")
       }
     }
-    
+
   return (
     <div className="user_display">
        <img src={props.friend.icon} height="100px" alt={props.friend.name}/>
        <p>{props.friend.name} </p>
        {props.action==="add" && 
-       <button onClick={()=>checkIfInGroup()}>add</button>
+       <button onClick={()=>addOrRemove("add")}>add</button>
       }
       {props.action ==="remove" &&
-      <button onClick={()=>checkIfInGroup()}>remove</button>
+      <button onClick={()=>addOrRemove("remove")}>remove</button>
       }
     </div>
   );
