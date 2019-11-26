@@ -38,6 +38,7 @@ function App() {
   const [friends, setFriends] = useState([])
 
   const userGenres = state.genres;
+  console.log(`Wut is ${userGenres}`)
 
   const toggleList = function(status) {
     if (status === "show") {
@@ -58,12 +59,18 @@ function App() {
   const setGenre = (id, value) => {
     console.log(`Set ${id} to ${value}`);
 
-    axios.post(`http://localhost:5000/api/${state.user.name}/genres`, { id, preference: value })
-      .then(response => {
-        console.log("We made it!")
-        setGenres(response.data.genres)
-      })
+    if (state.user && state.user.name !== "") {
+      axios.post(`http://localhost:5000/api/${state.user.name}/genres`, { id, preference: value })
+        .then(response => {
+          console.log("We made it!")
+          setGenres(response.data.genres)
+        })
+    } else {
+      const genre = state.genres.find(genre => genre.id === id);
+      genre.preference = value;
 
+      setGenres(state.genres);
+    }
   }
 
   useEffect(() => {
