@@ -7,6 +7,7 @@ export default function Suggested() {
   const [movieDescription, setMovieDescription] = useState("");
   const [moviePoster, setMoviePoster] = useState("");
   const [movieReleaseDate, setMovieReleaseDate] = useState("");
+  const [suggested, setSuggested] = useState("hide")
 
   const newMovie = () => {
     axios.get("http://localhost:5000/suggestion")
@@ -20,18 +21,32 @@ export default function Suggested() {
 
   return (
     <section>
-      <div className="suggestion-buttons">
-        <button type="button" onClick={()=>console.log("add this movie to later list!")}>Add This to Later List</button>
-        <button type="button" onClick={()=> newMovie()}>Suggest a Movie</button>
-      </div>
-      <div className="suggestion-all">
-        <img alt={movieTitle} src={moviePoster} className="poster"></img>
-        <div className="suggestion-text">
-          <h2 className="movie-title">{movieTitle}</h2>
-          <h4>{movieReleaseDate.slice(0,4)}</h4>
-          <p>{movieDescription}</p> 
+      {suggested === "hide" &&
+        <div className="click-suggest" onClick={() => {
+          setSuggested("show")
+          newMovie()
+        }}>
+          <img src="images/filmreel.png" height="300px"/>
+          <h1>Click to Generate Your First Movie Suggestion</h1>
         </div>
-      </div>
+      }
+      {suggested === "show" && 
+        <div>
+      
+          <div className="suggestion-all">
+            <img alt={movieTitle} src={moviePoster} className="poster"></img>
+            <div className="suggestion-text">
+              <h2 className="movie-title">{movieTitle}</h2>
+              <h4>{movieReleaseDate.slice(0,4)}</h4>
+              <p>{movieDescription}</p> 
+            </div>
+          </div>
+          <div className="suggestion-buttons">
+            <button type="button" onClick={()=>console.log("add this movie to later list!")}>Add This to Later List</button>
+            <button type="button" onClick={()=> newMovie()}>Suggest a Different Movie</button>
+          </div>
+        </div>
+      }
 
     </section>
   );

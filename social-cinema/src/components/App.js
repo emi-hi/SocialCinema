@@ -7,6 +7,7 @@ import Nav from './Nav'
 import Suggested from "./Suggested";
 import Genres from "./Genres";
 import FriendList from './FriendList';
+import MovieNightFriends from './MovieNightFriends';
 
 import useApplicationData from "../hooks/useApplicationData";
 
@@ -34,8 +35,6 @@ function App() {
   const [laterList, setLaterList] = useState("hide")
   const [genreList, setGenreList] = useState("hide")
   const [friendList, setFriendList] = useState("hide")
-  const [suggested, setSuggested] = useState("hide")
-
   const [friends, setFriends] = useState([])
 
   const userGenres =[
@@ -119,9 +118,9 @@ function App() {
       <div className="main-container">
         <div className="friends-container">
           FRIENDS FOR MOVIE NIGHT!
+          <MovieNightFriends  user={user}/>
         </div>
         <div className="suggested-container">
-          
           <Suggested/>
         </div>
         <div className="recent-suggestion-list-container">
