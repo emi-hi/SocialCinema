@@ -67,22 +67,19 @@ def genres():
   genres_json = json.dumps(genre_arr)
   return genres_json
 
-@app.route("/api/<user>/genres")
+@app.route("/api/<user>/genres", methods=['GET', 'POST'])
 def userGenres(user):
-  genres = [
-    {
-      "id": 28,
-      "preference": False
-    },
-    {
-      "id": 12,
-      "preference": True
-    },
-    {
-      "id": 80,
-      "preference": False
-    }
-  ]
+  user = User.query.filter(User.name == user).one_or_none()
+
+  genres = []
+
+  for genre in user.user_genres:
+    genres.append(
+      {
+        "id": genre.genre.genre_api_id,
+        "preference": genre.preference
+      }
+    )
 
   print(user)
 
@@ -94,12 +91,12 @@ def userGenres(user):
 
   return res_json
 
-@app.route("/api/<user>/favmovies")
+@app.route("/api/<user>/favmovies", methods=['GET', 'POST'])
 def userFavmovies(user):
 
   return "potatoe"
 
-@app.route("/api/<user>/latermovies")
+@app.route("/api/<user>/latermovies", methods=['GET', 'POST'])
 def userLatemovies(user):
 
   return "tomatoe"
@@ -137,26 +134,21 @@ def login():
     db.session.add(user)
     db.session.commit()
 
+  genres = []
+
+  for genre in user.user_genres:
+    genres.append(
+      {
+        "id": genre.genre.genre_api_id,
+        "preference": genre.preference
+      }
+    )
+
   user = {
     "name": user.name,
     "avatar": user.icon
   }
-
-  genres = [
-    {
-      "id": 28,
-      "preference": False
-    },
-    {
-      "id": 12,
-      "preference": True
-    },
-    {
-      "id": 80,
-      "preference": False
-    }
-  ]
-
+  
   res = {
     "user": user,
     "genres": genres
