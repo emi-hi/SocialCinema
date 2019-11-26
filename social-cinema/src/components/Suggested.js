@@ -26,7 +26,7 @@ export default function Suggested() {
           setSuggested("show")
           newMovie()
         }}>
-          <img src="images/filmreel.png" height="300px" alt="film reel" />
+          <img src="images/filmreel.png" height="300px" alt="click to generate a suggestion!"/>
           <h1>Click to Generate Your First Movie Suggestion</h1>
         </div>
       }

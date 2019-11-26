@@ -3,12 +3,11 @@ import UserDisplay from "./UserDisplay"
 
 
 export default function FriendList(props) {
-
   let friends = props.friends.map((friend) => {
-    return <UserDisplay icon={friend["icon"]} name={friend["name"]}/>
+    return <UserDisplay friend={friend} useMovieNight={props.useMovieNight} group={props.group} action={props.action}/>
   });
   
   return (
-    <article className="list">{friends}</article>
+    <article className={props.classname}>{friends}</article>
   )
 }

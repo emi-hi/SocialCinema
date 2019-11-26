@@ -1,5 +1,4 @@
 import React, {useState} from "react";
-import Popup from "reactjs-popup";
 import axios from 'axios';
 
 import MovieBox from './MovieBox'

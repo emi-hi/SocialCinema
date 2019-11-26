@@ -20,7 +20,11 @@
 .App-link {
   color: #09d3ac;
 }
-
+.columnlist{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 .list {
   display: flex;
   flex-direction: row;
@@ -134,6 +138,8 @@ section.genres {
 .click-suggest{
   padding:100px;
 }
+
+
 
 @-moz-keyframes spin { 100% { -moz-transform: rotate(360deg); } }
 @-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
