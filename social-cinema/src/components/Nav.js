@@ -6,15 +6,18 @@ import User from "./User"
 export default function Nav(props) {
 
   const logOn = (name) => {
-    console.log(name);
-    props.getUser(name)
+    props.getUser(name);
+  }
+
+  const logOut = () => {
+    props.removeUser();
   }
 
   return (
     <div class="nav">
       <div class="logo">
         <img id="cinema-logo"  src="images/popcorn.png" width="150px" alt="Social Cinema" />
-        {props.user === "" ? <Logon onLogin={logOn} /> : <User user={props.user} logout={() => logOn("")} />}
+        {props.user === "" ? <Logon onLogin={logOn} /> : <User user={props.user} logout={() => logOut()} />}
       </div>
     </div>
   );
