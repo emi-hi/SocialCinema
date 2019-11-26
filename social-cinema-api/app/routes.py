@@ -62,6 +62,43 @@ def genres():
   genres_json = json.dumps(genre_arr)
   return genres_json
 
+@app.route("/api/<user>/genres")
+def userGenres(user):
+  genres = [
+    {
+      "id": 28,
+      "preference": False
+    },
+    {
+      "id": 12,
+      "preference": True
+    },
+    {
+      "id": 80,
+      "preference": False
+    }
+  ]
+
+  print(user)
+
+  res = {
+    "genres": genres
+  }
+
+  res_json = json.dumps(res)
+
+  return res_json
+
+@app.route("/api/<user>/favmovies")
+def userFavmovies(user):
+
+  return "potatoe"
+
+@app.route("/api/<user>/latermovies")
+def userLatemovies(user):
+
+  return "tomatoe"
+
 @app.route("/movies/title/")
 def title():
   movie_title = request.args['title']
@@ -95,10 +132,29 @@ def login():
     db.session.add(user)
     db.session.commit()
 
-  print(user.name)
-  res = {
+  user = {
     "name": user.name,
     "avatar": user.icon
+  }
+
+  genres = [
+    {
+      "id": 28,
+      "preference": False
+    },
+    {
+      "id": 12,
+      "preference": True
+    },
+    {
+      "id": 80,
+      "preference": False
+    }
+  ]
+
+  res = {
+    "user": user,
+    "genres": genres
   }
 
   res_json = json.dumps(res)

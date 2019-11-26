@@ -1,13 +1,26 @@
-import { useReducer } from "react";
+import { useReducer, useEffect } from "react";
 import reducer, { SET_USER, SET_GENRES } from "../reducers/application";
+import axios from 'axios'
 
 export default function useApplicationData() {
   const [state, dispatch] = useReducer(reducer, {
     user: JSON.parse(localStorage.getItem('user')) || "",
-    genres: {},
+    genres: [],
     favorite_movies: {},
     later_movies: {}
   });
+
+  useEffect(() => {
+    if (state.user !== "") {
+      Promise.all([
+        axios.get(`http://localhost:5000/api/${state.user.name}/genres`)
+      ])
+      .then((all) => {
+        console.log(all[0].data.genres)
+        setGenres(all[0].data.genres)
+      })
+    }
+  }, [])
 
   const setUser = user => {
     localStorage.setItem('user', JSON.stringify(user));
