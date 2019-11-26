@@ -36,9 +36,30 @@ function App() {
   const [genreList, setGenreList] = useState("hide")
   const [friendList, setFriendList] = useState("hide")
   const [friends, setFriends] = useState([])
+  const [group, setGroup] = useState([])
+ 
 
   const userGenres = state.genres;
   console.log(`Wut is ${userGenres}`)
+
+  const useMovieNight = function(friend, action) {
+    if (action === "add") {
+      setGroup([
+        ...group, {
+          friend
+        }
+      ])
+    } else if (action === "remove") {
+      let newGroup = []
+      for (let each of group) {
+        if (!(friend["id"] === each["friend"]["id"])) {
+          newGroup.push(each)
+        }
+      }
+      setGroup(newGroup)
+    }
+
+  }
 
   const toggleList = function(status) {
     if (status === "show") {
@@ -79,6 +100,8 @@ function App() {
       setFriends(response.data)
     })  
   }, [user])
+
+
  
   const removeUser = () => {
     setUser("");
@@ -118,13 +141,13 @@ function App() {
       </div>
       <div>
       {friendList === "show" &&
-        <FriendList friends={friends}/>
+        <FriendList friends={friends} useMovieNight={useMovieNight} group={group} action="add" classname="list"/>
       }
       </div>
       <div className="main-container">
         <div className="friends-container">
           FRIENDS FOR MOVIE NIGHT!
-          <MovieNightFriends  user={user}/>
+          <MovieNightFriends  user={user} group={group} action="remove" classname="columnlist" useMovieNight={useMovieNight}/>
         </div>
         <div className="suggested-container">
           <Suggested/>
