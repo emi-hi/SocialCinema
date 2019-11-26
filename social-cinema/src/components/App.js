@@ -55,10 +55,20 @@ function App() {
       })
   }
 
+  const setGenre = (id, value) => {
+    console.log(`Set ${id} to ${value}`);
+
+    axios.post(`http://localhost:5000/api/${state.user.name}/genres`, { id, preference: value })
+      .then(response => {
+        console.log("We made it!")
+        setGenres(response.data.genres)
+      })
+
+  }
+
   useEffect(() => {
     axios.get("http://localhost:5000/api/users")
     .then(response => {
-      console.log(response.data)
       setFriends(response.data)
     })  
   }, [user])
@@ -93,7 +103,7 @@ function App() {
       </div>
       <div>
       {genreList === "show" &&
-        <Genres userGenres = {userGenres} />
+        <Genres userGenres = {userGenres} setGenre={setGenre} />
       }
       </div> 
       <div className="list_name" onClick={() => setFriendList(toggleList)}>

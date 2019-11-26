@@ -1,5 +1,5 @@
 from app import app, db
-from app.models import User, Genre
+from app.models import User, Genre, User_genre
 from flask import request
 from flask_cors import CORS
 import requests
@@ -71,6 +71,20 @@ def genres():
 def userGenres(user):
   user = User.query.filter(User.name == user).one_or_none()
 
+  if request.method == 'POST':
+    req = json.loads(request.data)
+
+    genre = Genre.query.filter(Genre.genre_api_id == req['id']).first()
+
+    user.genres.append(genre)
+    if req['preference'] == "":
+      user.genres[-1].user_genres[0].preference = None
+    else:
+      user.genres[-1].user_genres[0].preference = req['preference']
+
+    db.session.add(user)
+    db.session.commit()
+
   genres = []
 
   for genre in user.user_genres:
@@ -80,8 +94,6 @@ def userGenres(user):
         "preference": genre.preference
       }
     )
-
-  print(user)
 
   res = {
     "genres": genres
