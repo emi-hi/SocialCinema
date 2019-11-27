@@ -67,8 +67,27 @@ export default function useApplicationData() {
     dispatch({ type: SET_LATER_MOVIES, value:laterMovies });
   }
 
+  const removeLaterMovie = id => {
+    console.log(id);
+    axios.delete(`http://localhost:5000/api/${state.user.name}/latermovies`, { data: { "id": id } })
+    .then(response => {
+      console.log("THIS", response.data)
+      setLaterMovies(response.data.later_movies)
+    })
+  }
+
   const setFavoriteMovies = favoriteMovies => {
+    console.log("SET FAV", favoriteMovies)
     dispatch({ type: SET_FAVORITE_MOVIES, value:favoriteMovies });
+  }
+
+  const removeFavoritedMovie = id => {
+    console.log(id);
+    axios.delete(`http://localhost:5000/api/${state.user.name}/favmovies`, { data: { "id": id } })
+    .then(response => {
+      console.log("THIS", response.data)
+      setFavoriteMovies(response.data.favorited_movies)
+    })  
   }
 
   const setFriends = friends => {
@@ -79,5 +98,5 @@ export default function useApplicationData() {
     dispatch({ type: SET_GROUP, value: group });
   }
 
-  return { state, setUser, setGenres, setLaterMovies, setFriends, setGroup, setFavoriteMovies };
+  return { state, setUser, setGenres, setLaterMovies, removeLaterMovie, setFriends, setGroup, setFavoriteMovies, removeFavoritedMovie };
 };

@@ -12,6 +12,7 @@ export default function FavoriteForm(props) {
   const saveToFavoriteList = (userName, movie) => {
     axios.post(`http://localhost:5000/api/${userName}/favmovies`, { movie })
     .then(response => {
+      console.log("SERVER SAYS WUT", response);
       props.setFavoriteMovies(response.data.favorited_movies)
     })
   }

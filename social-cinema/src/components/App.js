@@ -14,7 +14,18 @@ import RecentSuggestion from './Recent';
 
 
 function App() {
-  const { state, setUser, setGenres, setLaterMovies, setFavoriteMovies, setFriends, setGroup } = useApplicationData();
+  const { 
+    state,
+    setUser,
+    setGenres,
+    setLaterMovies,
+    removeLaterMovie,
+    setFavoriteMovies,
+    removeFavoritedMovie,
+    setFriends,
+    setGroup
+  } = useApplicationData();
+  // const { state, setUser, setGenres, setLaterMovies, setFavoriteMovies, setFriends, setGroup } = useApplicationData();
 
   const user = state.user;
   const userGenres = state.genres;
@@ -91,6 +102,7 @@ function App() {
     setGenres([]);
     setLaterMovies([]);
     setFavoriteMovies([]);
+    setFriends([]);
   }
 
   return (
@@ -101,7 +113,7 @@ function App() {
       </div>
       <div>
         {favList === "show" &&
-        <List type="favorites" data={state.favorited_movies} user={user} setFavoriteMovies={setFavoriteMovies}/> 
+          <List type="favorites" data={state.favorited_movies} user={user} setFavoriteMovies={setFavoriteMovies} removeLaterMovie={removeFavoritedMovie} /> 
         }
       </div>
       <div className="list_name" onClick={() => setLaterList(toggleList)}>
@@ -109,7 +121,7 @@ function App() {
       </div>
       <div>
         {laterList === "show" &&
-        <List type="laters" data={state.later_movies}/> 
+          <List type="laters" removeLaterMovie={removeLaterMovie} data={state.later_movies} /> 
         }
       </div>
       <div className="list_name" onClick={() => setGenreList(toggleList)}>
@@ -146,5 +158,3 @@ function App() {
 }
 
 export default App;
-
-

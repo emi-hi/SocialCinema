@@ -114,7 +114,7 @@ def userGenres(user):
 
   return res_json
 
-@app.route("/api/<user>/favmovies", methods=['GET', 'POST'])
+@app.route("/api/<user>/favmovies", methods=['GET', 'POST', 'DELETE'])
 def userFavmovies(user):
   dbUser = User.query.filter(User.name == user).one_or_none()
   userFavMovies = dbUser.favorited_movies
@@ -134,6 +134,14 @@ def userFavmovies(user):
       
     new_fave_movie = Favorited_movie(user_id = dbUser.id, movie_id = new_movie.id)
     db.session.add(new_fave_movie)
+    db.session.commit()
+
+  if request.method == 'DELETE':
+    req = json.loads(request.data)
+
+    remove_movie = Favorited_movie.query.filter(Favorited_movie.movie_id == req['id']).first()
+
+    db.session.delete(remove_movie)
     db.session.commit()
 
   favorited_movies = []
@@ -156,12 +164,12 @@ def userFavmovies(user):
 
   return res_json
 
-@app.route("/api/<user>/latermovies", methods=['GET', 'POST'])
+@app.route("/api/<user>/latermovies", methods=['GET', 'POST', 'DELETE'])
 def userLatemovies(user):
 
   dbUser = User.query.filter(User.name == user).one_or_none()
   userLaterMovies = dbUser.later_movies
-  
+
   if request.method == 'POST':
     req = json.loads(request.data)
 
@@ -178,6 +186,14 @@ def userLatemovies(user):
 
     new_later_movie = Later_movie(user_id = dbUser.id, movie_id = new_movie.id)
     db.session.add(new_later_movie)
+    db.session.commit()
+
+  if request.method == 'DELETE':
+    req = json.loads(request.data)
+
+    remove_movie = Later_movie.query.filter(Later_movie.movie_id == req['id']).first()
+
+    db.session.delete(remove_movie)
     db.session.commit()
 
   later_movies = []
