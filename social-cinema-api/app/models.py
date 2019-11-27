@@ -61,3 +61,6 @@ class Later_movie(db.Model):
   movie_id = db.Column(db.Integer, db.ForeignKey('movies.id'))
   user = db.relationship(User, backref=db.backref("later_movies", cascade="all, delete-orphan"))
   movie = db.relationship(Movie, backref=db.backref("later_movies", cascade="all, delete-orphan"))
+
+  def __repr__(self):
+    return "<Later_movie {}>".format(self.movie_id)

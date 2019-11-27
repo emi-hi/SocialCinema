@@ -18,7 +18,6 @@ export default function FavoriteForm(props) {
     })
   }
 
-
   return(
     <main className="favorite-form">
       <h3>Add a New Favorite</h3>

@@ -1,5 +1,5 @@
 import { useReducer, useEffect } from "react";
-import reducer, { SET_USER, SET_GENRES } from "../reducers/application";
+import reducer, { SET_USER, SET_GENRES, SET_LATER_MOVIES } from "../reducers/application";
 import axios from 'axios'
 
 const initGenres = () => {
@@ -23,8 +23,8 @@ export default function useApplicationData() {
   const [state, dispatch] = useReducer(reducer, {
     user: JSON.parse(localStorage.getItem('user')) || "",
     genres: [],
-    favorite_movies: {},
-    later_movies: {}
+    favorite_movies: [],
+    later_movies: []
   });
 
   useEffect(() => {
@@ -47,5 +47,9 @@ export default function useApplicationData() {
     dispatch({ type: SET_GENRES, value: genres });
   };
 
-  return { state, setUser, setGenres };
+  const setLaterMovies = laterMovies => {
+    dispatch({ type: SET_LATER_MOVIES, value:laterMovies})
+  }
+
+  return { state, setUser, setGenres, setLaterMovies };
 };
