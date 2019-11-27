@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import './App.css';
 
-export default function Suggested() {
+export default function Suggested(props) {
   const [movieTitle, setMovieTitle] = useState("");
   const [movieDescription, setMovieDescription] = useState("");
   const [moviePoster, setMoviePoster] = useState("");
@@ -16,6 +16,7 @@ export default function Suggested() {
         setMovieDescription(response.data.description);
         setMoviePoster(response.data.poster);
         setMovieReleaseDate(response.data.release_date);
+        props.getRecentSuggestions(response.data.title)
       })
   }
 

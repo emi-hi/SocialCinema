@@ -10,6 +10,7 @@ import FriendList from './FriendList';
 import MovieNightFriends from './MovieNightFriends';
 
 import useApplicationData from "../hooks/useApplicationData";
+import RecentSuggestion from './Recent';
 
 const tempFaves = [
   {id: 1, title: 'Titanic', img: 'images/movies/titanic.jpg' },
@@ -37,7 +38,7 @@ function App() {
   const [friendList, setFriendList] = useState("hide")
   const [friends, setFriends] = useState([])
   const [group, setGroup] = useState([])
- 
+  const [recentSuggestions, setRecentSuggestions] = useState([])
 
   const userGenres = state.genres;
 
@@ -58,6 +59,15 @@ function App() {
       setGroup(newGroup)
     }
 
+  }
+
+  const getRecentSuggestions = function(newSuggestion) {
+    let updatedRecentSuggestionsList = [...recentSuggestions]
+    updatedRecentSuggestionsList.push({newSuggestion})
+    if (updatedRecentSuggestionsList.length > 10) {
+      updatedRecentSuggestionsList = updatedRecentSuggestionsList.slice(1)
+    }
+      setRecentSuggestions(updatedRecentSuggestionsList)
   }
 
   const toggleList = function(status) {
@@ -143,10 +153,11 @@ function App() {
           <MovieNightFriends  user={user} group={group} action="remove" classname="columnlist" useMovieNight={useMovieNight}/>
         </div>
         <div className="suggested-container">
-          <Suggested/>
+          <Suggested getRecentSuggestions={getRecentSuggestions}/>
         </div>
         <div className="recent-suggestion-list-container">
           RECENTLY SUGGESTED LIST
+          <RecentSuggestion recent={recentSuggestions}/>
         </div>
       </div>
     </div>
@@ -154,3 +165,5 @@ function App() {
 }
 
 export default App;
+
+
