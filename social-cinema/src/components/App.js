@@ -138,7 +138,7 @@ function App() {
           <MovieNightFriends  user={user} group={group} action="remove" classname="columnlist" useMovieNight={useMovieNight}/>
         </div>
         <div className="suggested-container">
-          <Suggested getRecentSuggestions={getRecentSuggestions} user={user} setLaterMovies = {setLaterMovies}/>
+          <Suggested getRecentSuggestions={getRecentSuggestions} user={user} userGenres={userGenres} setLaterMovies={setLaterMovies}/>
         </div>
         <div className="recent-suggestion-list-container">
           RECENTLY SUGGESTED LIST
