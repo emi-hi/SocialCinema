@@ -21,7 +21,7 @@ export default function useApplicationData() {
   const [state, dispatch] = useReducer(reducer, {
     user: JSON.parse(localStorage.getItem('user')) || "",
     genres: [],
-    favorite_movies: [],
+    favorited_movies: [],
     later_movies: [],
     friends: [],
     group: []
@@ -67,7 +67,7 @@ export default function useApplicationData() {
     dispatch({ type: SET_LATER_MOVIES, value:laterMovies });
   }
 
-  const setFavoriteMovies= favoriteMovies => {
+  const setFavoriteMovies = favoriteMovies => {
     dispatch({ type: SET_FAVORITE_MOVIES, value:favoriteMovies });
   }
 

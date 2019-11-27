@@ -12,12 +12,6 @@ import MovieNightFriends from './MovieNightFriends';
 import useApplicationData from "../hooks/useApplicationData";
 import RecentSuggestion from './Recent';
 
-const tempFaves = [
-  {id: 1, title: 'Titanic', img: 'images/movies/titanic.jpg' },
-  {id: 2, title: 'Scary Movie', img: 'images/movies/scary.jpg' },
-  {id: 3, title: 'Jaws', img: 'images/movies/jaws.jpg'},
-  {id: 4, title: 'Baby Driver', img: 'images/movies/baby.jpeg' }
-]
 
 function App() {
   const { state, setUser, setGenres, setLaterMovies, setFavoriteMovies, setFriends, setGroup } = useApplicationData();
@@ -74,6 +68,7 @@ function App() {
         setUser(response.data.user);
         setGenres(response.data.genres);
         setLaterMovies(response.data.later_movies);
+        setFavoriteMovies(response.data.favorited_movies);
       })
   }
 
@@ -95,6 +90,7 @@ function App() {
     setUser("");
     setGenres([]);
     setLaterMovies([]);
+    setFavoriteMovies([]);
   }
 
   return (
@@ -105,7 +101,7 @@ function App() {
       </div>
       <div>
         {favList === "show" &&
-        <List type="favorites" data={tempFaves} user={user} setFavoriteMovies={setFavoriteMovies}/> 
+        <List type="favorites" data={state.favorited_movies} user={user} setFavoriteMovies={setFavoriteMovies}/> 
         }
       </div>
       <div className="list_name" onClick={() => setLaterList(toggleList)}>

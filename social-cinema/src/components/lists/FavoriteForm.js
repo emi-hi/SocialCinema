@@ -10,12 +10,10 @@ export default function FavoriteForm(props) {
 
 
   const saveToFavoriteList = (userName, movie) => {
-    console.log(userName)
-    // console.log(movie)
-    // axios.post(`http://localhost:5000/api/${userName}/favoritemovies`, { movie })
-    // .then(response => {
-    //   props.setLaterMovies(response.data.favorite_movies)
-    // })
+    axios.post(`http://localhost:5000/api/${userName}/favmovies`, { movie })
+    .then(response => {
+      props.setFavoriteMovies(response.data.favorited_movies)
+    })
   }
 
   const movieSearch = (event) => {

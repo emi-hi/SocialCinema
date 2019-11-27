@@ -21,7 +21,6 @@ export default function Suggested(props) {
   }
 
   const saveToLaterList = (userName, suggestedMovie) => {
-    console.log(suggestedMovie)
     axios.post(`http://localhost:5000/api/${userName}/latermovies`, { suggestedMovie })
     .then(response => {
       props.setLaterMovies(response.data.later_movies)
