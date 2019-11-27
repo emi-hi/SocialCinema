@@ -61,7 +61,7 @@ function App() {
   }
 
   const getUser = (name) => {
-    axios.post("http://localhost:5000/login", { name: name })
+    axios.post("http://localhost:5000/login", { name, genres: userGenres })
       .then(response => {
         setUser(response.data.user);
         setGenres(response.data.genres);

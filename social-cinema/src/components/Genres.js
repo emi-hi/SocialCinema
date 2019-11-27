@@ -43,7 +43,7 @@ export default function Genres(props) {
 
   return (
     <div>
-      <section class="genres">
+      <section className="genres">
         {genreOptions}
       </section>
     </div>

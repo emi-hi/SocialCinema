@@ -4,7 +4,7 @@ import axios from 'axios'
 
 const initGenres = () => {
   let genres = []
-  axios.get("http://localhost:5000/api/genres")
+  return axios.get("http://localhost:5000/api/genres")
   .then(response => {
     genres = response.data.map(genre => {
       return genre = {
@@ -12,8 +12,6 @@ const initGenres = () => {
         preference: ""
       }
     })
-
-    console.log(genres)
 
     return genres
   })
@@ -26,6 +24,13 @@ export default function useApplicationData() {
     favorite_movies: [],
     later_movies: []
   });
+
+  useEffect(() => {
+    initGenres()
+    .then(res => {
+      setGenres(res);
+    })
+  }, [])
 
   useEffect(() => {
     if (state.user !== "") {
@@ -44,7 +49,14 @@ export default function useApplicationData() {
   };
 
   const setGenres = genres => {
-    dispatch({ type: SET_GENRES, value: genres });
+    if (genres.length === 0) {
+      initGenres()
+      .then(res => {
+        dispatch({ type: SET_GENRES, value: res });
+      })
+    } else {
+      dispatch({ type: SET_GENRES, value: genres });
+    }
   };
 
   const setLaterMovies = laterMovies => {
