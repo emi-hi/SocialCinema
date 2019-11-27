@@ -29,7 +29,6 @@ function App() {
   const { state, setUser, setGenres } = useApplicationData();
 
   const user = state.user;
-  // const genreList = state.genres;
 
   const [favList, setFavList] = useState("hide")
   const [laterList, setLaterList] = useState("hide")
@@ -40,7 +39,6 @@ function App() {
  
 
   const userGenres = state.genres;
-  console.log(`Wut is ${userGenres}`)
 
   const useMovieNight = function(friend, action) {
     if (action === "add") {
@@ -70,7 +68,7 @@ function App() {
   }
 
   const getUser = (name) => {
-    axios.post("http://localhost:5000/login", { name: name })
+    axios.post("http://localhost:5000/login", { name, genres: userGenres })
       .then(response => {
         setUser(response.data.user);
         setGenres(response.data.genres)
@@ -78,12 +76,9 @@ function App() {
   }
 
   const setGenre = (id, value) => {
-    console.log(`Set ${id} to ${value}`);
-
     if (state.user && state.user.name !== "") {
       axios.post(`http://localhost:5000/api/${state.user.name}/genres`, { id, preference: value })
         .then(response => {
-          console.log("We made it!")
           setGenres(response.data.genres)
         })
     } else {

@@ -16,11 +16,8 @@ export default function Genres(props) {
 
   const lovedGenres = [];
   const hatedGenres = [];
-
-  console.log("END " + props.userGenres)
   
   for (const genre of props.userGenres) {
-    console.log(`Genre ${genre.id} pref ${genre.preference}`)
     if (genre.preference) {
       lovedGenres.push(genre.id);
     } else if (genre.preference === false) {

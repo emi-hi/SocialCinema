@@ -5,7 +5,6 @@ export default function Logon(props) {
   const [name, setName] = useState("")
 
   const validate = () => {
-    console.log(name)
     if (name !== "") {
       props.onLogin(name);
     }
