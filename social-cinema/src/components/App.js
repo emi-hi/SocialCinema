@@ -12,12 +12,6 @@ import MovieNightFriends from './MovieNightFriends';
 import useApplicationData from "../hooks/useApplicationData";
 import RecentSuggestion from './Recent';
 
-const tempFaves = [
-  {id: 1, title: 'Titanic', img: 'images/movies/titanic.jpg' },
-  {id: 2, title: 'Scary Movie', img: 'images/movies/scary.jpg' },
-  {id: 3, title: 'Jaws', img: 'images/movies/jaws.jpg'},
-  {id: 4, title: 'Baby Driver', img: 'images/movies/baby.jpeg' }
-]
 
 function App() {
   const { 
@@ -26,9 +20,12 @@ function App() {
     setGenres,
     setLaterMovies,
     removeLaterMovie,
+    setFavoriteMovies,
+    removeFavoritedMovie,
     setFriends,
     setGroup
   } = useApplicationData();
+  // const { state, setUser, setGenres, setLaterMovies, setFavoriteMovies, setFriends, setGroup } = useApplicationData();
 
   const user = state.user;
   const userGenres = state.genres;
@@ -82,6 +79,7 @@ function App() {
         setUser(response.data.user);
         setGenres(response.data.genres);
         setLaterMovies(response.data.later_movies);
+        setFavoriteMovies(response.data.favorited_movies);
       })
   }
 
@@ -103,6 +101,7 @@ function App() {
     setUser("");
     setGenres([]);
     setLaterMovies([]);
+    setFavoriteMovies([]);
     setFriends([]);
   }
 
@@ -114,7 +113,7 @@ function App() {
       </div>
       <div>
         {favList === "show" &&
-        <List type="favorites" removeLaterMovie={removeLaterMovie} data={tempFaves}/> 
+          <List type="favorites" data={state.favorited_movies} user={user} setFavoriteMovies={setFavoriteMovies} removeLaterMovie={removeFavoritedMovie} /> 
         }
       </div>
       <div className="list_name" onClick={() => setLaterList(toggleList)}>
@@ -122,7 +121,7 @@ function App() {
       </div>
       <div>
         {laterList === "show" &&
-        <List type="laters" removeLaterMovie={removeLaterMovie} data={state.later_movies} /> 
+          <List type="laters" removeLaterMovie={removeLaterMovie} data={state.later_movies} /> 
         }
       </div>
       <div className="list_name" onClick={() => setGenreList(toggleList)}>

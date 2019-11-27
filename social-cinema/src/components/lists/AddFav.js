@@ -20,7 +20,7 @@ export default function AddFav(props) {
       />
     } modal
     contentStyle={contentStyle}>
-    <FavoriteForm/>
+    <FavoriteForm user={props.user} setFavoriteMovies={props.setFavoriteMovies}/>
     </Popup>
     </main>
   );

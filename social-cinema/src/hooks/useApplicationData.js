@@ -1,5 +1,5 @@
 import { useReducer, useEffect } from "react";
-import reducer, { SET_USER, SET_GENRES, SET_LATER_MOVIES, SET_FRIENDS, SET_GROUP } from "../reducers/application";
+import reducer, { SET_USER, SET_GENRES, SET_LATER_MOVIES, SET_FRIENDS, SET_GROUP, SET_FAVORITE_MOVIES } from "../reducers/application";
 import axios from 'axios'
 
 const initGenres = () => {
@@ -21,7 +21,7 @@ export default function useApplicationData() {
   const [state, dispatch] = useReducer(reducer, {
     user: JSON.parse(localStorage.getItem('user')) || "",
     genres: [],
-    favorite_movies: [],
+    favorited_movies: [],
     later_movies: [],
     friends: [],
     group: []
@@ -76,6 +76,20 @@ export default function useApplicationData() {
     })
   }
 
+  const setFavoriteMovies = favoriteMovies => {
+    console.log("SET FAV", favoriteMovies)
+    dispatch({ type: SET_FAVORITE_MOVIES, value:favoriteMovies });
+  }
+
+  const removeFavoritedMovie = id => {
+    console.log(id);
+    axios.delete(`http://localhost:5000/api/${state.user.name}/favmovies`, { data: { "id": id } })
+    .then(response => {
+      console.log("THIS", response.data)
+      setFavoriteMovies(response.data.favorited_movies)
+    })  
+  }
+
   const setFriends = friends => {
     dispatch({ type: SET_FRIENDS, value: friends });
   }
@@ -84,5 +98,5 @@ export default function useApplicationData() {
     dispatch({ type: SET_GROUP, value: group });
   }
 
-  return { state, setUser, setGenres, setLaterMovies, removeLaterMovie, setFriends, setGroup };
+  return { state, setUser, setGenres, setLaterMovies, removeLaterMovie, setFriends, setGroup, setFavoriteMovies, removeFavoritedMovie };
 };
