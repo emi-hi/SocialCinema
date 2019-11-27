@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 import './App.css';
 import List from './lists/List.js'
@@ -32,7 +32,6 @@ function App() {
   const [genreList, setGenreList] = useState("hide")
   const [friendList, setFriendList] = useState("hide")
   const [recentSuggestions, setRecentSuggestions] = useState([])
-
 
   const useMovieNight = function(friend, action) {
     if (action === "add") {
@@ -92,15 +91,6 @@ function App() {
     }
   }
 
-  useEffect(() => {
-    axios.get("http://localhost:5000/api/users")
-    .then(response => {
-      setFriends(response.data)
-    })  
-  }, [user])
-
-
- 
   const removeUser = () => {
     setUser("");
     setGenres([]);
@@ -108,7 +98,6 @@ function App() {
   }
 
   return (
-    
     <div className="App">
       <Nav user={user} getUser={getUser} removeUser={removeUser} />
       <div className="list_name" onClick={() => setFavList(toggleList)}>

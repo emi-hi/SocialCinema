@@ -37,10 +37,12 @@ export default function useApplicationData() {
   useEffect(() => {
     if (state.user !== "") {
       Promise.all([
-        axios.get(`http://localhost:5000/api/${state.user.name}/genres`)
+        axios.get(`http://localhost:5000/api/${state.user.name}/genres`),
+        axios.get("http://localhost:5000/api/users")
       ])
       .then((all) => {
         setGenres(all[0].data.genres)
+        setFriends(all[1].data.users)
       })
     }
   }, [state.user])
