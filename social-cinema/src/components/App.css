@@ -29,30 +29,6 @@ h4 {
   flex-direction: column;
   align-items: center;
 }
-.list {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: space-around;
-}
-
-.movie_box {
-  width: 8vw;
-  height: 150px;
-  border: 2px solid rgb(0, 0, 0);
-  margin-left: .75vw;
-  margin-right: .75vw;
-}
-
-.favorite_add {
-  margin: 25px;
-}
-
-.empty {
-  width: 8vw;
-  height: 150px;
-  background-color: brown;
-}
 
 .list_name {
   background-color: rgb(158, 158, 158);
@@ -66,7 +42,6 @@ h4 {
   padding-right: 10px;
   background-color: rgb(92, 92, 92);
 }
-
 
 .logo {
   display: flex;
@@ -91,11 +66,6 @@ section.genres {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-}
-
-
-.favorite-form {
-  background-color: white;
 }
 
 .main-container{

@@ -67,6 +67,15 @@ export default function useApplicationData() {
     dispatch({ type: SET_LATER_MOVIES, value:laterMovies });
   }
 
+  const removeLaterMovie = id => {
+    console.log(id);
+    axios.delete(`http://localhost:5000/api/${state.user.name}/latermovies`, { data: { "id": id } })
+    .then(response => {
+      console.log("THIS", response.data)
+      setLaterMovies(response.data.later_movies)
+    })
+  }
+
   const setFriends = friends => {
     dispatch({ type: SET_FRIENDS, value: friends });
   }
@@ -75,5 +84,5 @@ export default function useApplicationData() {
     dispatch({ type: SET_GROUP, value: group });
   }
 
-  return { state, setUser, setGenres, setLaterMovies, setFriends, setGroup };
+  return { state, setUser, setGenres, setLaterMovies, removeLaterMovie, setFriends, setGroup };
 };

@@ -119,13 +119,14 @@ def userFavmovies(user):
 
   return "potatoe"
 
-@app.route("/api/<user>/latermovies", methods=['GET', 'POST'])
+@app.route("/api/<user>/latermovies", methods=['GET', 'POST', 'DELETE'])
 def userLatemovies(user):
 
   dbUser = User.query.filter(User.name == user).one_or_none()
   userLaterMovies = dbUser.later_movies
-  
+
   if request.method == 'POST':
+    print("POST")
     req = json.loads(request.data)
 
     title = req['suggestedMovie']['title']
@@ -141,6 +142,18 @@ def userLatemovies(user):
 
     new_later_movie = Later_movie(user_id = dbUser.id, movie_id = new_movie.id)
     db.session.add(new_later_movie)
+    db.session.commit()
+
+  if request.method == 'DELETE':
+    print("DELETE")
+    print(request.data.decode("utf-8"))
+    req = json.loads(request.data.decode("utf-8"))
+    print(req['id'])
+
+    remove_movie = Later_movie.query.filter(Later_movie.movie_id == req['id']).first()
+
+    print(remove_movie)
+    db.session.delete(remove_movie)
     db.session.commit()
 
   later_movies = []
