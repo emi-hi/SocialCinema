@@ -1,5 +1,5 @@
 from app import app, db
-from app.models import User, Genre, User_genre, Movie, Later_movie
+from app.models import User, Genre, User_genre, Movie, Later_movie, Favorited_movie
 from flask import request
 from flask_cors import CORS
 import requests
@@ -170,17 +170,62 @@ def userGenres(user):
 
   return res_json
 
-@app.route("/api/<user>/favmovies", methods=['GET', 'POST'])
+@app.route("/api/<user>/favmovies", methods=['GET', 'POST', 'DELETE'])
 def userFavmovies(user):
+  dbUser = User.query.filter(User.name == user).one_or_none()
+  userFavMovies = dbUser.favorited_movies
 
-  return "potatoe"
+  if request.method == 'POST':
+    req = json.loads(request.data)
+    title = req['movie']['title']
+    image = req['movie']['poster']
+    movie_api_id = req['movie']['tmdbId']
+    
+    new_movie = Movie.query.filter(Movie.movie_api_id == str(movie_api_id)).first()
 
-@app.route("/api/<user>/latermovies", methods=['GET', 'POST'])
+    if new_movie == None:
+      new_movie = Movie(title = title, movie_api_id = movie_api_id, image = image)    
+      db.session.add(new_movie)
+      db.session.commit()
+      
+    new_fave_movie = Favorited_movie(user_id = dbUser.id, movie_id = new_movie.id)
+    db.session.add(new_fave_movie)
+    db.session.commit()
+
+  if request.method == 'DELETE':
+    req = json.loads(request.data)
+
+    remove_movie = Favorited_movie.query.filter(Favorited_movie.movie_id == req['id']).first()
+
+    db.session.delete(remove_movie)
+    db.session.commit()
+
+  favorited_movies = []
+
+  
+  for fave_movie in dbUser.favorited_movies:
+    favorited_movies.append(
+      {
+        "id": fave_movie.movie.id,
+        "title": fave_movie.movie.title,
+        "img": fave_movie.movie.image
+      }
+    )
+
+  res = {
+    "favorited_movies": favorited_movies
+  }
+
+  res_json = json.dumps(res)
+
+  return res_json
+
+@app.route("/api/<user>/latermovies", methods=['GET', 'POST', 'DELETE'])
 def userLatemovies(user):
 
   dbUser = User.query.filter(User.name == user).one_or_none()
   userLaterMovies = dbUser.later_movies
-  
+
   if request.method == 'POST':
     req = json.loads(request.data)
 
@@ -197,6 +242,14 @@ def userLatemovies(user):
 
     new_later_movie = Later_movie(user_id = dbUser.id, movie_id = new_movie.id)
     db.session.add(new_later_movie)
+    db.session.commit()
+
+  if request.method == 'DELETE':
+    req = json.loads(request.data)
+
+    remove_movie = Later_movie.query.filter(Later_movie.movie_id == req['id']).first()
+
+    db.session.delete(remove_movie)
     db.session.commit()
 
   later_movies = []
@@ -228,12 +281,14 @@ def title():
   result_poster = "https://image.tmdb.org/t/p/w500" + first_result["poster_path"]
   result_description = first_result["overview"]
   result_release_date = first_result["release_date"]
+  result_tmdb_id = first_result["id"]
 
   movie_info = {
     "title": result_title,
     "poster": result_poster,
     "description": result_description,
-    "release_date": result_release_date
+    "release_date": result_release_date,
+    "tmdbId": result_tmdb_id
   }
 
   movie_info_json = json.dumps(movie_info)
@@ -288,11 +343,21 @@ def login():
         "img": later_movie.movie.image
       }
     )
+  favorited_movies = []
 
+  for fave_movie in user.favorited_movies:
+    favorited_movies.append(
+      {
+        "id": fave_movie.movie.id,
+        "title": fave_movie.movie.title,
+        "img": fave_movie.movie.image
+      }
+    )
   res = {
     "user": userInfo,
     "genres": genres,
-    "later_movies": later_movies
+    "later_movies": later_movies,
+    "favorited_movies": favorited_movies
   }
 
   res_json = json.dumps(res)

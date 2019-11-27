@@ -21,7 +21,7 @@ const reducerLookup = {
   SET_FAVORITE_MOVIES: (state, action) => {
     return {
       ...state,
-      favorite_movies: action.value
+      favorited_movies: action.value
     }
   },
   SET_LATER_MOVIES: (state, action) => {
