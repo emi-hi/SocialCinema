@@ -120,16 +120,12 @@ def userLatemovies(user):
   dbUser = User.query.filter(User.name == user).one_or_none()
   userLaterMovies = dbUser.later_movies
   
-
   if request.method == 'POST':
     req = json.loads(request.data)
 
     title = req['suggestedMovie']['title']
     image = req['suggestedMovie']['poster']
     movie_api_id = req['suggestedMovie']['tmdbId']
-
-    all_movies = Movie.query.all()
-    print(all_movies)
 
     new_movie = Movie.query.filter(Movie.movie_api_id == str(movie_api_id)).first()
 
@@ -142,11 +138,7 @@ def userLatemovies(user):
     db.session.add(new_later_movie)
     db.session.commit()
 
-    all_movies = Movie.query.all()
-    print(all_movies)
-
   later_movies = []
-
   for later_movie in dbUser.later_movies:
     later_movies.append(
       {
