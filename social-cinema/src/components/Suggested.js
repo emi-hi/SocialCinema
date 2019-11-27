@@ -3,21 +3,29 @@ import axios from "axios";
 import './App.css';
 
 export default function Suggested(props) {
-  const [movieTitle, setMovieTitle] = useState("");
-  const [movieDescription, setMovieDescription] = useState("");
-  const [moviePoster, setMoviePoster] = useState("");
-  const [movieReleaseDate, setMovieReleaseDate] = useState("");
+  const [suggestedMovie, setSuggestedMovie] = useState("");
   const [suggested, setSuggested] = useState("hide")
 
   const newMovie = () => {
     axios.get("http://localhost:5000/suggestion")
       .then(response => {
-        setMovieTitle(response.data.title);
-        setMovieDescription(response.data.description);
-        setMoviePoster(response.data.poster);
-        setMovieReleaseDate(response.data.release_date);
-        props.getRecentSuggestions(response.data.title)
+        setSuggestedMovie({
+          "title": response.data.title,
+          "description": response.data.description,
+          "poster": response.data.poster,
+          "releaseDate": response.data.release_date,
+          "tmdbId": response.data.tmdb_id
+        });
+        props.getRecentSuggestions(response.data.title);
       })
+  }
+
+  const saveToLaterList = (userName, suggestedMovie) => {
+    console.log(suggestedMovie)
+    axios.post(`http://localhost:5000/api/${userName}/latermovies`, { suggestedMovie })
+    .then(response => {
+      props.setLaterMovies(response.data.later_movies)
+    })
   }
 
   return (
@@ -28,22 +36,22 @@ export default function Suggested(props) {
           newMovie()
         }}>
           <img src="images/filmreel.png" height="300px" alt="click to generate a suggestion!"/>
+          <h1>{props.user.name}</h1>
           <h1>Click to Generate Your First Movie Suggestion</h1>
         </div>
       }
       {suggested === "show" && 
         <div>
-      
           <div className="suggestion-all">
-            <img alt={movieTitle} src={moviePoster} className="poster"></img>
+            <img alt={suggestedMovie.title} src={suggestedMovie.poster} className="poster"></img>
             <div className="suggestion-text">
-              <h2 className="movie-title">{movieTitle}</h2>
-              <h4>{movieReleaseDate.slice(0,4)}</h4>
-              <p>{movieDescription}</p> 
+              <h2 className="movie-title">{suggestedMovie.title}</h2>
+              <h4>{suggestedMovie.releaseDate }</h4>
+              <p>{suggestedMovie.description}</p> 
             </div>
           </div>
           <div className="suggestion-buttons">
-            <button type="button" onClick={()=>console.log("add this movie to later list!")}>Add This to Later List</button>
+            {props.user.name && <button type="button" onClick={()=>{saveToLaterList(props.user.name, suggestedMovie)}}>Add This to Later List</button>}
             <button type="button" onClick={()=> newMovie()}>Suggest a Different Movie</button>
           </div>
         </div>

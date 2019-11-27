@@ -1,5 +1,5 @@
 from app import app, db
-from app.models import User, Genre, User_genre
+from app.models import User, Genre, User_genre, Movie, Later_movie
 from flask import request
 from flask_cors import CORS
 import requests
@@ -32,12 +32,14 @@ def suggestions():
   result_poster = "https://image.tmdb.org/t/p/w500" + selected_result["poster_path"]
   result_description = selected_result["overview"]
   result_release_date = selected_result["release_date"]
+  result_tmdb_id = selected_result["id"]
 
   movie_info = {
     "title": result_title,
     "poster": result_poster,
     "description": result_description,
-    "release_date": result_release_date
+    "release_date": result_release_date,
+    "tmdb_id": result_tmdb_id
   }
 
   movie_info_json = json.dumps(movie_info)
@@ -76,13 +78,17 @@ def userGenres(user):
 
     genre = Genre.query.filter(Genre.genre_api_id == req['id']).first()
 
-    user.genres.append(genre)
-    if req['preference'] == "":
-      user.genres[-1].user_genres[0].preference = None
-    else:
-      user.genres[-1].user_genres[0].preference = req['preference']
+    update_genre = User_genre.query.filter(User_genre.user_id == user.id, User_genre.genre_id == genre.id).first()
 
-    db.session.add(user)
+    if not update_genre:
+      update_genre = User_genre(user_id = user.id, genre_id = genre.id)
+
+    if req['preference'] == "":
+      update_genre.preference = None
+    else:
+      update_genre.preference = req['preference']
+
+    db.session.add(update_genre)
     db.session.commit()
 
   genres = []
@@ -111,7 +117,44 @@ def userFavmovies(user):
 @app.route("/api/<user>/latermovies", methods=['GET', 'POST'])
 def userLatemovies(user):
 
-  return "tomatoe"
+  dbUser = User.query.filter(User.name == user).one_or_none()
+  userLaterMovies = dbUser.later_movies
+  
+  if request.method == 'POST':
+    req = json.loads(request.data)
+
+    title = req['suggestedMovie']['title']
+    image = req['suggestedMovie']['poster']
+    movie_api_id = req['suggestedMovie']['tmdbId']
+
+    new_movie = Movie.query.filter(Movie.movie_api_id == str(movie_api_id)).first()
+
+    if new_movie == None:
+      new_movie = Movie(title = title, movie_api_id = movie_api_id, image = image)    
+      db.session.add(new_movie)
+      db.session.commit()
+
+    new_later_movie = Later_movie(user_id = dbUser.id, movie_id = new_movie.id)
+    db.session.add(new_later_movie)
+    db.session.commit()
+
+  later_movies = []
+  for later_movie in dbUser.later_movies:
+    later_movies.append(
+      {
+        "id": later_movie.movie.id,
+        "title": later_movie.movie.title,
+        "img": later_movie.movie.image
+      }
+    )
+
+  res = {
+    "later_movies": later_movies
+  }
+
+  res_json = json.dumps(res)
+
+  return res_json
 
 @app.route("/movies/title/")
 def title():
@@ -146,6 +189,19 @@ def login():
     db.session.add(user)
     db.session.commit()
 
+    for new_genre in req['genres']:
+      genre = Genre.query.filter(Genre.genre_api_id == new_genre['id']).first()
+      update_genre = User_genre(user_id = user.id, genre_id = genre.id)
+
+      if new_genre['preference'] == "":
+        update_genre.preference = None
+      else:
+        update_genre.preference = new_genre['preference']
+
+      db.session.add(update_genre)
+
+    db.session.commit()
+
   genres = []
 
   for genre in user.user_genres:
@@ -156,14 +212,26 @@ def login():
       }
     )
 
-  user = {
+  userInfo = {
     "name": user.name,
     "avatar": user.icon
   }
-  
+
+  later_movies = []
+
+  for later_movie in user.later_movies:
+    later_movies.append(
+      {
+        "id": later_movie.movie.id,
+        "title": later_movie.movie.title,
+        "img": later_movie.movie.image
+      }
+    )
+
   res = {
-    "user": user,
-    "genres": genres
+    "user": userInfo,
+    "genres": genres,
+    "later_movies": later_movies
   }
 
   res_json = json.dumps(res)

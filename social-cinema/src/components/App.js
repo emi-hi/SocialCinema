@@ -19,18 +19,10 @@ const tempFaves = [
   {id: 4, title: 'Baby Driver', img: 'images/movies/baby.jpeg' }
 ]
 
-const tempLater = [
-  {id: 1, title: 'Titanic 2', img: 'images/movies/titanic.jpg' },
-  {id: 2, title: 'Scary Movie 2', img: 'images/movies/scary.jpg' },
-  {id: 3, title: 'Jaws 2', img: 'images/movies/jaws.jpg'},
-  {id: 4, title: 'Baby Driver 2', img: 'images/movies/baby.jpeg' }
-]
-
 function App() {
-  const { state, setUser, setGenres } = useApplicationData();
+  const { state, setUser, setGenres, setLaterMovies } = useApplicationData();
 
   const user = state.user;
-  // const genreList = state.genres;
 
   const [favList, setFavList] = useState("hide")
   const [laterList, setLaterList] = useState("hide")
@@ -79,22 +71,27 @@ function App() {
   }
 
   const getUser = (name) => {
-    axios.post("http://localhost:5000/login", { name: name })
+    axios.post("http://localhost:5000/login", { name, genres: userGenres })
       .then(response => {
         setUser(response.data.user);
-        setGenres(response.data.genres)
+        setGenres(response.data.genres);
+        setLaterMovies(response.data.later_movies);
       })
   }
 
   const setGenre = (id, value) => {
-    console.log(`Set ${id} to ${value}`);
 
-    axios.post(`http://localhost:5000/api/${state.user.name}/genres`, { id, preference: value })
-      .then(response => {
-        console.log("We made it!")
-        setGenres(response.data.genres)
-      })
+    if (state.user && state.user.name !== "") {
+      axios.post(`http://localhost:5000/api/${state.user.name}/genres`, { id, preference: value })
+        .then(response => {
+          setGenres(response.data.genres)
+        })
+    } else {
+      const genre = state.genres.find(genre => genre.id === id);
+      genre.preference = value;
 
+      setGenres(state.genres);
+    }
   }
 
   useEffect(() => {
@@ -109,6 +106,7 @@ function App() {
   const removeUser = () => {
     setUser("");
     setGenres([]);
+    setLaterMovies([]);
   }
 
   return (
@@ -128,7 +126,7 @@ function App() {
       </div>
       <div>
         {laterList === "show" &&
-        <List type="laters" data={tempLater}/> 
+        <List type="laters" data={state.later_movies}/> 
         }
       </div>
       <div className="list_name" onClick={() => setGenreList(toggleList)}>
@@ -153,7 +151,7 @@ function App() {
           <MovieNightFriends  user={user} group={group} action="remove" classname="columnlist" useMovieNight={useMovieNight}/>
         </div>
         <div className="suggested-container">
-          <Suggested getRecentSuggestions={getRecentSuggestions}/>
+          <Suggested getRecentSuggestions={getRecentSuggestions} user={user} setLaterMovies = {setLaterMovies}/>
         </div>
         <div className="recent-suggestion-list-container">
           RECENTLY SUGGESTED LIST
