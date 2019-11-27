@@ -3,7 +3,6 @@ import Radio from "./Radio";
 
 export default function Toggle(props) {
 
-
   return (
     <div class="switch-toggle switch-3 switch-candy">
         <h2>{props.name}</h2>
