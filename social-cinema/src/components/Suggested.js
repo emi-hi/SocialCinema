@@ -23,7 +23,7 @@ export default function Suggested(props) {
     console.log(suggestedMovie)
     axios.post(`http://localhost:5000/api/${userName}/latermovies`, { suggestedMovie })
     .then(response => {
-      console.log(response.data)
+      props.setLaterMovies(response.data.later_movies)
     })
   }
 

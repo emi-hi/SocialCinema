@@ -119,6 +119,7 @@ def userLatemovies(user):
 
   dbUser = User.query.filter(User.name == user).one_or_none()
   userLaterMovies = dbUser.later_movies
+  
 
   if request.method == 'POST':
     req = json.loads(request.data)
@@ -127,19 +128,41 @@ def userLatemovies(user):
     image = req['suggestedMovie']['poster']
     movie_api_id = req['suggestedMovie']['tmdbId']
 
-    og_movies = Movie.query.all()
-    print(og_movies)
+    all_movies = Movie.query.all()
+    print(all_movies)
 
-    new_movie = Movie(title = title, movie_api_id = movie_api_id, image = image)
-    
-    db.session.add(new_movie)
-    db.session.commit()
+    new_movie = Movie.query.filter(Movie.movie_api_id == str(movie_api_id)).first()
+
+    if new_movie == None:
+      new_movie = Movie(title = title, movie_api_id = movie_api_id, image = image)    
+      db.session.add(new_movie)
+      db.session.commit()
 
     new_later_movie = Later_movie(user_id = dbUser.id, movie_id = new_movie.id)
     db.session.add(new_later_movie)
     db.session.commit()
 
-  return "HAPPY"
+    all_movies = Movie.query.all()
+    print(all_movies)
+
+  later_movies = []
+
+  for later_movie in dbUser.later_movies:
+    later_movies.append(
+      {
+        "id": later_movie.movie.id,
+        "title": later_movie.movie.title,
+        "img": later_movie.movie.image
+      }
+    )
+
+  res = {
+    "later_movies": later_movies
+  }
+
+  res_json = json.dumps(res)
+
+  return res_json
 
 @app.route("/movies/title/")
 def title():
@@ -200,12 +223,6 @@ def login():
       }
     )
 
-
-  # later_movies = [
-  #   {'id': 1, 'title': 'Titanic 2', 'img': 'images/movies/titanic.jpg' },
-  #   {'id': 2, 'title': 'Scary Movie 2', 'img': 'images/movies/scary.jpg' }
-  # ]
-  
   res = {
     "user": userInfo,
     "genres": genres,

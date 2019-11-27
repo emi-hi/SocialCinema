@@ -143,6 +143,7 @@ function App() {
         <div className="suggested-container">
           <Suggested
             user={user}
+            setLaterMovies = {setLaterMovies}
           />
         </div>
         <div className="recent-suggestion-list-container">
