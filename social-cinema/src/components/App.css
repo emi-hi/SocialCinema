@@ -139,7 +139,9 @@ section.genres {
   padding:100px;
 }
 
-
+.recent-movie-display{
+  border: 2px solid rgb(37, 59, 107);
+}
 
 @-moz-keyframes spin { 100% { -moz-transform: rotate(360deg); } }
 @-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }

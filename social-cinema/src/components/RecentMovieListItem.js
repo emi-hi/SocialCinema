@@ -2,7 +2,7 @@ import React from "react";
 
 export default function RecentMovieListItem(props) {
   return (
-    <div className="recent_movie_display">
+    <div className="recent-movie-display">
        {props.title}
     </div>
   );
