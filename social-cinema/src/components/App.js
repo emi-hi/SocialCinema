@@ -20,7 +20,7 @@ const tempFaves = [
 ]
 
 function App() {
-  const { state, setUser, setGenres, setLaterMovies, setFriends, setGroup } = useApplicationData();
+  const { state, setUser, setGenres, setLaterMovies, setFavoriteMovies, setFriends, setGroup } = useApplicationData();
 
   const user = state.user;
   const userGenres = state.genres;
@@ -105,7 +105,7 @@ function App() {
       </div>
       <div>
         {favList === "show" &&
-        <List type="favorites" data={tempFaves}/> 
+        <List type="favorites" data={tempFaves} user={user} setFavoriteMovies={setFavoriteMovies}/> 
         }
       </div>
       <div className="list_name" onClick={() => setLaterList(toggleList)}>

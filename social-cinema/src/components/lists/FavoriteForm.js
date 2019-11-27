@@ -8,6 +8,16 @@ export default function FavoriteForm(props) {
   const [title, setTitle] = useState("");
   const [searchedMovie, setSearchedMovie] = useState("");
 
+
+  const saveToFavoriteList = (userName, movie) => {
+    console.log(userName)
+    // console.log(movie)
+    // axios.post(`http://localhost:5000/api/${userName}/favoritemovies`, { movie })
+    // .then(response => {
+    //   props.setLaterMovies(response.data.favorite_movies)
+    // })
+  }
+
   const movieSearch = (event) => {
     event.preventDefault();
     const queryStringTitle = title.trim().split(" ").join("%20"); 
@@ -35,7 +45,7 @@ export default function FavoriteForm(props) {
       <br/>
   
       {searchedMovie && <MovieBox img = {searchedMovie.poster} title = {searchedMovie.title}/>}
-      {searchedMovie && <button onClick={()=>{console.log("Send to DB!")}}>Yes, this one!</button>}
+      {searchedMovie && <button onClick={()=>{saveToFavoriteList(props.user.name, searchedMovie)}}>Yes, this one!</button>}
     </main>
   )
 }

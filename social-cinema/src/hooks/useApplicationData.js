@@ -1,5 +1,5 @@
 import { useReducer, useEffect } from "react";
-import reducer, { SET_USER, SET_GENRES, SET_LATER_MOVIES, SET_FRIENDS, SET_GROUP } from "../reducers/application";
+import reducer, { SET_USER, SET_GENRES, SET_LATER_MOVIES, SET_FRIENDS, SET_GROUP, SET_FAVORITE_MOVIES } from "../reducers/application";
 import axios from 'axios'
 
 const initGenres = () => {
@@ -67,6 +67,10 @@ export default function useApplicationData() {
     dispatch({ type: SET_LATER_MOVIES, value:laterMovies });
   }
 
+  const setFavoriteMovies= favoriteMovies => {
+    dispatch({ type: SET_FAVORITE_MOVIES, value:favoriteMovies });
+  }
+
   const setFriends = friends => {
     dispatch({ type: SET_FRIENDS, value: friends });
   }
@@ -75,5 +79,5 @@ export default function useApplicationData() {
     dispatch({ type: SET_GROUP, value: group });
   }
 
-  return { state, setUser, setGenres, setLaterMovies, setFriends, setGroup };
+  return { state, setUser, setGenres, setLaterMovies, setFriends, setGroup, setFavoriteMovies };
 };
