@@ -11,7 +11,7 @@ export default function Logon(props) {
   }
 
   return (
-    <div class="logon">
+    <div className="logon">
       <form autoComplete="off" onSubmit={event => event.preventDefault()}>
         <input
           name="name"

@@ -38,7 +38,7 @@ class Movie(db.Model):
   __tablename__ = 'movies'
   id = db.Column(db.Integer, primary_key=True)
   title = db.Column(db.String(64))
-  movie_api_id = db.Column(db.String(64))
+  movie_api_id = db.Column(db.String(64), unique=True)
   image = db.Column(db.String(64))
   user_favs = db.relationship('User', secondary='favorited_movies')
   user_laters = db.relationship('User', secondary='later_movies')

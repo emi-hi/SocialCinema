@@ -2,6 +2,10 @@
   text-align: center;
 }
 
+h4 {
+  margin-block-start: 0px;
+  margin-block-end: 5px;
+}
 /* .App-logo {
   height: 40vmin;
 } */
@@ -28,6 +32,7 @@
 .list {
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   justify-content: space-around;
 }
 
@@ -80,7 +85,7 @@ button.selected {
 
 
 div.genre {
-  padding:40px;
+  padding:10px;
 }
 section.genres {
   display: flex;
