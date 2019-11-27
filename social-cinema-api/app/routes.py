@@ -79,7 +79,6 @@ def userGenres(user):
     update_genre = User_genre.query.filter(User_genre.user_id == user.id, User_genre.genre_id == genre.id).first()
 
     if not update_genre:
-      print("Fail")
       update_genre = User_genre(user_id = user.id, genre_id = genre.id)
 
     if req['preference'] == "":
@@ -149,6 +148,19 @@ def login():
   if user == None:
     user = User(name=req['name'], icon="https://ui-avatars.com/api/?name={}".format(req['name']))
     db.session.add(user)
+    db.session.commit()
+
+    for new_genre in req['genres']:
+      genre = Genre.query.filter(Genre.genre_api_id == new_genre['id']).first()
+      update_genre = User_genre(user_id = user.id, genre_id = genre.id)
+
+      if new_genre['preference'] == "":
+        update_genre.preference = None
+      else:
+        update_genre.preference = new_genre['preference']
+
+      db.session.add(update_genre)
+
     db.session.commit()
 
   genres = []
