@@ -10,7 +10,7 @@ export default function List(props) {
       boxes.push(<MovieBox title={props.data[x]['title']} img={props.data[x]['img']} />)
     } else {
       if (props.type === 'favorites') {
-        boxes.push(<AddFav/>)
+        boxes.push(<AddFav user={props.user} setFavoriteMovies={props.setFavoriteMovies}/>)
       } else {
         boxes.push(<Empty/>)
       }
