@@ -76,13 +76,18 @@ def userGenres(user):
 
     genre = Genre.query.filter(Genre.genre_api_id == req['id']).first()
 
-    user.genres.append(genre)
-    if req['preference'] == "":
-      user.genres[-1].user_genres[0].preference = None
-    else:
-      user.genres[-1].user_genres[0].preference = req['preference']
+    update_genre = User_genre.query.filter(User_genre.user_id == user.id, User_genre.genre_id == genre.id).first()
 
-    db.session.add(user)
+    if not update_genre:
+      print("Fail")
+      update_genre = User_genre(user_id = user.id, genre_id = genre.id)
+
+    if req['preference'] == "":
+      update_genre.preference = None
+    else:
+      update_genre.preference = req['preference']
+
+    db.session.add(update_genre)
     db.session.commit()
 
   genres = []
