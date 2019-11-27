@@ -20,19 +20,19 @@ const tempFaves = [
 ]
 
 function App() {
-  const { state, setUser, setGenres, setLaterMovies } = useApplicationData();
+  const { state, setUser, setGenres, setLaterMovies, setFriends, setGroup } = useApplicationData();
 
   const user = state.user;
+  const userGenres = state.genres;
+  const friends = state.friends
+  const group = state.group
 
   const [favList, setFavList] = useState("hide")
   const [laterList, setLaterList] = useState("hide")
   const [genreList, setGenreList] = useState("hide")
   const [friendList, setFriendList] = useState("hide")
-  const [friends, setFriends] = useState([])
-  const [group, setGroup] = useState([])
   const [recentSuggestions, setRecentSuggestions] = useState([])
 
-  const userGenres = state.genres;
 
   const useMovieNight = function(friend, action) {
     if (action === "add") {
@@ -50,7 +50,6 @@ function App() {
       }
       setGroup(newGroup)
     }
-
   }
 
   const getRecentSuggestions = function(newSuggestion) {
@@ -80,7 +79,6 @@ function App() {
   }
 
   const setGenre = (id, value) => {
-
     if (state.user && state.user.name !== "") {
       axios.post(`http://localhost:5000/api/${state.user.name}/genres`, { id, preference: value })
         .then(response => {
