@@ -1,5 +1,5 @@
 import { useReducer, useEffect } from "react";
-import reducer, { SET_USER, SET_GENRES, SET_LATER_MOVIES } from "../reducers/application";
+import reducer, { SET_USER, SET_GENRES, SET_LATER_MOVIES, SET_FRIENDS, SET_GROUP } from "../reducers/application";
 import axios from 'axios'
 
 const initGenres = () => {
@@ -22,7 +22,9 @@ export default function useApplicationData() {
     user: JSON.parse(localStorage.getItem('user')) || "",
     genres: [],
     favorite_movies: [],
-    later_movies: []
+    later_movies: [],
+    friends: [],
+    group: []
   });
 
   useEffect(() => {
@@ -35,10 +37,12 @@ export default function useApplicationData() {
   useEffect(() => {
     if (state.user !== "") {
       Promise.all([
-        axios.get(`http://localhost:5000/api/${state.user.name}/genres`)
+        axios.get(`http://localhost:5000/api/${state.user.name}/genres`),
+        axios.get("http://localhost:5000/api/users")
       ])
       .then((all) => {
         setGenres(all[0].data.genres)
+        setFriends(all[1].data.users)
       })
     }
   }, [state.user])
@@ -60,8 +64,16 @@ export default function useApplicationData() {
   };
 
   const setLaterMovies = laterMovies => {
-    dispatch({ type: SET_LATER_MOVIES, value:laterMovies})
+    dispatch({ type: SET_LATER_MOVIES, value:laterMovies });
   }
 
-  return { state, setUser, setGenres, setLaterMovies };
+  const setFriends = friends => {
+    dispatch({ type: SET_FRIENDS, value: friends });
+  }
+
+  const setGroup = group => {
+    dispatch({ type: SET_GROUP, value: group });
+  }
+
+  return { state, setUser, setGenres, setLaterMovies, setFriends, setGroup };
 };

@@ -56,8 +56,13 @@ def users():
   user_list = []
   for user in users:
     user_list.append({"id":user.id, "name":user.name, "icon":user.icon})
-  users_json = json.dumps(user_list)
-  return users_json
+  
+  res = {
+    "users": user_list
+  }
+  res_json = json.dumps(res)
+
+  return res_json
 
 @app.route("/api/genres")
 def genres():
