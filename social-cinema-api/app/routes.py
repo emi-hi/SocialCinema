@@ -352,7 +352,8 @@ def login():
 
   user = User.query.filter(User.name == req['name']).one_or_none()
   if user == None:
-    user = User(name=req['name'], icon="https://ui-avatars.com/api/?name={}".format(req['name']))
+    user = User(name=req['name'], icon="https://ui-avatars.com/api/?background=e3b04b&color=fff&size=50&rounded=true&bold=true&name={}".format(req['name']))
+    # user = User(name=req['name'], icon="https://ui-avatars.com/api/?name={}".format(req['name']))
     db.session.add(user)
     db.session.commit()
 
