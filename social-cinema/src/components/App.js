@@ -103,6 +103,7 @@ function App() {
     setLaterMovies([]);
     setFavoriteMovies([]);
     setFriends([]);
+    setGroup([]);
   }
 
   return (
