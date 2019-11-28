@@ -12,6 +12,7 @@ section.genres {
   color: rgb(81, 85, 88);
   margin:1px;
   font-size: small;
+  font-weight: bold;
 }
 
 div.genre {
