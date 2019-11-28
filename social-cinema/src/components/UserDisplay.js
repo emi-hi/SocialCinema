@@ -22,7 +22,7 @@ export default function UserDisplay(props) {
 
   return (
     <div className="user_display">
-       <img src={props.friend.icon} height="100px" alt={props.friend.name}/>
+       <img src={props.friend.icon} alt={props.friend.name}/>
        <p>{props.friend.name} </p>
        {props.action==="add" && 
        <button onClick={()=>addOrRemove("add")}>add</button>
