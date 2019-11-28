@@ -12,6 +12,7 @@ section.genres {
   color: rgb(81, 85, 88);
   margin:1px;
   font-size: small;
+  font-weight: bold;
 }
 
 div.genre {
@@ -54,9 +55,10 @@ div.genre:hover .genre-choices{
 
 .genre-feeling-hate{
   height: 100%;
+  width: 100%;
   position: absolute;
-  opacity: .3;
-  z-index:90;
+  opacity: .2;
+  z-index:-1;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);

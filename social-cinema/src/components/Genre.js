@@ -5,7 +5,7 @@ export default function Genre(props) {
   let imgClassName="genre-feeling";
 
   if (props.hate_class === "selected") {
-    feelingImg = "images/no.png";
+    feelingImg = "images/no.svg";
     imgClassName += "-hate";
     
   } else if (props.love_class === "selected") {
