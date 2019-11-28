@@ -15,7 +15,8 @@ export default function Suggested(props) {
           "poster": response.data.poster,
           "releaseDate": response.data.release_date,
           "tmdbId": response.data.tmdb_id,
-          "imdb_link": response.data.imdb_link
+          "imdb_link": response.data.imdb_link,
+          "runtime" : response.data.runtime
         });
         props.getRecentSuggestions(response.data);
       })
@@ -26,6 +27,10 @@ export default function Suggested(props) {
     .then(response => {
       props.setLaterMovies(response.data.later_movies)
     })
+  }
+  let runtime;
+  if (suggestedMovie.runtime) {
+    runtime = suggestedMovie.runtime + ' minutes'
   }
 
   return (
@@ -46,8 +51,10 @@ export default function Suggested(props) {
             <img alt={suggestedMovie.title} src={suggestedMovie.poster} className="poster"></img>
             <div className="suggestion-text">
               <h2 className="movie-title">{suggestedMovie.title}</h2>
-              <h4>{suggestedMovie.releaseDate }</h4>
+              <h4>{suggestedMovie.releaseDate}</h4>
               <p>{suggestedMovie.description}</p>
+              
+              <p>{runtime}</p>
               <a href={suggestedMovie.imdb_link} target="_blank">Learn more at IMDB</a>
             </div>
           </div>

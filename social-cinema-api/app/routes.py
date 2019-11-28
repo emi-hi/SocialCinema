@@ -77,26 +77,26 @@ def suggestions():
 
     if len(user_loved_genres_loop_copy) != 0:
       index = random.randint(0, (len(user_loved_genres_loop_copy) - 1))
-      r = requests.get("https://api.themoviedb.org/3/discover/movie?api_key={}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page={}&with_genres={}&without_genres={}".format(TMDB_key, page_num, user_loved_genres[index], hated_list))
+      r = requests.get("https://api.themoviedb.org/3/discover/movie?api_key={}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page={}&with_genres={}&without_genres={}&with_runtime.gte=20".format(TMDB_key, page_num, user_loved_genres[index], hated_list))
       del user_loved_genres_loop_copy[index]
     elif len(user_meh_genres_loop_copy) != 0:
       index = random.randint(0, (len(user_meh_genres_loop_copy) - 1))
-      r = requests.get("https://api.themoviedb.org/3/discover/movie?api_key={}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page={}&with_genres={}&without_genres={}".format(TMDB_key, page_num, user_meh_genres[index], hated_list))
+      r = requests.get("https://api.themoviedb.org/3/discover/movie?api_key={}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page={}&with_genres={}&without_genres={}&with_runtime.gte=20".format(TMDB_key, page_num, user_meh_genres[index], hated_list))
       del user_meh_genres_loop_copy[index]
     else:
       index = 0
-      r = requests.get("https://api.themoviedb.org/3/discover/movie?api_key={}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page={}&with_genres={}&without_genres={}".format(TMDB_key, page_num, user_meh_genres[index], hated_list))
+      r = requests.get("https://api.themoviedb.org/3/discover/movie?api_key={}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page={}&with_genres={}&without_genres={}&with_runtime.gte=20".format(TMDB_key, page_num, user_meh_genres[index], hated_list))
 
 
     tmdb_result = json.loads(r.text)
     results = tmdb_result["results"]
-
+    
     for index, result in enumerate(results):
       # print('result: ', result['id'])
       # print('index: ', index)
       if result['id'] in suggested_ids:
+        print("it was in here!")
         print(result['title'])
-        print("IT WAS IN HERE")
         del results[index]
         
     all_results += results
@@ -105,9 +105,8 @@ def suggestions():
 
   details_r = requests.get("https://api.themoviedb.org/3/movie/{}?api_key={}&language=en-US".format(selected_result["id"], TMDB_key))
   detailed_result = json.loads(details_r.text)
-
   imdb_id = detailed_result["imdb_id"]
-
+  runtime = detailed_result["runtime"]
   if selected_result["poster_path"]:
     poster = "https://image.tmdb.org/t/p/w500" + selected_result["poster_path"]
   else:
@@ -124,7 +123,8 @@ def suggestions():
     "description": selected_result["overview"],
     "release_date": selected_result["release_date"],
     "tmdb_id": selected_result["id"],
-    "imdb_link": imdb_link
+    "imdb_link": imdb_link,
+    "runtime" : runtime
   }
 
   movie_info_json = json.dumps(movie_info)
