@@ -17,6 +17,11 @@ CORS(app)
 @app.route("/suggestion", methods=['GET', 'POST'])
 def suggestions():
   req = json.loads(request.data)
+
+  suggested_ids = []
+  for suggestion in req['recentSuggestions']:
+    suggested_ids.append(suggestion['newSuggestion']['tmdb_id'])
+  
   user_genre_preferences = req['userGenrePreferences']
 
   # Confert user preferences to more useable object
@@ -34,9 +39,6 @@ def suggestions():
           preferences[genre.genre.genre_api_id] = False
         elif genre.preference == True:
           preferences[genre.genre.genre_api_id] = True
-
-
-  print(preferences)
 
   # Do some things to the lists to make them in a thing
   user_loved_genres = []
@@ -87,7 +89,17 @@ def suggestions():
 
 
     tmdb_result = json.loads(r.text)
-    all_results += tmdb_result["results"]
+    results = tmdb_result["results"]
+
+    for index, result in enumerate(results):
+      # print('result: ', result['id'])
+      # print('index: ', index)
+      if result['id'] in suggested_ids:
+        print(result['title'])
+        print("IT WAS IN HERE")
+        del results[index]
+        
+    all_results += results
 
   selected_result = all_results[(random.randint(0, (len(all_results) - 1)))]
 
@@ -297,8 +309,6 @@ def title():
   movies = []
 
   for result in results: 
-    print("MUCH THINGS")
-    print(result) 
     result_title = result["title"]
     if result["poster_path"]:
       result_poster = "https://image.tmdb.org/t/p/w500" + result["poster_path"]
