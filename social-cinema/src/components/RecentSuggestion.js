@@ -7,7 +7,6 @@ export default function RecentSuggestion(props) {
     return <RecentMovieListItem title={movie.newSuggestion.title} imdb_link={movie.newSuggestion.imdb_link}/>
   })
 
-
   return (
     <article>
       <div className="recent"> 

@@ -19,17 +19,37 @@ def suggestions():
   req = json.loads(request.data)
   user_genre_preferences = req['userGenrePreferences']
 
+  # Confert user preferences to more useable object
+  preferences = {}
+  for user_preference in user_genre_preferences:
+    preferences[user_preference['id']] = user_preference['preference']
+
+  # Get any group preferences
+  for user in req['group']:
+    genre_preferences = User_genre.query.filter(User_genre.user_id == user['friend']['id']).all()
+
+    for genre in genre_preferences:
+      if preferences[genre.genre.genre_api_id] != False:
+        if genre.preference == False:
+          preferences[genre.genre.genre_api_id] = False
+        elif genre.preference == True:
+          preferences[genre.genre.genre_api_id] = True
+
+
+  print(preferences)
+
+  # Do some things to the lists to make them in a thing
   user_loved_genres = []
   user_meh_genres = []
   user_hated_genres = []
 
-  for genre in user_genre_preferences:
-    if genre['preference'] == True:
-      user_loved_genres.append(str(genre['id']))
-    elif genre['preference'] == "" or genre['preference'] == None:
-      user_meh_genres.append(str(genre['id']))
-    elif genre['preference'] == False:
-      user_hated_genres.append(str(genre['id']))
+  for genre in preferences:
+    if preferences[genre] == True:
+      user_loved_genres.append(str(genre))
+    elif preferences[genre] == "" or preferences[genre] == None:
+      user_meh_genres.append(str(genre))
+    elif preferences[genre] == False:
+      user_hated_genres.append(str(genre))
 
   if len(user_meh_genres) == 0 and len(user_loved_genres) == 0:
     full_hate_info = {
