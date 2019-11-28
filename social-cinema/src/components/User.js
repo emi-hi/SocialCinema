@@ -1,6 +1,5 @@
 import React from "react";
 
-
 //this one shows up when there is no favorite. It's just an add symbol.
 export default function User(props) {
 
