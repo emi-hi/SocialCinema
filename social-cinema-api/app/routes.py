@@ -58,6 +58,16 @@ def suggestions():
       "title": "No Movie For You",
       "description": "It seems you are not the moving watching kind",
     }
+  
+    full_hate_info = {
+    "title": "Bob Ross: The Happy Painter",
+    "poster": "https://image.tmdb.org/t/p/w500/yhV6rSv8Ry80lyDL8sjZpu8hzph.jpg",
+    "description": "We couldn't find an appropriate movie to recommend based on the current genre prefernces. However, we believe everyone will enjoy this!",
+    "release_date": "2011-12-03",
+    "tmdb_id": "238959",
+    "imdb_link": "https://www.imdb.com/title/tt2155259/"
+    }
+
     full_hate_info_json = json.dumps(full_hate_info)
     return full_hate_info_json
 
