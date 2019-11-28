@@ -19,6 +19,16 @@
   justify-content: flex-start;
 }
 
+.friend-card{
+  /* height: 50px;
+  width: 50px; */
+  border: 2px solid rgb(37, 59, 107);
+}
+
+.user-icon{
+  border: 2px dotted rgb(184, 121, 111);
+}
+
 .movie_box {
   width: 8vw;
   height: 120px;

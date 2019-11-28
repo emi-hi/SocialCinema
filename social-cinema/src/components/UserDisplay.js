@@ -1,5 +1,5 @@
 import React from "react";
-
+import './lists/styles.css'
 export default function UserDisplay(props) {
   const addOrRemove = function(action) {
     let addEnabled = true;
@@ -21,8 +21,8 @@ export default function UserDisplay(props) {
     }
 
   return (
-    <div className="user_display">
-       <img src={props.friend.icon} height="100px" alt={props.friend.name}/>
+    <div className="friend-card">
+       <img className="user-icon" src={props.friend.icon} height="100px" alt={props.friend.name}/>
        <p>{props.friend.name} </p>
        {props.action==="add" && 
        <button onClick={()=>addOrRemove("add")}>add</button>
