@@ -4,7 +4,7 @@ class User(db.Model):
   __tablename__ = 'users'
   id = db.Column(db.Integer, primary_key=True)
   name = db.Column(db.String(64), unique=True)
-  icon = db.Column(db.String(64))
+  icon = db.Column(db.String(128))
   genres = db.relationship('Genre', secondary='user_genres')
   movie_favs = db.relationship('Movie', secondary='favorited_movies')
   movie_laters = db.relationship('Movie', secondary='later_movies')

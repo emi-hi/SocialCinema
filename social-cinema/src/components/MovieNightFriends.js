@@ -9,7 +9,11 @@ export default function MovieNightFriends(props) {
 
   return (
     <article className="columnlist">
+<<<<<<< HEAD
       <img className="user-icon"src={props.user.avatar} width="100px" height="100px" alt={props.user.name}/>
+=======
+      <img className="user_display "src={props.user.avatar} alt={props.user.name}/>
+>>>>>>> master
       you
     <FriendList friends={theGroup} group={props.group} action={props.action} useMovieNight={props.useMovieNight}/>
     </article>
