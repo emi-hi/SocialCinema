@@ -14,7 +14,8 @@ export default function Suggested(props) {
           "description": response.data.description,
           "poster": response.data.poster,
           "releaseDate": response.data.release_date,
-          "tmdbId": response.data.tmdb_id
+          "tmdbId": response.data.tmdb_id,
+          "imdb_link": response.data.imdb_link
         });
         props.getRecentSuggestions(response.data);
       })
@@ -46,7 +47,8 @@ export default function Suggested(props) {
             <div className="suggestion-text">
               <h2 className="movie-title">{suggestedMovie.title}</h2>
               <h4>{suggestedMovie.releaseDate }</h4>
-              <p>{suggestedMovie.description}</p> 
+              <p>{suggestedMovie.description}</p>
+              <a href={suggestedMovie.imdb_link} target="_blank">Learn more at IMDB</a>
             </div>
           </div>
           <div className="suggestion-buttons">

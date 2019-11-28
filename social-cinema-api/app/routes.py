@@ -71,17 +71,28 @@ def suggestions():
 
   selected_result = all_results[(random.randint(0, (len(all_results) - 1)))]
 
+  details_r = requests.get("https://api.themoviedb.org/3/movie/{}?api_key={}&language=en-US".format(selected_result["id"], TMDB_key))
+  detailed_result = json.loads(details_r.text)
+
+  imdb_id = detailed_result["imdb_id"]
+
   if selected_result["poster_path"]:
     poster = "https://image.tmdb.org/t/p/w500" + selected_result["poster_path"]
   else:
     poster = ""
+
+  if imdb_id:
+    imdb_link = "https://www.imdb.com/title/{}/".format(imdb_id)
+  else:
+    imdb_link = "https://www.imdb.com/"
 
   movie_info = {
     "title": selected_result["title"],
     "poster": poster,
     "description": selected_result["overview"],
     "release_date": selected_result["release_date"],
-    "tmdb_id": selected_result["id"]
+    "tmdb_id": selected_result["id"],
+    "imdb_link": imdb_link
   }
 
   movie_info_json = json.dumps(movie_info)
