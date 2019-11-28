@@ -21,10 +21,10 @@ export default function useApplicationData() {
   const [state, dispatch] = useReducer(reducer, {
     user: JSON.parse(localStorage.getItem('user')) || "",
     genres: [],
-    favorited_movies: [],
-    later_movies: [],
+    favorited_movies: JSON.parse(localStorage.getItem('favoritedMovies')) || [],
+    later_movies: JSON.parse(localStorage.getItem('laterMovies')) || [],
     friends: [],
-    group: []
+    group: JSON.parse(localStorage.getItem('group')) || []
   });
 
   useEffect(() => {
@@ -64,6 +64,7 @@ export default function useApplicationData() {
   };
 
   const setLaterMovies = laterMovies => {
+    localStorage.setItem("laterMovies", JSON.stringify(laterMovies))
     dispatch({ type: SET_LATER_MOVIES, value:laterMovies });
   }
 
@@ -76,9 +77,9 @@ export default function useApplicationData() {
     })
   }
 
-  const setFavoriteMovies = favoriteMovies => {
-    console.log("SET FAV", favoriteMovies)
-    dispatch({ type: SET_FAVORITE_MOVIES, value:favoriteMovies });
+  const setFavoriteMovies = favoritedMovies => {
+    localStorage.setItem("favoritedMovies", JSON.stringify(favoritedMovies))
+    dispatch({ type: SET_FAVORITE_MOVIES, value:favoritedMovies });
   }
 
   const removeFavoritedMovie = id => {
@@ -95,6 +96,7 @@ export default function useApplicationData() {
   }
 
   const setGroup = group => {
+    localStorage.setItem("group", JSON.stringify(group))
     dispatch({ type: SET_GROUP, value: group });
   }
 
