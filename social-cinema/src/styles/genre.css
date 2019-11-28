@@ -54,9 +54,10 @@ div.genre:hover .genre-choices{
 
 .genre-feeling-hate{
   height: 100%;
+  width: 100%;
   position: absolute;
-  opacity: .3;
-  z-index:90;
+  opacity: .2;
+  z-index:-1;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
