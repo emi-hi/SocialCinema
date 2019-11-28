@@ -22,6 +22,12 @@ div.genre {
   box-shadow: 1px 1px 2px grey;
   border-radius: 5px;
   margin:2px;
+
+}
+
+.genre-choices{
+  display:none;
+  height:33%;
 }
 
 div.genre:hover .genre-choices{
@@ -34,8 +40,6 @@ div.genre:hover .genre-choices{
   height: 90%;
   display:flex;
   flex-direction:column;
-
-  /* border: 2px solid rgb(15, 10, 10); */
   background-color: white;
   border-radius: 10px;
 }
@@ -44,14 +48,27 @@ div.genre:hover .genre-choices{
   margin-top: 4px;
   height: 4vw;
   width: 6vw;
-  z-index:50;
+  z-index:50; 
 }
 
-.genre-choices{
-  display:none;
-  height:33%;
+.genre-feeling-hate{
+  height: 100%;
+  position: absolute;
+  opacity: .3;
+  z-index:90;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
-
+.genre-feeling-love{
+  height: 100%;
+  position: absolute;
+  opacity: .3;
+  z-index:0;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);  
+}
 
 button.unselected {
   background-color:white;
@@ -70,4 +87,14 @@ button.selected#lovegenre{
 }
 button.selected#mehgenre{
   background-color: rgb(138, 138, 138);
+}
+
+button#hategenre:hover{
+  background-color: rgb(204, 119, 119);
+}
+button#lovegenre:hover{
+  background-color: rgb(143, 168, 143);
+}
+button#mehgenre:hover{
+  background-color: rgb(170, 168, 168);
 }
