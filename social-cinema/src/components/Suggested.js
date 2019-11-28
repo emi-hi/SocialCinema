@@ -6,8 +6,8 @@ export default function Suggested(props) {
   const [suggestedMovie, setSuggestedMovie] = useState("");
   const [suggested, setSuggested] = useState("hide")
 
-  const newMovie = () => {
-    axios.get("http://localhost:5000/suggestion")
+  const newMovie = (userGenrePreferences) => {
+    axios.post(`http://localhost:5000/suggestion`, { userGenrePreferences })
       .then(response => {
         setSuggestedMovie({
           "title": response.data.title,
@@ -32,7 +32,7 @@ export default function Suggested(props) {
       {suggested === "hide" &&
         <div className="click-suggest" onClick={() => {
           setSuggested("show")
-          newMovie()
+          newMovie(props.userGenres)
         }}>
           <img src="images/film-reel.png" height="300px" alt="click to generate a suggestion!"/>
           <h1>{props.user.name}</h1>
@@ -51,7 +51,7 @@ export default function Suggested(props) {
           </div>
           <div className="suggestion-buttons">
             {props.user.name && <button type="button" onClick={()=>{saveToLaterList(props.user.name, suggestedMovie)}}>Add This to Later List</button>}
-            <button type="button" onClick={()=> newMovie()}>Suggest a Different Movie</button>
+            <button type="button" onClick={()=>newMovie(props.userGenres)}>Suggest a Different Movie</button>
           </div>
         </div>
       }

@@ -14,32 +14,74 @@ TMDB_key = os.getenv('TMDB_KEY')
 
 CORS(app)
 
-@app.route("/suggestion")
+@app.route("/suggestion", methods=['GET', 'POST'])
 def suggestions():
+  req = json.loads(request.data)
+  user_genre_preferences = req['userGenrePreferences']
 
-  genres = [28, 12, 16, 35, 80, 99, 18, 10751, 14, 36, 27, 10402, 9648, 10749, 878, 10770, 53, 10752, 37]
-  genre_index = (random.randint(0,18))
-  genre = genres[genre_index]
+  user_loved_genres = []
+  user_meh_genres = []
+  user_hated_genres = []
 
-  r = requests.get("https://api.themoviedb.org/3/discover/movie?api_key={}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres={}".format(TMDB_key, genre))
-  tmdb_result = json.loads(r.text)
+  for genre in user_genre_preferences:
+    if genre['preference'] == True:
+      user_loved_genres.append(str(genre['id']))
+    elif genre['preference'] == "" or genre['preference'] == None:
+      user_meh_genres.append(str(genre['id']))
+    elif genre['preference'] == False:
+      user_hated_genres.append(str(genre['id']))
 
-  result_index = (random.randint(0, 10))
+  if len(user_meh_genres) == 0 and len(user_loved_genres) == 0:
+    full_hate_info = {
+      "title": "No Movie For You",
+      "description": "It seems you are not the moving watching kind",
+    }
+    full_hate_info_json = json.dumps(full_hate_info)
+    return full_hate_info_json
 
-  selected_result = tmdb_result["results"][result_index]
+  if len(user_hated_genres) > 1:
+    hated_list = (",".join(user_hated_genres))
+  elif len(user_hated_genres) == 1:
+    hated_list = user_hated_genres[0]
+  elif len(user_hated_genres) == 0:
+    hated_list = "0"
 
-  result_title = selected_result["title"]
-  result_poster = "https://image.tmdb.org/t/p/w500" + selected_result["poster_path"]
-  result_description = selected_result["overview"]
-  result_release_date = selected_result["release_date"]
-  result_tmdb_id = selected_result["id"]
+  user_loved_genres_loop_copy = user_loved_genres.copy()
+  user_meh_genres_loop_copy = user_meh_genres.copy()
+  all_results = []
+
+  while len(all_results) == 0:
+    page_num = random.randint(1, 3)
+
+    if len(user_loved_genres_loop_copy) != 0:
+      index = random.randint(0, (len(user_loved_genres_loop_copy) - 1))
+      r = requests.get("https://api.themoviedb.org/3/discover/movie?api_key={}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page={}&with_genres={}&without_genres={}".format(TMDB_key, page_num, user_loved_genres[index], hated_list))
+      del user_loved_genres_loop_copy[index]
+    elif len(user_meh_genres_loop_copy) != 0:
+      index = random.randint(0, (len(user_meh_genres_loop_copy) - 1))
+      r = requests.get("https://api.themoviedb.org/3/discover/movie?api_key={}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page={}&with_genres={}&without_genres={}".format(TMDB_key, page_num, user_meh_genres[index], hated_list))
+      del user_meh_genres_loop_copy[index]
+    else:
+      index = 0
+      r = requests.get("https://api.themoviedb.org/3/discover/movie?api_key={}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page={}&with_genres={}&without_genres={}".format(TMDB_key, page_num, user_meh_genres[index], hated_list))
+
+
+    tmdb_result = json.loads(r.text)
+    all_results += tmdb_result["results"]
+
+  selected_result = all_results[(random.randint(0, (len(all_results) - 1)))]
+
+  if selected_result["poster_path"]:
+    poster = "https://image.tmdb.org/t/p/w500" + selected_result["poster_path"]
+  else:
+    poster = ""
 
   movie_info = {
-    "title": result_title,
-    "poster": result_poster,
-    "description": result_description,
-    "release_date": result_release_date,
-    "tmdb_id": result_tmdb_id
+    "title": selected_result["title"],
+    "poster": poster,
+    "description": selected_result["overview"],
+    "release_date": selected_result["release_date"],
+    "tmdb_id": selected_result["id"]
   }
 
   movie_info_json = json.dumps(movie_info)
