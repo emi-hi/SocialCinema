@@ -57,7 +57,7 @@ function App() {
   const getRecentSuggestions = function(newSuggestion) {
     let updatedRecentSuggestionsList = [...recentSuggestions]
     updatedRecentSuggestionsList.unshift({newSuggestion})
-    if (updatedRecentSuggestionsList.length > 10) {
+    if (updatedRecentSuggestionsList.length > 15) {
       updatedRecentSuggestionsList = updatedRecentSuggestionsList.slice(0, updatedRecentSuggestionsList.length - 1)
     }
       setRecentSuggestions(updatedRecentSuggestionsList)
@@ -146,6 +146,7 @@ function App() {
         </div>
         <div className="suggested-container">
           <Suggested
+            recentSuggestions={recentSuggestions}
             getRecentSuggestions={getRecentSuggestions}
             user={user}
             group={group}

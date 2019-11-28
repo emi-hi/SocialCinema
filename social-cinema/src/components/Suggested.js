@@ -7,8 +7,7 @@ export default function Suggested(props) {
   const [suggested, setSuggested] = useState("hide")
 
   const newMovie = () => {
-    console.log(props.group)
-    axios.post(`http://localhost:5000/suggestion`, { userGenrePreferences: props.userGenres, group: props.group })
+    axios.post(`http://localhost:5000/suggestion`, { userGenrePreferences: props.userGenres, group: props.group, recentSuggestions: props.recentSuggestions })
       .then(response => {
         setSuggestedMovie({
           "title": response.data.title,
@@ -54,7 +53,7 @@ export default function Suggested(props) {
           </div>
           <div className="suggestion-buttons">
             {props.user.name && <button type="button" onClick={()=>{saveToLaterList(props.user.name, suggestedMovie)}}>Add This to Later List</button>}
-            <button type="button" onClick={()=>newMovie(props.userGenres)}>Suggest a Different Movie</button>
+            <button type="button" onClick={()=>newMovie()}>Suggest a Different Movie</button>
           </div>
         </div>
       }
