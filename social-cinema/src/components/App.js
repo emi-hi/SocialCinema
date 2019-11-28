@@ -10,7 +10,7 @@ import FriendList from './FriendList';
 import MovieNightFriends from './MovieNightFriends';
 
 import useApplicationData from "../hooks/useApplicationData";
-import RecentSuggestion from './Recent';
+import RecentSuggestion from './RecentSuggestion';
 
 
 function App() {
