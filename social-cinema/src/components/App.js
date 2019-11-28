@@ -12,7 +12,6 @@ import MovieNightFriends from './MovieNightFriends';
 import useApplicationData from "../hooks/useApplicationData";
 import RecentSuggestion from './Recent';
 
-
 function App() {
   const { 
     state,
@@ -25,7 +24,6 @@ function App() {
     setFriends,
     setGroup
   } = useApplicationData();
-  // const { state, setUser, setGenres, setLaterMovies, setFavoriteMovies, setFriends, setGroup } = useApplicationData();
 
   const user = state.user;
   const userGenres = state.genres;
@@ -147,7 +145,13 @@ function App() {
           <MovieNightFriends  user={user} group={group} action="remove" classname="columnlist" useMovieNight={useMovieNight}/>
         </div>
         <div className="suggested-container">
-          <Suggested getRecentSuggestions={getRecentSuggestions} user={user} userGenres={userGenres} setLaterMovies={setLaterMovies}/>
+          <Suggested
+            getRecentSuggestions={getRecentSuggestions}
+            user={user}
+            group={group}
+            userGenres={userGenres}
+            setLaterMovies={setLaterMovies}
+          />
         </div>
         <div className="recent-suggestion-list-container">
           RECENTLY SUGGESTED LIST
