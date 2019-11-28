@@ -34,7 +34,7 @@ export default function Suggested(props) {
           setSuggested("show")
           newMovie(props.userGenres)
         }}>
-          <img src="images/filmreel.png" height="300px" alt="click to generate a suggestion!"/>
+          <img src="images/film-reel.png" height="300px" alt="click to generate a suggestion!"/>
           <h1>{props.user.name}</h1>
           <h1>Click to Generate Your First Movie Suggestion</h1>
         </div>

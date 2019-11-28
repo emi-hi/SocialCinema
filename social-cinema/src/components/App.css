@@ -59,18 +59,14 @@ h4 {
 
 .main-container .friends-container{
   width:20%;
-  border: 2px dotted rgb(138, 100, 100);
 }
 .main-container .suggested-container{
   width:60%;
-  border: 2px dotted rgb(54, 151, 120);
 }
 .main-container .recent-suggestion-list-container{
   width:20%;
-  border: 2px dotted rgb(92, 196, 31);
 }
 .suggestion-all {
-  border: 2px solid rgb(0, 0, 0);
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -82,25 +78,19 @@ h4 {
 
 .suggestion-text{
   height: 60vh;
-  border: 2px dashed rgb(0, 0, 0);
   width: 50%;
-}
-
-.initial-suggest{
-    -webkit-animation:spin 5s linear infinite;
-    -moz-animation:spin 5s linear infinite;
-    animation:spin 5s linear infinite;
-    height: 300px;
 }
 
 .click-suggest{
   padding:100px;
 }
 
-.recent-movie-display{
-  border: 2px solid rgb(37, 59, 107);
+.recent{
+  display:flex;
+  flex-direction: column;
 }
 
-@-moz-keyframes spin { 100% { -moz-transform: rotate(360deg); } }
-@-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
-@keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
+.recent-movie-display{
+  border: 1px solid rgb(37, 59, 107);
+  border-radius: 4px;
+}

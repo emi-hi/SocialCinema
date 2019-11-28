@@ -9,8 +9,8 @@ export default function RecentSuggestion(props) {
 
 
   return (
-    <article className="test">
-      <div>
+    <article>
+      <div className="recent"> 
        {recents}
       </div>
     </article>
