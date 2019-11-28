@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import './App.css';
+import '../styles/genre.css';
 
 import Genre from "./Genre";
 import axios from "axios";
@@ -18,6 +19,7 @@ export default function Genres(props) {
   const hatedGenres = [];
   
   for (const genre of props.userGenres) {
+    console.log(genre)
     if (genre.preference) {
       lovedGenres.push(genre.id);
     } else if (genre.preference === false) {

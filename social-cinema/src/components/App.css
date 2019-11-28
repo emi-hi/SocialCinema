@@ -48,25 +48,8 @@ h4 {
   flex-direction: row;
 }
 
-button.unselected {
-  background-color: lightgray;
-  border: none;
-}
-
-button.selected {
-  background-color: lightgreen;
-  border: 2px solid #4CAF50;
-}
 
 
-div.genre {
-  padding:10px;
-}
-section.genres {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-}
 
 .main-container{
   display: flex;
