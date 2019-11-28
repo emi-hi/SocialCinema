@@ -13,15 +13,16 @@ const contentStyle = {
 export default function AddFav(props) {
   return (
     <main className="favorite_add">
-      <Popup trigger={
-      <img
-        src="images/add.png"
-        alt="Add" 
-      />
-    } modal
-    contentStyle={contentStyle}>
-    <FavoriteForm user={props.user} setFavoriteMovies={props.setFavoriteMovies}/>
-    </Popup>
+      <Popup trigger=
+        {
+          <img
+            src="images/add.png"
+            alt="Add" 
+          />
+        } modal
+        contentStyle={contentStyle}>
+        <FavoriteForm user={props.user} setFavoriteMovies={props.setFavoriteMovies}/>
+      </Popup>
     </main>
   );
 }

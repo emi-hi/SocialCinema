@@ -2,10 +2,6 @@ import React from "react";
 
 export default function MovieBox(props) {
 
-  const fish = () => {
-    console.log("Win");
-  }
-
   return (
     <div className="movie_box">
       <div className="tiny_poster">

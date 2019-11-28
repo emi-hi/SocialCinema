@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import axios from 'axios';
 
-import MovieBox from './MovieBox'
+import PickFav from "./PickFav";
 
 
 export default function FavoriteForm(props) {
@@ -12,7 +12,6 @@ export default function FavoriteForm(props) {
   const saveToFavoriteList = (userName, movie) => {
     axios.post(`http://localhost:5000/api/${userName}/favmovies`, { movie })
     .then(response => {
-      console.log("SERVER SAYS WUT", response);
       props.setFavoriteMovies(response.data.favorited_movies)
     })
   }
@@ -23,7 +22,7 @@ export default function FavoriteForm(props) {
   
     axios.get(`http://localhost:5000/movies/title/?title=${queryStringTitle}`)
     .then(response => {
-      setSearchedMovie(response.data)
+      setSearchedMovie(response.data.movies)
     })
   }
 
@@ -43,8 +42,7 @@ export default function FavoriteForm(props) {
       </form>
       <br/>
   
-      {searchedMovie && <MovieBox img = {searchedMovie.poster} title = {searchedMovie.title}/>}
-      {searchedMovie && <button onClick={()=>{saveToFavoriteList(props.user.name, searchedMovie)}}>Yes, this one!</button>}
+      {searchedMovie && <PickFav user={props.user} searchedMovie={searchedMovie} saveToFavoriteList={saveToFavoriteList} />}
     </main>
   )
 }

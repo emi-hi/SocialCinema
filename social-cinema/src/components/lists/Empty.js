@@ -4,7 +4,7 @@ import React from "react";
 export default function Empty(props) {
   return (
     <main className="empty">
-      <h1>Empty stuff</h1>
+      <h1>Nothing for later</h1>
     </main>
   );
 }

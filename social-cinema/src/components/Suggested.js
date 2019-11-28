@@ -16,7 +16,7 @@ export default function Suggested(props) {
           "releaseDate": response.data.release_date,
           "tmdbId": response.data.tmdb_id
         });
-        props.getRecentSuggestions(response.data.title);
+        props.getRecentSuggestions(response.data);
       })
   }
 
