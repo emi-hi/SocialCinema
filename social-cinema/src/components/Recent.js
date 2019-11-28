@@ -3,7 +3,7 @@ import RecentMovieListItem from './RecentMovieListItem'
 
 export default function RecentSuggestion(props) {
   let recents = props.recent.map((movie) => {
-    return <RecentMovieListItem title={movie["newSuggestion"]}/>
+    return <RecentMovieListItem key={movie.newSuggestion.tmdb_id} title={movie.newSuggestion.title}/>
   })
 
   return (
@@ -14,5 +14,3 @@ export default function RecentSuggestion(props) {
     </article>
     )
 }
-
-

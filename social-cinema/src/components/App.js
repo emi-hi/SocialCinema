@@ -58,9 +58,9 @@ function App() {
 
   const getRecentSuggestions = function(newSuggestion) {
     let updatedRecentSuggestionsList = [...recentSuggestions]
-    updatedRecentSuggestionsList.push({newSuggestion})
+    updatedRecentSuggestionsList.unshift({newSuggestion})
     if (updatedRecentSuggestionsList.length > 10) {
-      updatedRecentSuggestionsList = updatedRecentSuggestionsList.slice(1)
+      updatedRecentSuggestionsList = updatedRecentSuggestionsList.slice(0, updatedRecentSuggestionsList.length - 1)
     }
       setRecentSuggestions(updatedRecentSuggestionsList)
   }

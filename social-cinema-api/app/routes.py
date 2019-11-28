@@ -219,25 +219,39 @@ def title():
   movie_title = request.args['title']
   movies = requests.get("https://api.themoviedb.org/3/search/movie?api_key={}&language=en-US&query={}&page=1&include_adult=false".format(TMDB_key, movie_title))
   movies_dict = movies.json()
-  first_result = movies_dict["results"][0]
-  
-  result_title = first_result["title"]
-  result_poster = "https://image.tmdb.org/t/p/w500" + first_result["poster_path"]
-  result_description = first_result["overview"]
-  result_release_date = first_result["release_date"]
-  result_tmdb_id = first_result["id"]
+  results = movies_dict["results"]
 
-  movie_info = {
-    "title": result_title,
-    "poster": result_poster,
-    "description": result_description,
-    "release_date": result_release_date,
-    "tmdbId": result_tmdb_id
-  }
+  movies = []
 
-  movie_info_json = json.dumps(movie_info)
+  for result in results: 
+    print("MUCH THINGS")
+    print(result) 
+    result_title = result["title"]
+    if result["poster_path"]:
+      result_poster = "https://image.tmdb.org/t/p/w500" + result["poster_path"]
+    else:
+      result_poster = "Nope"
+    result_description = result["overview"]
+    result_release_date = result["release_date"]
+    result_tmdb_id = result["id"]
 
-  return movie_info_json
+    movie_info = {
+      "title": result_title,
+      "poster": result_poster,
+      "description": result_description,
+      "release_date": result_release_date,
+      "tmdbId": result_tmdb_id
+    }
+
+    movies.append(movie_info)
+
+    res = {
+      "movies": movies
+    }
+
+  movies_json = json.dumps(res)
+
+  return movies_json
 
 @app.route("/login", methods=['GET', 'POST'])
 def login():
