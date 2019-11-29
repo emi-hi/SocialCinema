@@ -16,10 +16,7 @@ export default function Form(props) {
     <main className="">
       <Popup trigger=
         {
-          <img
-            src="images/add.png"
-            alt="Add" 
-          />
+          props.createUser ? <img src="images/add.png" alt="Add" /> : <img src="images/trash.png" alt="No" />
         } modal
         contentStyle={contentStyle}>
         {props.createUser && <Signup createUser={props.createUser} />}

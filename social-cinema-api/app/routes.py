@@ -1,6 +1,6 @@
 from app import app, db
 from app.models import User, Genre, User_genre, Movie, Later_movie, Favorited_movie
-from flask import request
+from flask import request, make_response, jsonify
 from flask_cors import CORS
 import requests
 import json
@@ -353,11 +353,11 @@ def signup():
   user = User.query.filter(User.name == req['name']).one_or_none()
 
   if user != None:
-    return json.dumps({ "user": "" })
+    return make_response(jsonify({ "error": "Username already exists." })), 401
 
   user = User(name=req['name'], icon="https://ui-avatars.com/api/?background=e3b04b&color=fff&size=50&rounded=true&bold=true&name={}".format(req['name']))
   user.set_password(req['password'])
-  # user = User(name=req['name'], icon="https://ui-avatars.com/api/?name={}".format(req['name']))
+
   db.session.add(user)
   db.session.commit()
 
@@ -395,16 +395,11 @@ def signup():
 def login():
   req = json.loads(request.data)
 
-  print(req['password'])
-
   user = User.query.filter(User.name == req['name']).one_or_none()
-  if user == None:
-    return json.dumps({ "user": "" })
-
   print(user)
-
-  if not user.check_password(req['password']):
-    return json.dumps({ "user": "" })
+  if user == None or not user.check_password(req['password']):
+    print("WE MADE IT")
+    return make_response(jsonify({ "error": "Invalid password." })), 401
 
   genres = []
 
