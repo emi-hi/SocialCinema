@@ -326,28 +326,59 @@ def title():
 
   return movies_json
 
+@app.route("/signup", methods=['POST'])
+def signup():
+  req = json.loads(request.data)
+
+  user = User.query.filter(User.name == req['name']).one_or_none()
+
+  if user != None:
+    return "Sheeeeeeeeet"
+
+  user = User(name=req['name'], icon="https://ui-avatars.com/api/?name={}".format(req['name']))
+  user.set_password(req['password'])
+  db.session.add(user)
+
+  for new_genre in req['genres']:
+    genre = Genre.query.filter(Genre.genre_api_id == new_genre['id']).first()
+    update_genre = User_genre(user_id = user.id, genre_id = genre.id)
+
+    if new_genre['preference'] == "":
+      update_genre.preference = None
+    else:
+      update_genre.preference = new_genre['preference']
+
+    db.session.add(update_genre)
+
+  db.session.commit()
+
+  token = user.generate_token(user.id)
+
+  user_info = {
+    "id": user.id,
+    "name": user.name,
+    "avatar": user.icon,
+    "token": token.decode()
+  }
+
+  res = {
+    "user": user_info,
+  }
+
+  res_json = json.dumps(res)
+
+  return res_json
+
 @app.route("/login", methods=['GET', 'POST'])
 def login():
   req = json.loads(request.data)
 
   user = User.query.filter(User.name == req['name']).one_or_none()
   if user == None:
-    user = User(name=req['name'], icon="https://ui-avatars.com/api/?name={}".format(req['name']))
-    db.session.add(user)
-    db.session.commit()
+    return "Neh"
 
-    for new_genre in req['genres']:
-      genre = Genre.query.filter(Genre.genre_api_id == new_genre['id']).first()
-      update_genre = User_genre(user_id = user.id, genre_id = genre.id)
-
-      if new_genre['preference'] == "":
-        update_genre.preference = None
-      else:
-        update_genre.preference = new_genre['preference']
-
-      db.session.add(update_genre)
-
-    db.session.commit()
+  if not user.check_password(req['password']):
+    return "Nooooooo"
 
   genres = []
 
