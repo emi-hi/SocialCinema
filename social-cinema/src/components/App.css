@@ -25,9 +25,18 @@ h4 {
   color: #09d3ac;
 }
 
-.list_name {
+/* .list_name {
   background-color: rgb(158, 158, 158);
   border: 2px solid rgb(14, 10, 14);
+} */
+
+.list-button{
+  background-color: grey;
+}
+
+.list-button.disabled{
+  display:none;
+  opacity:.5;
 }
 
 .nav {
@@ -41,6 +50,11 @@ h4 {
 
 .logo {
   display: flex;
+  flex-direction: row;
+}
+
+.user-login{
+  display:flex;
   flex-direction: row;
 }
 

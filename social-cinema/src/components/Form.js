@@ -10,13 +10,12 @@ const contentStyle = {
   borderRadius: "20px"
 };
 
-//this one shows up when there is no favorite. It's just an add symbol.
 export default function Form(props) {
   return (
     <main className="">
       <Popup trigger=
         {
-          props.createUser ? <img src="images/add.png" alt="Add" /> : <img src="images/trash.png" alt="No" />
+          props.createUser ? <button className="list_name">register</button> : <button className="list_name">sign in</button>
         } modal
         contentStyle={contentStyle}>
         {props.createUser && <Signup createUser={props.createUser} />}

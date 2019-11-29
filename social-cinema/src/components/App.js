@@ -119,26 +119,27 @@ function App() {
 
   return (
     <div className="App">
-      <Nav user={user} createUser={createUser} getUser={getUser} removeUser={removeUser} />
-      <div className="list_name" onClick={() => setFavList(toggleList)}>
-        Favorite Movies
-      </div>
+      <Nav user={user} 
+        createUser={createUser} 
+        getUser={getUser} 
+        removeUser={removeUser} 
+        toggleList={toggleList}
+        setFavList={setFavList} 
+        setLaterList={setLaterList}
+        setGenreList={setGenreList}
+        setFriendList={setFriendList}
+      />
       <div>
         {favList === "show" &&
           <List type="favorites" data={state.favorited_movies} user={user} setFavoriteMovies={setFavoriteMovies} removeLaterMovie={removeFavoritedMovie} /> 
         }
-      </div>
-      <div className="list_name" onClick={() => setLaterList(toggleList)}>
-        Later Movies
       </div>
       <div>
         {laterList === "show" &&
           <List type="laters" removeLaterMovie={removeLaterMovie} data={state.later_movies} /> 
         }
       </div>
-      <div className="list_name" onClick={() => setGenreList(toggleList)}>
-        My Preferences
-      </div>
+
       <div>
       {genreList === "show" &&
         <div>
@@ -147,9 +148,6 @@ function App() {
         </div>
       }
       </div> 
-      <div className="list_name" onClick={() => setFriendList(toggleList)}>
-        My Friends
-      </div>
       <div>
       {friendList === "show" &&
         <FriendList friends={friends} useMovieNight={useMovieNight} group={group} action="add" classname="list"/>
