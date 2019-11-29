@@ -351,18 +351,15 @@ def signup():
   req = json.loads(request.data)
 
   user = User.query.filter(User.name == req['name']).one_or_none()
-  if user == None:
-    user = User(name=req['name'], icon="https://ui-avatars.com/api/?background=e3b04b&color=fff&size=50&rounded=true&bold=true&name={}".format(req['name']))
-    # user = User(name=req['name'], icon="https://ui-avatars.com/api/?name={}".format(req['name']))
-    db.session.add(user)
-    db.session.commit()
 
   if user != None:
-    return "Sheeeeeeeeet"
+    return json.dumps({ "user": "" })
 
-  user = User(name=req['name'], icon="https://ui-avatars.com/api/?name={}".format(req['name']))
+  user = User(name=req['name'], icon="https://ui-avatars.com/api/?background=e3b04b&color=fff&size=50&rounded=true&bold=true&name={}".format(req['name']))
   user.set_password(req['password'])
+  # user = User(name=req['name'], icon="https://ui-avatars.com/api/?name={}".format(req['name']))
   db.session.add(user)
+  db.session.commit()
 
   for new_genre in req['genres']:
     genre = Genre.query.filter(Genre.genre_api_id == new_genre['id']).first()
@@ -398,12 +395,16 @@ def signup():
 def login():
   req = json.loads(request.data)
 
+  print(req['password'])
+
   user = User.query.filter(User.name == req['name']).one_or_none()
   if user == None:
-    return "Neh"
+    return json.dumps({ "user": "" })
+
+  print(user)
 
   if not user.check_password(req['password']):
-    return "Nooooooo"
+    return json.dumps({ "user": "" })
 
   genres = []
 
