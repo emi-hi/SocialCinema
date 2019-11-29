@@ -142,7 +142,7 @@ function App() {
       <div className="main-container">
         <div className="friends-container">
           FRIENDS FOR MOVIE NIGHT!
-          <MovieNightFriends  user={user} group={group} action="remove" classname="columnlist" useMovieNight={useMovieNight}/>
+          <MovieNightFriends  group={group} action="remove" classname="columnlist" useMovieNight={useMovieNight}/>
         </div>
         <div className="suggested-container">
           <Suggested

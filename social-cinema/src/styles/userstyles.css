@@ -1,0 +1,61 @@
+.columnlist{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-y:auto;
+  max-height: 90%;
+}
+
+.friend-card{
+  /* background-color: #e74c3c; */
+  min-width: 80px;
+  max-width: 5vw;
+  height: 13vh;
+  margin: 5px;
+  border: 2px solid rgb(37, 59, 107);
+  position: relative;
+}
+
+.user-icon{
+  
+  border: 2px dotted rgb(184, 121, 111);
+}
+
+
+.columnlist::-webkit-scrollbar {
+  display: none;
+}
+
+.friend-night{
+  display:none;
+  z-index: 100;
+  position: absolute;
+  bottom: 3px;
+
+}
+
+.friend-night#trash{
+  height:3vh;
+  left: 3px;
+}
+
+.friend-night#add{
+  height: 3.5vh;
+  left: 3px;
+}
+
+.friend-night#eye{
+  right: 3px;
+  height: 3vh;
+}
+
+.friend-card:hover .friend-night{
+  display:block;
+}
+
+.user-name-text{
+  margin: 2px;
+  /* overflow-wrap: break-word; */
+  overflow: hidden;
+  text-overflow: ellipsis
+}

@@ -1,5 +1,7 @@
 import React from "react";
 import './lists/styles.css'
+import '../styles/genre.css';
+
 export default function UserDisplay(props) {
   const addOrRemove = function(action) {
     let addEnabled = true;
@@ -21,15 +23,16 @@ export default function UserDisplay(props) {
     }
 
   return (
-    <div className="user_display">
-       <img src={props.friend.icon} alt={props.friend.name}/>
-       <p>{props.friend.name} </p>
+    <div className="friend-card">
+       <img className="user-icon" src={props.friend.icon} alt={props.friend.name}/>
+       <p className="user-name-text">{props.friend.name}</p>
        {props.action==="add" && 
-       <button onClick={()=>addOrRemove("add")}>add</button>
+      <img className="friend-night" id="add" src="./images/plusfriend.svg" alt="Delete" onClick={()=>addOrRemove("add")}/>
       }
       {props.action ==="remove" &&
-      <button onClick={()=>addOrRemove("remove")}>remove</button>
+       <img className="friend-night" id="trash" src="./images/trash.png" alt="Delete" onClick={()=>addOrRemove("remove")}/>
       }
+      <img className="friend-night" id="eye" src="./images/eye.svg" alt="info" onClick={()=>console.log(props.friend)}/>
     </div>
   );
 }

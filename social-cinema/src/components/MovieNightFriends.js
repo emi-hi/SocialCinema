@@ -1,5 +1,6 @@
 import React from "react";
 import FriendList from './FriendList';
+import '../styles/userstyles.css'
 
 export default function MovieNightFriends(props) {
   let theGroup = []
@@ -9,8 +10,6 @@ export default function MovieNightFriends(props) {
 
   return (
     <article className="columnlist">
-      <img className="user_display "src={props.user.avatar} alt={props.user.name}/>
-      you
     <FriendList friends={theGroup} group={props.group} action={props.action} useMovieNight={props.useMovieNight}/>
     </article>
 
