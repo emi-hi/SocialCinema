@@ -17,6 +17,11 @@ CORS(app)
 @app.route("/suggestion", methods=['GET', 'POST'])
 def suggestions():
   req = json.loads(request.data)
+  min_runtime = req['minimumRuntime']
+  max_runtime = req['maximumRuntime']
+  print(min_runtime)
+  print(max_runtime)
+
 
   suggested_ids = []
   for suggestion in req['recentSuggestions']:
@@ -87,15 +92,15 @@ def suggestions():
 
     if len(user_loved_genres_loop_copy) != 0:
       index = random.randint(0, (len(user_loved_genres_loop_copy) - 1))
-      r = requests.get("https://api.themoviedb.org/3/discover/movie?api_key={}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page={}&with_genres={}&without_genres={}&with_runtime.gte=20".format(TMDB_key, page_num, user_loved_genres[index], hated_list))
+      r = requests.get("https://api.themoviedb.org/3/discover/movie?api_key={}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page={}&with_genres={}&without_genres={}&with_runtime.gte={}&with_runtime.lte={}".format(TMDB_key, page_num, user_loved_genres[index], hated_list, min_runtime, max_runtime))
       del user_loved_genres_loop_copy[index]
     elif len(user_meh_genres_loop_copy) != 0:
       index = random.randint(0, (len(user_meh_genres_loop_copy) - 1))
-      r = requests.get("https://api.themoviedb.org/3/discover/movie?api_key={}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page={}&with_genres={}&without_genres={}&with_runtime.gte=20".format(TMDB_key, page_num, user_meh_genres[index], hated_list))
+      r = requests.get("https://api.themoviedb.org/3/discover/movie?api_key={}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page={}&with_genres={}&without_genres={}&with_runtime.gte={}&with_runtime.lte={}".format(TMDB_key, page_num, user_meh_genres[index], hated_list, min_runtime, max_runtime))
       del user_meh_genres_loop_copy[index]
     else:
       index = 0
-      r = requests.get("https://api.themoviedb.org/3/discover/movie?api_key={}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page={}&with_genres={}&without_genres={}&with_runtime.gte=20".format(TMDB_key, page_num, user_meh_genres[index], hated_list))
+      r = requests.get("https://api.themoviedb.org/3/discover/movie?api_key={}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page={}&with_genres={}&without_genres={}&with_runtime.gte={}&with_runtime.lte={}".format(TMDB_key, page_num, user_meh_genres[index], hated_list, min_runtime, max_runtime))
 
 
     tmdb_result = json.loads(r.text)
@@ -219,6 +224,8 @@ def userFavmovies(user):
     title = req['movie']['title']
     image = req['movie']['poster']
     movie_api_id = req['movie']['tmdbId']
+
+    
     
     new_movie = Movie.query.filter(Movie.movie_api_id == str(movie_api_id)).first()
 
@@ -346,29 +353,65 @@ def title():
 
   return movies_json
 
+@app.route("/signup", methods=['POST'])
+def signup():
+  req = json.loads(request.data)
+
+  user = User.query.filter(User.name == req['name']).one_or_none()
+
+  if user != None:
+    return json.dumps({ "user": "" })
+
+  user = User(name=req['name'], icon="https://ui-avatars.com/api/?background=e3b04b&color=fff&size=50&rounded=true&bold=true&name={}".format(req['name']))
+  user.set_password(req['password'])
+  # user = User(name=req['name'], icon="https://ui-avatars.com/api/?name={}".format(req['name']))
+  db.session.add(user)
+  db.session.commit()
+
+  for new_genre in req['genres']:
+    genre = Genre.query.filter(Genre.genre_api_id == new_genre['id']).first()
+    update_genre = User_genre(user_id = user.id, genre_id = genre.id)
+
+    if new_genre['preference'] == "":
+      update_genre.preference = None
+    else:
+      update_genre.preference = new_genre['preference']
+
+    db.session.add(update_genre)
+
+  db.session.commit()
+
+  token = user.generate_token(user.id)
+
+  user_info = {
+    "id": user.id,
+    "name": user.name,
+    "avatar": user.icon,
+    "token": token.decode()
+  }
+
+  res = {
+    "user": user_info,
+  }
+
+  res_json = json.dumps(res)
+
+  return res_json
+
 @app.route("/login", methods=['GET', 'POST'])
 def login():
   req = json.loads(request.data)
 
+  print(req['password'])
+
   user = User.query.filter(User.name == req['name']).one_or_none()
   if user == None:
-    user = User(name=req['name'], icon="https://ui-avatars.com/api/?background=e3b04b&color=fff&size=50&rounded=true&bold=true&name={}".format(req['name']))
-    # user = User(name=req['name'], icon="https://ui-avatars.com/api/?name={}".format(req['name']))
-    db.session.add(user)
-    db.session.commit()
+    return json.dumps({ "user": "" })
 
-    for new_genre in req['genres']:
-      genre = Genre.query.filter(Genre.genre_api_id == new_genre['id']).first()
-      update_genre = User_genre(user_id = user.id, genre_id = genre.id)
+  print(user)
 
-      if new_genre['preference'] == "":
-        update_genre.preference = None
-      else:
-        update_genre.preference = new_genre['preference']
-
-      db.session.add(update_genre)
-
-    db.session.commit()
+  if not user.check_password(req['password']):
+    return json.dumps({ "user": "" })
 
   genres = []
 
