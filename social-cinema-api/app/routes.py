@@ -17,6 +17,11 @@ CORS(app)
 @app.route("/suggestion", methods=['GET', 'POST'])
 def suggestions():
   req = json.loads(request.data)
+  min_runtime = req['minimumRuntime']
+  max_runtime = req['maximumRuntime']
+  print(min_runtime)
+  print(max_runtime)
+
 
   suggested_ids = []
   for suggestion in req['recentSuggestions']:
@@ -87,15 +92,15 @@ def suggestions():
 
     if len(user_loved_genres_loop_copy) != 0:
       index = random.randint(0, (len(user_loved_genres_loop_copy) - 1))
-      r = requests.get("https://api.themoviedb.org/3/discover/movie?api_key={}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page={}&with_genres={}&without_genres={}&with_runtime.gte=20".format(TMDB_key, page_num, user_loved_genres[index], hated_list))
+      r = requests.get("https://api.themoviedb.org/3/discover/movie?api_key={}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page={}&with_genres={}&without_genres={}&with_runtime.gte={}&with_runtime.lte={}".format(TMDB_key, page_num, user_loved_genres[index], hated_list, min_runtime, max_runtime))
       del user_loved_genres_loop_copy[index]
     elif len(user_meh_genres_loop_copy) != 0:
       index = random.randint(0, (len(user_meh_genres_loop_copy) - 1))
-      r = requests.get("https://api.themoviedb.org/3/discover/movie?api_key={}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page={}&with_genres={}&without_genres={}&with_runtime.gte=20".format(TMDB_key, page_num, user_meh_genres[index], hated_list))
+      r = requests.get("https://api.themoviedb.org/3/discover/movie?api_key={}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page={}&with_genres={}&without_genres={}&with_runtime.gte={}&with_runtime.lte={}".format(TMDB_key, page_num, user_meh_genres[index], hated_list, min_runtime, max_runtime))
       del user_meh_genres_loop_copy[index]
     else:
       index = 0
-      r = requests.get("https://api.themoviedb.org/3/discover/movie?api_key={}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page={}&with_genres={}&without_genres={}&with_runtime.gte=20".format(TMDB_key, page_num, user_meh_genres[index], hated_list))
+      r = requests.get("https://api.themoviedb.org/3/discover/movie?api_key={}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page={}&with_genres={}&without_genres={}&with_runtime.gte={}&with_runtime.lte={}".format(TMDB_key, page_num, user_meh_genres[index], hated_list, min_runtime, max_runtime))
 
 
     tmdb_result = json.loads(r.text)
@@ -219,6 +224,8 @@ def userFavmovies(user):
     title = req['movie']['title']
     image = req['movie']['poster']
     movie_api_id = req['movie']['tmdbId']
+
+    
     
     new_movie = Movie.query.filter(Movie.movie_api_id == str(movie_api_id)).first()
 
