@@ -7,7 +7,7 @@ import Form from "./Form";
 export default function Nav(props) {
 
   const logOn = (name, password) => {
-    props.getUser(name, password);
+    return props.getUser(name, password);
   }
 
   const logOut = () => {
