@@ -357,9 +357,6 @@ def signup():
     db.session.add(user)
     db.session.commit()
 
-  if user != None:
-    return "Sheeeeeeeeet"
-
   user = User(name=req['name'], icon="https://ui-avatars.com/api/?name={}".format(req['name']))
   user.set_password(req['password'])
   db.session.add(user)
