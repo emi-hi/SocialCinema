@@ -4,16 +4,23 @@ export default function Signup(props) {
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConf, setPasswordConf] = useState("")
+  const [error, setError] = useState("")
   
   const signup = (event) => {
     event.preventDefault();
-    if (password === passwordConf) {
+    if (password != "" && password === passwordConf) {
       props.createUser(name, password)
+      .catch(() => {
+        setError("Username already exists.")
+      })
+    } else {
+      setError("Invalid password.")
     }
   }
 
   return (
     <main className="">
+      <div>{error}</div>
       <form onSubmit={signup}>
         <label>
           Username:
