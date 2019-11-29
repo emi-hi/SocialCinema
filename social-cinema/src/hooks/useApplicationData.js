@@ -9,7 +9,7 @@ const initGenres = () => {
     genres = response.data.map(genre => {
       return genre = {
         id: genre.id,
-        preference: ""
+        preference: null
       }
     })
 
