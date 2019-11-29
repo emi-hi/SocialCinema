@@ -71,8 +71,16 @@ function App() {
     }
   }
 
-  const getUser = (name) => {
-    axios.post("http://localhost:5000/login", { name, genres: userGenres })
+  const createUser = (name, password) => {
+    axios.post(`http://localhost:5000/signup`, { name, password, genres: userGenres })
+    .then(response => {
+      console.log("WEE RES!", response.data)
+      setUser(response.data.user);
+    })
+  }
+
+  const getUser = (name, password) => {
+    axios.post("http://localhost:5000/login", { name, password, genres: userGenres })
       .then(response => {
         setUser(response.data.user);
         setGenres(response.data.genres);
@@ -106,7 +114,7 @@ function App() {
 
   return (
     <div className="App">
-      <Nav user={user} getUser={getUser} removeUser={removeUser} />
+      <Nav user={user} createUser={createUser} getUser={getUser} removeUser={removeUser} />
       <div className="list_name" onClick={() => setFavList(toggleList)}>
         Favorite Movies
       </div>
