@@ -15,8 +15,16 @@
 .list {
   display: flex;
   flex-direction: row;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   justify-content: flex-start;
+  min-width: 100%;
+  height: 15vh;
+  overflow-x: auto;
+  border: 2px dashed rgb(105, 37, 107);
+  
+}
+.list::-webkit-scrollbar {
+  display: none;
 }
 
 .movie_box {
@@ -49,4 +57,11 @@
 .favSelector {
   display: flex;
   flex-direction: row;
+}
+
+/* IPHONE STYLES */
+@media only screen and (max-width: 767px) {
+  .list {
+    -webkit-overflow-scrolling: touch;
+  }
 }

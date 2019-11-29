@@ -5,6 +5,10 @@ section.genres {
   flex-direction: row;
   flex-wrap: wrap;
   margin: 5px;
+  overflow-y:auto;
+}
+.section.genres::-webkit-scrollbar {
+  display: none;
 }
 
 .genre-name{
@@ -13,10 +17,13 @@ section.genres {
   margin:1px;
   font-size: small;
   font-weight: bold;
+  overflow-wrap: break-word;
+  overflow: hidden;
 }
 
 div.genre {
   width: 9.2vw;
+  min-width: 75px;
   height:7vw;
   position:relative;
   border: 1px solid rgb(136, 103, 103);
@@ -107,4 +114,20 @@ button#lovegenre:hover{
 }
 button#mehgenre:hover{
   background-color: rgb(170, 168, 168);
+}
+
+
+/* IPHONE STYLES */
+@media only screen and (max-width: 560px) {
+  .genre-image{
+    display: none;
+
+  }
+}
+
+@media only screen and (max-width: 1000px) {
+  .genre-name{
+    font-size: x-small;
+
+  }
 }

@@ -24,11 +24,6 @@ h4 {
 .App-link {
   color: #09d3ac;
 }
-.columnlist{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
 
 .list_name {
   background-color: rgb(158, 158, 158);
@@ -94,3 +89,4 @@ h4 {
   border: 1px solid rgb(37, 59, 107);
   border-radius: 4px;
 }
+
