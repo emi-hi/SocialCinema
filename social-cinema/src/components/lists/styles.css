@@ -21,7 +21,6 @@
   height: 15vh;
   overflow-x: auto;
   border: 2px dashed rgb(105, 37, 107);
-  background-color: slategray;
   
 }
 .list::-webkit-scrollbar {
