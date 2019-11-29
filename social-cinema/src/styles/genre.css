@@ -51,6 +51,7 @@ div.genre:hover .genre-choices{
   flex-direction:column;
   background-color: white;
   border-radius: 10px;
+
 }
 
 .genre-image{
@@ -123,11 +124,41 @@ button#mehgenre:hover{
     display: none;
 
   }
+  div.genre {
+    width: 30vw;
+  }
 }
+
 
 @media only screen and (max-width: 1000px) {
   .genre-name{
     font-size: x-small;
 
+  }
+  .genre-feeling-hate{
+     background-color: red;
+  }
+  
+  .genre-feeling-love{
+    width: 100%;
+    background-color:rgb(70, 161, 97);
+  }
+  section.genres{
+    margin-bottom: 2vh;
+    z-index: 1000;
+    overflow-y:visible;
+    cursor: pointer;
+  }
+  label{
+    z-index: 1;
+    font-size: smaller;
+  }
+  .genre-choices{
+    z-index: 10000;
+    
+  }
+  span{
+    z-index: 1;
+    font-size: smaller;
   }
 }
