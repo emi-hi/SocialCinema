@@ -127,6 +127,10 @@ button#mehgenre:hover{
   div.genre {
     width: 30vw;
   }
+
+  .genre-feeling-love{
+    opacity: 1;
+  }
 }
 
 
@@ -139,10 +143,7 @@ button#mehgenre:hover{
      background-color: red;
   }
   
-  .genre-feeling-love{
-    width: 100%;
-    background-color:rgb(70, 161, 97);
-  }
+
   section.genres{
     margin-bottom: 2vh;
     z-index: 1000;
