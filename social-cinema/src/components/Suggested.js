@@ -17,7 +17,8 @@ export default function Suggested(props) {
           "tmdbId": response.data.tmdb_id,
           "imdb_link": response.data.imdb_link,
           "runtime" : response.data.runtime,
-          "error": response.data.error
+          "error": response.data.error,
+          "rating": response.data.rating
         });
         props.getRecentSuggestions(response.data);
       })
@@ -59,7 +60,7 @@ export default function Suggested(props) {
               <h2 className="movie-title">{suggestedMovie.title}</h2>
               <h4>{suggestedMovie.releaseDate}</h4>
               <p>{suggestedMovie.description}</p>
-              
+              <p>{suggestedMovie.rating}</p>
               <p>{runtime}</p>
               <a href={suggestedMovie.imdb_link} target="_blank" rel="noopener noreferrer">Learn more at IMDB</a>
             </div>

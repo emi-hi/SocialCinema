@@ -8,6 +8,7 @@ import random
 from flask import request
 import dotenv
 import os
+from lxml import html
 
 dotenv.load_dotenv()
 TMDB_key = os.getenv('TMDB_KEY')
@@ -125,8 +126,13 @@ def suggestions():
 
   if imdb_id:
     imdb_link = "https://www.imdb.com/title/{}/".format(imdb_id)
+    imdb_details = requests.get(imdb_link)
+    tree = html.fromstring(imdb_details.content)
+    rating = tree.xpath('//*[@id="title-overview-widget"]/div[1]/div[2]/div/div[1]/div[1]/div[1]/strong/span/text()')
+    rating = str(rating[0]) + '/10 on IMDB'
   else:
     imdb_link = "https://www.imdb.com/"
+    rating = 'no rating info!'
 
   movie_info = {
     "title": selected_result["title"],
@@ -135,7 +141,8 @@ def suggestions():
     "release_date": selected_result["release_date"][:4],
     "tmdb_id": selected_result["id"],
     "imdb_link": imdb_link,
-    "runtime" : runtime
+    "runtime" : runtime,
+    "rating" : rating
   }
 
   movie_info_json = json.dumps(movie_info)
