@@ -13,8 +13,6 @@ from lxml import html
 dotenv.load_dotenv()
 TMDB_key = os.getenv('TMDB_KEY')
 
-CORS(app)
-
 # Route for generating a movie suggestion
 @app.route("/suggestion", methods=['GET', 'POST'])
 def suggestions():
