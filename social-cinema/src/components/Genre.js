@@ -23,7 +23,7 @@ export default function Genre(props) {
     <div className="genre">
       {feelingImg && <img src={feelingImg} className={imgClassName} alt={feelingImg}/>}
       
-      <img src={`images/genreicons/${props.name}.svg`} className="genre-image" alt={`${props.name}`} />
+      <img src={`images/genreicons/${props.name.replace(" ", "")}.svg`} className="genre-image" alt={`${props.name}`} />
       <p className="genre-name">{displayName}</p>
       <div className="genre-choices">
         <button type="button" id="hategenre" className={props.hate_class} onClick={() => props.setGenre(props.id, false)}>Hate it!</button>

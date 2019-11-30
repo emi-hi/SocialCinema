@@ -7,7 +7,13 @@ export default function Suggested(props) {
   const [suggested, setSuggested] = useState("hide")
 
   const newMovie = () => {
-    axios.post(`http://localhost:5000/suggestion`, { userGenrePreferences: props.userGenres, group: props.group, recentSuggestions: props.recentSuggestions, minimumRuntime: props.minimumRuntime, maximumRuntime: props.maximumRuntime })
+    let group;
+    if (props.theme) {
+      group = [];
+    } else {
+      group = props.group;
+    }
+    axios.post(`/suggestion`, { userGenrePreferences: props.userGenres, group, recentSuggestions: props.recentSuggestions, minimumRuntime: props.minimumRuntime, maximumRuntime: props.maximumRuntime })
       .then(response => {
         setSuggestedMovie({
           "title": response.data.title,
@@ -26,7 +32,7 @@ export default function Suggested(props) {
   };
 
   const saveToLaterList = (userName, suggestedMovie) => {
-    axios.post(`http://localhost:5000/api/${userName}/latermovies`, { suggestedMovie })
+    axios.post(`/api/${userName}/latermovies`, { suggestedMovie })
     .then(response => {
       props.setLaterMovies(response.data.later_movies)
     })
