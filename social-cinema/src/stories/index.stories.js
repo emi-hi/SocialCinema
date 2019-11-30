@@ -2,7 +2,7 @@ import React from "react";
 
 import { storiesOf } from "@storybook/react";
 import { action } from "@storybook/addon-actions";
-import "../index.css";
+import "../index.scss";
 
 import AddFav from "../components/lists/AddFav.js";
 import MovieBox from "../components/lists/MovieBox.js";

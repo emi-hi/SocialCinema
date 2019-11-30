@@ -1,5 +1,5 @@
 import React from "react";
-import '../styles/genre.css';
+import '../styles/genre.scss';
 export default function Genre(props) {
   let feelingImg;
   let imgClassName="genre-feeling";
