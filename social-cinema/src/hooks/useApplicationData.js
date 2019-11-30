@@ -4,7 +4,7 @@ import axios from 'axios'
 
 const initGenres = () => {
   let genres = []
-  return axios.get("http://localhost:5000/api/genres")
+  return axios.get("/api/genres")
   .then(response => {
     genres = response.data.map(genre => {
       return genre = {
@@ -37,8 +37,8 @@ export default function useApplicationData() {
   useEffect(() => {
     if (state.user !== "") {
       Promise.all([
-        axios.get(`http://localhost:5000/api/${state.user.name}/genres`),
-        axios.get("http://localhost:5000/api/users")
+        axios.get(`/api/${state.user.name}/genres`),
+        axios.get("/api/users")
       ])
       .then((all) => {
         setGenres(all[0].data.genres)
@@ -54,7 +54,7 @@ export default function useApplicationData() {
   };
 
   const getGenres = () => {
-    axios.get(`http://localhost:5000/api/${state.user.name}/genres`)
+    axios.get(`/api/${state.user.name}/genres`)
     .then(res => {
       setGenres(res.data.genres)
     })
@@ -77,7 +77,7 @@ export default function useApplicationData() {
   }
 
   const removeLaterMovie = id => {
-    axios.delete(`http://localhost:5000/api/${state.user.name}/latermovies`, { data: { "id": id } })
+    axios.delete(`/api/${state.user.name}/latermovies`, { data: { "id": id } })
     .then(response => {
       setLaterMovies(response.data.later_movies)
     })
@@ -90,7 +90,7 @@ export default function useApplicationData() {
   };
 
   const removeFavoritedMovie = id => {
-    axios.delete(`http://localhost:5000/api/${state.user.name}/favmovies`, { data: { "id": id } })
+    axios.delete(`/api/${state.user.name}/favmovies`, { data: { "id": id } })
     .then(response => {
       setFavoriteMovies(response.data.favorited_movies)
     })

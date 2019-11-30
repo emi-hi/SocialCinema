@@ -110,7 +110,7 @@ function App() {
 
       new_later_movies.splice(destination.index, 0, moved_movie)
 
-      axios.post(`http://localhost:5000/api/${state.user.name}/latermovies`, { "suggestedMovie": { ...moved_movie }  })
+      axios.post(`/api/${state.user.name}/latermovies`, { "suggestedMovie": { ...moved_movie }  })
       .then(response => {
         setLaterMovies(response.data.later_movies)
       })
@@ -119,7 +119,7 @@ function App() {
   };
 
   const createUser = (name, password) => {
-    return axios.post(`http://localhost:5000/signup`, { name, password, genres: userGenres })
+    return axios.post(`/signup`, { name, password, genres: userGenres })
     .then(response => {
       setUser(response.data.user);
     })
@@ -127,7 +127,7 @@ function App() {
   };
 
   const getUser = (name, password) => {
-    return axios.post("http://localhost:5000/login", { name, password })
+    return axios.post("/login", { name, password })
       .then(response => {
         setUser(response.data.user);
         setGenres(response.data.genres);
@@ -139,7 +139,7 @@ function App() {
 
   const setGenre = (id, value) => {
     if (state.user && state.user.name !== "" && state.group.length === 0) {
-      axios.post(`http://localhost:5000/api/${state.user.name}/genres`, { id, preference: value })
+      axios.post(`/api/${state.user.name}/genres`, { id, preference: value })
         .then(response => {
           setGenres(response.data.genres)
         })
