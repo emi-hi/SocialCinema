@@ -8,6 +8,11 @@ export default function FriendList(props) {
   });
   
   return (
-    <article className={props.classname}>{friends}</article>
+    <article>
+      <h4>Friends</h4>
+      <div className={props.classname}>
+        {friends}
+      </div>
+    </article>
   )
 }

@@ -44,6 +44,7 @@ export default function Genres(props) {
 
   return (
     <div>
+      <h4>My Preferences</h4>
       <section className="genres">
         {genreOptions}
       </section>
