@@ -8,6 +8,11 @@ export default function FriendList(props) {
   });
   
   return (
-    <article className={props.classname}>{friends}</article>
+    <article>
+      {friends.length>0? <h4>{props.type}</h4>: ""}
+      <div className={props.classname}>
+        {friends}
+      </div>
+    </article>
   )
 }
