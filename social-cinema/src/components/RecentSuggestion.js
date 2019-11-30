@@ -15,6 +15,7 @@ export default function RecentSuggestion(props) {
         ref={provided.innerRef}
         {...provided.droppableProps}
       > 
+        {recents.length>0? <h4>Recent Suggestions</h4> : ""}
         {recents}
         {provided.placeholder}
       </div>

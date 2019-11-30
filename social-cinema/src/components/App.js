@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { DragDropContext } from 'react-beautiful-dnd'
-
 import './App.css';
 import List from './lists/List.js'
 import Nav from './Nav'
+import { DragDropContext } from 'react-beautiful-dnd'
+
+
 import Suggested from "./Suggested";
 import Genres from "./Genres";
 import FriendList from './FriendList';
@@ -65,51 +66,10 @@ function App() {
     if (updatedRecentSuggestionsList.length > 15) {
       updatedRecentSuggestionsList = updatedRecentSuggestionsList.slice(0, updatedRecentSuggestionsList.length - 1)
     }
-
-    setRecentSuggestions(updatedRecentSuggestionsList)
-  }
-
-  const toggleList = function(status) {
-    if (status === "show") {
-      return "hide" 
-    } else {
-      return "show"
-    }
-  }
-
-  const createUser = (name, password) => {
-    return axios.post(`http://localhost:5000/signup`, { name, password, genres: userGenres })
-    .then(response => {
-      setUser(response.data.user);
-    })
-  }
-
-  const getUser = (name, password) => {
-    return axios.post("http://localhost:5000/login", { name, password })
-      .then(response => {
-        setUser(response.data.user);
-        setGenres(response.data.genres);
-        setLaterMovies(response.data.later_movies);
-        setFavoriteMovies(response.data.favorited_movies);
-      })
-  }
-
-  const setGenre = (id, value) => {
-    if (state.user && state.user.name !== "") {
-      axios.post(`http://localhost:5000/api/${state.user.name}/genres`, { id, preference: value })
-        .then(response => {
-          setGenres(response.data.genres)
-        })
-    } else {
-      const genre = state.genres.find(genre => genre.id === id);
-      genre.preference = value;
-
-      setGenres(state.genres);
-    }
+      setRecentSuggestions(updatedRecentSuggestionsList)
   }
 
   const onDragEnd = (result) => {
-    // TODO : update
     const { destination, source, draggableId } = result;
 
     if (!destination) {
@@ -140,17 +100,52 @@ function App() {
       }
     } else if (destination.droppableId === "laters" && source.droppableId === "recent") {
       const new_later_movies = [...state.later_movies]
-      const sugested_movie = { ...recentSuggestions[destination.index] }
+      const sugested_movie = { ...recentSuggestions[source.index].newSuggestion }
       const moved_movie = {
         title: sugested_movie.title,
-        img: sugested_movie.poster,
+        poster: sugested_movie.poster,
+        tmdbId: draggableId
       }
 
       new_later_movies.splice(destination.index, 0, moved_movie)
 
-      console.log(new_later_movies)
+      axios.post(`http://localhost:5000/api/${state.user.name}/latermovies`, { "suggestedMovie": { ...moved_movie }  })
+      .then(response => {
+        setLaterMovies(response.data.later_movies)
+      })
+    }
+  }
 
-      setLaterMovies(new_later_movies)
+  const createUser = (name, password) => {
+    return axios.post(`http://localhost:5000/signup`, { name, password, genres: userGenres })
+    .then(response => {
+      console.log("WEE RES!", response)
+
+      setUser(response.data.user);
+    })
+  }
+
+  const getUser = (name, password) => {
+    return axios.post("http://localhost:5000/login", { name, password })
+      .then(response => {
+        setUser(response.data.user);
+        setGenres(response.data.genres);
+        setLaterMovies(response.data.later_movies);
+        setFavoriteMovies(response.data.favorited_movies);
+      })
+  }
+
+  const setGenre = (id, value) => {
+    if (state.user && state.user.name !== "") {
+      axios.post(`http://localhost:5000/api/${state.user.name}/genres`, { id, preference: value })
+        .then(response => {
+          setGenres(response.data.genres)
+        })
+    } else {
+      const genre = state.genres.find(genre => genre.id === id);
+      genre.preference = value;
+
+      setGenres(state.genres);
     }
   }
 
@@ -165,67 +160,66 @@ function App() {
 
   return (
     <div className="App">
-      <Nav user={user} createUser={createUser} getUser={getUser} removeUser={removeUser} />
-      <div className="list_name" onClick={() => setFavList(toggleList)}>
-        Favorite Movies
-      </div>
+      <Nav user={user} 
+        createUser={createUser} 
+        getUser={getUser} 
+        removeUser={removeUser} 
+        setFavList={setFavList} 
+        setLaterList={setLaterList}
+        setGenreList={setGenreList}
+        setFriendList={setFriendList}
+        favList={favList}
+        friendList={friendList}
+        laterList={laterList}
+        genreList={genreList}
+      />
       <DragDropContext
         onDragEnd={onDragEnd}
       >
-        <div>
-          {favList === "show" &&
-            <List type="favorites" data={state.favorited_movies} user={user} setFavoriteMovies={setFavoriteMovies} removeLaterMovie={removeFavoritedMovie} /> 
-          }
-        </div>
-        <div className="list_name" onClick={() => setLaterList(toggleList)}>
-          Later Movies
-        </div>
-        <div>
-          {laterList === "show" &&
-            <List type="laters" removeLaterMovie={removeLaterMovie} data={state.later_movies} /> 
-          }
-        </div>
-        <div className="list_name" onClick={() => setGenreList(toggleList)}>
-          My Preferences
-        </div>
-        <div>
-        {genreList === "show" &&
-          <div>
-            <Genres userGenres = {userGenres} setGenre={setGenre} />
-            <RuntimeSelector minimumRuntime={minimumRuntime} setMinimumRuntime={setMinimumRuntime} maximumRuntime={maximumRuntime} setMaximumRuntime={setMaximumRuntime}/>
-          </div>
+      <div>
+        {favList === "show" &&   
+          <List type="favorites" data={state.favorited_movies} user={user} setFavoriteMovies={setFavoriteMovies} removeLaterMovie={removeFavoritedMovie} /> 
+        } 
+      </div>
+      <div>
+        {laterList === "show" &&
+          <List type="laters" removeLaterMovie={removeLaterMovie} data={state.later_movies} /> 
         }
-        </div> 
-        <div className="list_name" onClick={() => setFriendList(toggleList)}>
-          My Friends
-        </div>
+      </div>
+
+      <div>
+      {genreList === "show" &&
         <div>
-        {friendList === "show" &&
-          <FriendList friends={friends} useMovieNight={useMovieNight} group={group} action="add" classname="list"/>
-        }
+          <Genres userGenres = {userGenres} setGenre={setGenre} />
+          <RuntimeSelector minimumRuntime={minimumRuntime} setMinimumRuntime={setMinimumRuntime} maximumRuntime={maximumRuntime} setMaximumRuntime={setMaximumRuntime}/>
         </div>
-        <div className="main-container">
-          <div className="friends-container">
-            FRIENDS FOR MOVIE NIGHT!
-            <MovieNightFriends  group={group} action="remove" classname="columnlist" useMovieNight={useMovieNight}/>
-          </div>
-          <div className="suggested-container">
-            <Suggested
-              recentSuggestions={recentSuggestions}
-              getRecentSuggestions={getRecentSuggestions}
-              user={user}
-              group={group}
-              userGenres={userGenres}
-              setLaterMovies={setLaterMovies}
-              minimumRuntime={minimumRuntime}
-              maximumRuntime={maximumRuntime}
-            />
-          </div>
-          <div className="recent-suggestion-list-container">
-            RECENTLY SUGGESTED LIST
-            <RecentSuggestion id="recent" type="laters" recent={recentSuggestions}/>
-          </div>
+      }
+      </div> 
+      <div>
+      {friendList === "show" &&
+        <FriendList friends={friends} useMovieNight={useMovieNight} group={group} action="add" classname="list" type="All Friends  - click + on a friend to add them to your movie night"/>
+      }
+      </div>
+      <div className="main-container">
+        <div className="friends-container">
+          <MovieNightFriends  group={group} action="remove" classname="columnlist" useMovieNight={useMovieNight} />
         </div>
+        <div className="suggested-container">
+          <Suggested
+            recentSuggestions={recentSuggestions}
+            getRecentSuggestions={getRecentSuggestions}
+            user={user}
+            group={group}
+            userGenres={userGenres}
+            setLaterMovies={setLaterMovies}
+            minimumRuntime={minimumRuntime}
+            maximumRuntime={maximumRuntime}
+          />
+        </div>
+        <div className="recent-suggestion-list-container">
+          <RecentSuggestion id={"recent"} type={"laters"} recent={recentSuggestions}/>
+        </div>
+      </div>
       </DragDropContext>
     </div>
   );

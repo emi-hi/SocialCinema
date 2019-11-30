@@ -228,15 +228,18 @@ def userFavmovies(user):
     
     
     new_movie = Movie.query.filter(Movie.movie_api_id == str(movie_api_id)).first()
+    print(new_movie)
 
     if new_movie == None:
       new_movie = Movie(title = title, movie_api_id = movie_api_id, image = image)    
       db.session.add(new_movie)
       db.session.commit()
-      
-    new_fave_movie = Favorited_movie(user_id = dbUser.id, movie_id = new_movie.id)
-    db.session.add(new_fave_movie)
-    db.session.commit()
+
+    previously_faved = Favorited_movie.query.filter(Favorited_movie.user_id == dbUser.id, Favorited_movie.movie_id == new_movie.id).one_or_none()
+    if previously_faved == None:
+      new_fave_movie = Favorited_movie(user_id = dbUser.id, movie_id = new_movie.id)
+      db.session.add(new_fave_movie)
+      db.session.commit()
 
   if request.method == 'DELETE':
     req = json.loads(request.data)
@@ -286,9 +289,12 @@ def userLatemovies(user):
       db.session.add(new_movie)
       db.session.commit()
 
-    new_later_movie = Later_movie(user_id = dbUser.id, movie_id = new_movie.id)
-    db.session.add(new_later_movie)
-    db.session.commit()
+    previously_latered = Later_movie.query.filter(Later_movie.user_id == dbUser.id, Later_movie.movie_id == new_movie.id).one_or_none()
+    if previously_latered == None:
+      print("WOOOOO")
+      new_later_movie = Later_movie(user_id = dbUser.id, movie_id = new_movie.id)
+      db.session.add(new_later_movie)
+      db.session.commit()
 
   if request.method == 'DELETE':
     req = json.loads(request.data)
