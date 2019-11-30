@@ -12,10 +12,10 @@ const initGenres = () => {
         preference: null
       }
     })
-
     return genres
   })
-}
+  .catch(error => {console.log(error)})
+};
 
 export default function useApplicationData() {
   const [state, dispatch] = useReducer(reducer, {
@@ -44,6 +44,7 @@ export default function useApplicationData() {
         setGenres(all[0].data.genres)
         setFriends(all[1].data.users)
       })
+      .catch(error => {console.log(error)})
     }
   }, [state.user])
 
@@ -69,36 +70,34 @@ export default function useApplicationData() {
   }
 
   const removeLaterMovie = id => {
-    console.log(id);
     axios.delete(`http://localhost:5000/api/${state.user.name}/latermovies`, { data: { "id": id } })
     .then(response => {
-      console.log("THIS", response.data)
       setLaterMovies(response.data.later_movies)
     })
-  }
+    .catch(error => {console.log(error)})
+  };
 
   const setFavoriteMovies = favoritedMovies => {
     localStorage.setItem("favoritedMovies", JSON.stringify(favoritedMovies))
     dispatch({ type: SET_FAVORITE_MOVIES, value:favoritedMovies });
-  }
+  };
 
   const removeFavoritedMovie = id => {
-    console.log(id);
     axios.delete(`http://localhost:5000/api/${state.user.name}/favmovies`, { data: { "id": id } })
     .then(response => {
-      console.log("THIS", response.data)
       setFavoriteMovies(response.data.favorited_movies)
-    })  
-  }
+    })
+    .catch(error => {console.log(error)})
+  };
 
   const setFriends = friends => {
     dispatch({ type: SET_FRIENDS, value: friends });
-  }
+  };
 
   const setGroup = group => {
     localStorage.setItem("group", JSON.stringify(group))
     dispatch({ type: SET_GROUP, value: group });
-  }
+  };
 
   return { state, setUser, setGenres, setLaterMovies, removeLaterMovie, setFriends, setGroup, setFavoriteMovies, removeFavoritedMovie };
 };

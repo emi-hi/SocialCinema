@@ -16,7 +16,8 @@ export default function FavoriteForm(props) {
     .then(response => {
       props.setFavoriteMovies(response.data.favorited_movies)
     })
-  }
+    .catch(error => {console.log(error)})
+  };
 
   const movieSearch = (event) => {
     event.preventDefault();
@@ -33,7 +34,8 @@ export default function FavoriteForm(props) {
         setError(true);
       }
     })
-  }
+    .catch(error => {console.log(error)})
+  };
 
   return(
     <main className="favorite-form">
