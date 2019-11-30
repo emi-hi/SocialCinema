@@ -113,17 +113,18 @@ function App() {
       .then(response => {
         setLaterMovies(response.data.later_movies)
       })
+      .catch(error => {console.log(error)})
     }
-  }
+  };
 
   const createUser = (name, password) => {
     return axios.post(`http://localhost:5000/signup`, { name, password, genres: userGenres })
     .then(response => {
       console.log("WEE RES!", response)
-
       setUser(response.data.user);
     })
-  }
+    .catch(error => {console.log(error)})
+  };
 
   const getUser = (name, password) => {
     return axios.post("http://localhost:5000/login", { name, password })
@@ -133,7 +134,8 @@ function App() {
         setLaterMovies(response.data.later_movies);
         setFavoriteMovies(response.data.favorited_movies);
       })
-  }
+      .catch(error => {console.log(error)})
+  };
 
   const setGenre = (id, value) => {
     if (state.user && state.user.name !== "") {
@@ -141,13 +143,14 @@ function App() {
         .then(response => {
           setGenres(response.data.genres)
         })
+        .catch(error => {console.log(error)})
     } else {
       const genre = state.genres.find(genre => genre.id === id);
       genre.preference = value;
 
       setGenres(state.genres);
     }
-  }
+  };
 
   const removeUser = () => {
     setUser("");

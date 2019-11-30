@@ -13,6 +13,7 @@ export default function Genres(props) {
     .then(response => {
       setGenres(response.data);
     })
+    .catch(error => {console.log(error)})
   },[]);
 
   const lovedGenres = [];
