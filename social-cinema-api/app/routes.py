@@ -60,8 +60,13 @@ def suggestions():
 # Check if no genres are in meh or loved, thus all are hated and we return Bob Ross movie
   if len(user_meh_genres) == 0 and len(user_loved_genres) == 0:
 
+    if len(req['group']) == 0:
+      error = "solo"
+    else:
+      error = "group"
+
     full_hate_info = {
-    "error": "You don't have any preferred genres!",
+    "error": error,
     "title": "Bob Ross: The Happy Painter",
     "poster": "https://image.tmdb.org/t/p/w500/yhV6rSv8Ry80lyDL8sjZpu8hzph.jpg",
     "description": "A behind-the-scenes look at the beloved public television personality's journey from humble beginnings to an American pop-culture icon. \"The Happy Painter\" reveals the public and private sides of Bob Ross through loving accounts from close friends and family, childhood photographs and rare archival footage.  Interviewees recount his gentle, mild-mannered demeanor and unwavering dedication to wildlife, and disclose little-known facts about his hair, his fascination with fast cars and more.  Film clips feature Bob Ross with mentor William Alexander and the rough-cut of the first \"Joy of Painting\" episode from 1982. Famous Bob Ross enthusiasts, including talk-show pioneer Phil Donahue, film stars Jane Seymour and Terrence Howard, chef Duff Goldman and country music favorites Brad Paisley and Jerrod Niemann, provide fascinating insights into the man, the artist and his legacy.",

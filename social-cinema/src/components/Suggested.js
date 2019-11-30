@@ -39,6 +39,13 @@ export default function Suggested(props) {
     runtime = suggestedMovie.runtime + ' minutes'
   }
 
+  let error = ""
+  if(suggestedMovie.error === "group") {
+    error = "As a group, you hate all movie genres. To receive a curated movie suggestion, try setting a theme night. Otherwise, we suggest you watch Bob Ross! No one hates Bob Ross."
+  } else if(suggestedMovie.error === "solo") {
+    error = "You currently hate all movie genres. Update your preferences to receive a curated movie suggestion. Otherwise, we suggest you watch Bob Ross! No one hates Bob Ross."
+  }
+
   return (
     <section>
       {suggested === "hide" &&
@@ -53,7 +60,7 @@ export default function Suggested(props) {
       }
       {suggested === "show" && 
         <div>
-          <h5>{suggestedMovie.error}</h5>
+          <h5>{error}</h5>
           <div className="suggestion-all">
             <img alt={suggestedMovie.title} src={suggestedMovie.poster} className="poster"></img>
             <div className="suggestion-text">
