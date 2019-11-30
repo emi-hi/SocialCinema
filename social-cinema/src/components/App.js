@@ -67,13 +67,7 @@ function App() {
       setRecentSuggestions(updatedRecentSuggestionsList)
   }
 
-  const toggleList = function(status) {
-    if (status === "show") {
-      return "hide" 
-    } else {
-      return "show"
-    }
-  }
+
 
   const createUser = (name, password) => {
     return axios.post(`http://localhost:5000/signup`, { name, password, genres: userGenres })
@@ -123,16 +117,19 @@ function App() {
         createUser={createUser} 
         getUser={getUser} 
         removeUser={removeUser} 
-        toggleList={toggleList}
         setFavList={setFavList} 
         setLaterList={setLaterList}
         setGenreList={setGenreList}
         setFriendList={setFriendList}
+        favList={favList}
+        friendList={friendList}
+        laterList={laterList}
+        genreList={genreList}
       />
       <div>
-        {favList === "show" &&
+        {favList === "show" &&   
           <List type="favorites" data={state.favorited_movies} user={user} setFavoriteMovies={setFavoriteMovies} removeLaterMovie={removeFavoritedMovie} /> 
-        }
+        } 
       </div>
       <div>
         {laterList === "show" &&

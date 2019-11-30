@@ -1,9 +1,9 @@
 import React from "react";
-import Logon from "./Logon"
+// import Logon from "./Logon"
 import User from "./User"
 import Form from "./Form";
+let classnames = require("classnames");
 
-//this one shows up when there is no favorite. It's just an add symbol.
 export default function Nav(props) {
 
   const logOn = (name, password) => {
@@ -14,23 +14,45 @@ export default function Nav(props) {
     props.removeUser();
   }
 
-  let display;
-  props.user===""? display="None": display="True"
+  const buttonClass1 = classnames("list-name", {
+    "list-name-show": props.favList==="show",
+    "list-name": props.favList==="hide"
+  });
+  const buttonClass2 = classnames("list-name", {
+    "list-name-show": props.laterList==="show",
+    "list-name": props.favList==="hide"
+  });
+  const buttonClass3 = classnames("list-name", {
+    "list-name-show": props.genreList==="show",
+    "list-name": props.favList==="hide"
+  });
+  const buttonClass4 = classnames("list-name", {
+    "list-name-show": props.friendList==="show",
+    "list-name": props.favList==="hide"
+  });
+
+  const toggleList = function(status) {
+    if (status === "show") {
+      return "hide" 
+    } else {
+      return "show"
+    }
+  }
+ 
   return (
     <div className="nav">
       <div className="logo">
         <img id="cinema-logo"  src="images/popcorn.png" width="150px" alt="Social Cinema" />
-        
-        <button className="list_name" disabled={!props.user} onClick={() => props.setFavList(props.toggleList)}>
+        <button className={buttonClass1} disabled={!props.user} onClick={() => props.setFavList(toggleList)}>
           Favorite Movies
         </button>
-        <button className="list_name" disabled={!props.user} onClick={() => props.setLaterList(props.toggleList)}>
+        <button className={buttonClass2} disabled={!props.user} onClick={() => props.setLaterList(toggleList)}>
           Later Movies
         </button>
-        <button className="list_name" onClick={() => props.setGenreList(props.toggleList)}>
+        <button className={buttonClass3} onClick={() => props.setGenreList(toggleList)}>
           My Preferences
         </button>
-        <button className="list_name" disabled={!props.user} onClick={() => props.setFriendList(props.toggleList)}>
+        <button className={buttonClass4} disabled={!props.user} onClick={() => props.setFriendList(toggleList)}>
           My Friends
         </button>
       </div>
