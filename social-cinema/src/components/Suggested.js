@@ -16,7 +16,8 @@ export default function Suggested(props) {
           "releaseDate": response.data.release_date,
           "tmdbId": response.data.tmdb_id,
           "imdb_link": response.data.imdb_link,
-          "runtime" : response.data.runtime
+          "runtime" : response.data.runtime,
+          "error": response.data.error
         });
         props.getRecentSuggestions(response.data);
       })
@@ -51,6 +52,7 @@ export default function Suggested(props) {
       }
       {suggested === "show" && 
         <div>
+          <h5>{suggestedMovie.error}</h5>
           <div className="suggestion-all">
             <img alt={suggestedMovie.title} src={suggestedMovie.poster} className="poster"></img>
             <div className="suggestion-text">
