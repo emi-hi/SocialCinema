@@ -3,6 +3,8 @@ import axios from 'axios';
 import './App.css';
 import List from './lists/List.js'
 import Nav from './Nav'
+import { DragDropContext } from 'react-beautiful-dnd'
+
 
 import Suggested from "./Suggested";
 import Genres from "./Genres";
@@ -67,7 +69,51 @@ function App() {
       setRecentSuggestions(updatedRecentSuggestionsList)
   }
 
+  const onDragEnd = (result) => {
+    // TODO : update
+    const { destination, source, draggableId } = result;
 
+    if (!destination) {
+      return;
+    }
+
+    if (destination.droppableId === source.droppableId) {
+      if (destination.index === source.index) {
+        return;
+      }
+
+      if (destination.droppableId === "favorites") {
+        const new_fav_movies = [...state.favorited_movies]
+        const moved_movie = { ...new_fav_movies[source.index] }
+  
+        new_fav_movies.splice(source.index, 1);
+        new_fav_movies.splice(destination.index, 0, moved_movie)
+
+        setFavoriteMovies(new_fav_movies)
+      } else if (destination.droppableId === "laters") {
+        const new_later_movies = [...state.later_movies]
+        const moved_movie = { ...new_later_movies[source.index] }
+
+        new_later_movies.splice(source.index, 1);
+        new_later_movies.splice(destination.index, 0, moved_movie)
+  
+        setLaterMovies(new_later_movies)
+      }
+    } else if (destination.droppableId === "laters" && source.droppableId === "recent") {
+      const new_later_movies = [...state.later_movies]
+      const sugested_movie = { ...recentSuggestions[destination.index] }
+      const moved_movie = {
+        title: sugested_movie.title,
+        img: sugested_movie.poster,
+      }
+
+      new_later_movies.splice(destination.index, 0, moved_movie)
+
+      console.log(new_later_movies)
+
+      setLaterMovies(new_later_movies)
+    }
+  }
 
   const createUser = (name, password) => {
     return axios.post(`http://localhost:5000/signup`, { name, password, genres: userGenres })
@@ -126,6 +172,9 @@ function App() {
         laterList={laterList}
         genreList={genreList}
       />
+      <DragDropContext
+        onDragEnd={onDragEnd}
+      >
       <div>
         {favList === "show" &&   
           <List type="favorites" data={state.favorited_movies} user={user} setFavoriteMovies={setFavoriteMovies} removeLaterMovie={removeFavoritedMovie} /> 
@@ -172,6 +221,7 @@ function App() {
           <RecentSuggestion recent={recentSuggestions}/>
         </div>
       </div>
+      </DragDropContext>
     </div>
   );
 }

@@ -1,5 +1,4 @@
 import React from "react";
-// import Logon from "./Logon"
 import User from "./User"
 import Form from "./Form";
 let classnames = require("classnames");
