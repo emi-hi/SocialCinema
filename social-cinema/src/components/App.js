@@ -109,7 +109,6 @@ function App() {
   }
 
   const onDragEnd = (result) => {
-    // TODO : update
     const { destination, source, draggableId } = result;
 
     if (!destination) {
@@ -140,17 +139,19 @@ function App() {
       }
     } else if (destination.droppableId === "laters" && source.droppableId === "recent") {
       const new_later_movies = [...state.later_movies]
-      const sugested_movie = { ...recentSuggestions[destination.index] }
+      const sugested_movie = { ...recentSuggestions[source.index].newSuggestion }
       const moved_movie = {
         title: sugested_movie.title,
-        img: sugested_movie.poster,
+        poster: sugested_movie.poster,
+        tmdbId: draggableId
       }
 
       new_later_movies.splice(destination.index, 0, moved_movie)
 
-      console.log(new_later_movies)
-
-      setLaterMovies(new_later_movies)
+      axios.post(`http://localhost:5000/api/${state.user.name}/latermovies`, { "suggestedMovie": { ...moved_movie }  })
+      .then(response => {
+        setLaterMovies(response.data.later_movies)
+      })
     }
   }
 
