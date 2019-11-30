@@ -7,11 +7,11 @@ export default function Genre(props) {
   if (props.hate_class === "selected") {
     feelingImg = "images/no.svg";
     imgClassName += "-hate";
-    
   } else if (props.love_class === "selected") {
     feelingImg = "images/love.png";
     imgClassName += "-love";
   }
+
   let displayName;
   if (props.name === 'Science Fiction'){
     displayName = 'Sci Fi'
@@ -20,7 +20,6 @@ export default function Genre(props) {
   }
 
   return (
-    
     <div className="genre">
       {feelingImg && <img src={feelingImg} className={imgClassName} alt={feelingImg}/>}
       
@@ -28,7 +27,7 @@ export default function Genre(props) {
       <p className="genre-name">{displayName}</p>
       <div className="genre-choices">
         <button type="button" id="hategenre" className={props.hate_class} onClick={() => props.setGenre(props.id, false)}>Hate it!</button>
-        <button type="button" id="mehgenre" className={props.meh_class} onClick={() => props.setGenre(props.id, "")}>Meh</button>
+        <button type="button" id="mehgenre" className={props.meh_class} onClick={() => props.setGenre(props.id, null)}>Meh</button>
         <button type="button" id="lovegenre" className={props.love_class} onClick={() => props.setGenre(props.id, true)}>Love it!</button>
       </div>
     </div>
