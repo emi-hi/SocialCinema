@@ -7,6 +7,8 @@ import PickFav from "./PickFav";
 export default function FavoriteForm(props) {
   const [title, setTitle] = useState("");
   const [searchedMovie, setSearchedMovie] = useState("");
+  const [error, setError] = useState(false);
+  const [movie, setMovie] = useState(0)
 
 
   const saveToFavoriteList = (userName, movie) => {
@@ -22,7 +24,14 @@ export default function FavoriteForm(props) {
   
     axios.get(`http://localhost:5000/movies/title/?title=${queryStringTitle}`)
     .then(response => {
-      setSearchedMovie(response.data.movies)
+      setMovie(0);
+      if (response.data.movies) {
+        setError(false);
+        setSearchedMovie(response.data.movies)
+      } else {
+        setSearchedMovie("");
+        setError(true);
+      }
     })
   }
 
@@ -41,8 +50,8 @@ export default function FavoriteForm(props) {
         <input type="submit" value="Search"/>
       </form>
       <br/>
-  
-      {searchedMovie && <PickFav user={props.user} searchedMovie={searchedMovie} saveToFavoriteList={saveToFavoriteList} />}
+      {error && <p>Your search returned no results.</p>}
+      {searchedMovie && <PickFav user={props.user} searchedMovie={searchedMovie} saveToFavoriteList={saveToFavoriteList} movie={movie} setMovie={setMovie} />}
     </main>
   )
 }
