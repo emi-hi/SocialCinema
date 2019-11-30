@@ -7,7 +7,13 @@ export default function Suggested(props) {
   const [suggested, setSuggested] = useState("hide")
 
   const newMovie = () => {
-    axios.post(`/suggestion`, { userGenrePreferences: props.userGenres, group: props.group, recentSuggestions: props.recentSuggestions, minimumRuntime: props.minimumRuntime, maximumRuntime: props.maximumRuntime })
+    let group;
+    if (props.theme) {
+      group = [];
+    } else {
+      group = props.group;
+    }
+    axios.post(`/suggestion`, { userGenrePreferences: props.userGenres, group, recentSuggestions: props.recentSuggestions, minimumRuntime: props.minimumRuntime, maximumRuntime: props.maximumRuntime })
       .then(response => {
         setSuggestedMovie({
           "title": response.data.title,

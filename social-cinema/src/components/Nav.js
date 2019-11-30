@@ -4,7 +4,6 @@ import Form from "./Form";
 let classnames = require("classnames");
 
 export default function Nav(props) {
-
   const logOn = (name, password) => {
     return props.getUser(name, password);
   }
@@ -29,12 +28,26 @@ export default function Nav(props) {
     "list-name-show": props.friendList==="show",
     "list-name": props.favList==="hide"
   });
+  const buttonClass5 = classnames("list-name", {
+    "list-name-show": props.genreList==="show",
+    "list-name": props.favList==="hide"
+  });
 
   const toggleList = function(status) {
     if (status === "show") {
       return "hide" 
     } else {
       return "show"
+    }
+  }
+
+  const toggleThemeNight = () => {
+    if (props.themeNight) {
+      props.setGenreList(toggleList)
+      props.setThemeNight(false)
+    } else {
+      props.setGenreList(toggleList)
+      props.setThemeNight(true);
     }
   }
  
@@ -48,12 +61,19 @@ export default function Nav(props) {
         <button className={buttonClass2} disabled={!props.user} onClick={() => props.setLaterList(toggleList)}>
           Later Movies
         </button>
-        <button className={buttonClass3} onClick={() => props.setGenreList(toggleList)}>
-          {props.group.length === 0 ? "My Preferences" : "Theme Night!"}
+        <button className={props.themeNight ? "list-name" : buttonClass3} disabled={props.group.length > 0} onClick={() => props.setGenreList(toggleList)}>
+          My Preferences
         </button>
         <button className={buttonClass4} disabled={!props.user} onClick={() => props.setFriendList(toggleList)}>
           My Friends
         </button>
+      </div>
+      <div>
+        { props.group.length !== 0 &&
+          <button className={buttonClass5} onClick={() => toggleThemeNight()}>
+            {props.themeNight === false ? "Activate a Theme Night!" : "Remove Theme Night"}
+          </button>
+        }
       </div>
       <div className="user-login"> 
         {props.user === "" ? <><Form onLogin={logOn} /> <Form createUser={props.createUser} /></> : <User user={props.user} logout={() => logOut()} />}

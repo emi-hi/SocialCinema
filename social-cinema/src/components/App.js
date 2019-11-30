@@ -26,13 +26,15 @@ function App() {
     setFavoriteMovies,
     removeFavoritedMovie,
     setFriends,
-    setGroup
+    setGroup,
+    setTheme
   } = useApplicationData();
 
   const user = state.user;
   const userGenres = state.genres;
   const friends = state.friends
   const group = state.group
+  const theme = state.theme
 
   const [favList, setFavList] = useState("hide")
   const [laterList, setLaterList] = useState("hide")
@@ -44,6 +46,10 @@ function App() {
   const [maximumRuntime, setMaximumRuntime] = useState(300)
 
   const useMovieNight = function(friend, action) {
+    if (group.length === 0 && action === "add") {
+      setGenreList("hide");
+    }
+
     if (action === "add") {
       setGroup([
         ...group, {
@@ -152,6 +158,16 @@ function App() {
     }
   };
 
+  const setThemeNight = (value) => {
+    setTheme(value)
+    console.log("teme", value)
+
+    if (value) {
+      console.log("Rst")
+      setGenres([])
+    }
+  }
+
   const removeUser = () => {
     setUser("");
     setGenres([]);
@@ -159,6 +175,9 @@ function App() {
     setFavoriteMovies([]);
     setFriends([]);
     setGroup([]);
+    setFavList("hide");
+    setLaterList("hide");
+    setFriendList("hide");
   }
 
   return (
@@ -176,6 +195,8 @@ function App() {
         group={group}
         laterList={laterList}
         genreList={genreList}
+        themeNight={theme}
+        setThemeNight={setThemeNight}
       />
       <DragDropContext
         onDragEnd={onDragEnd}
@@ -215,6 +236,7 @@ function App() {
             user={user}
             group={group}
             userGenres={userGenres}
+            theme={theme}
             setLaterMovies={setLaterMovies}
             minimumRuntime={minimumRuntime}
             maximumRuntime={maximumRuntime}

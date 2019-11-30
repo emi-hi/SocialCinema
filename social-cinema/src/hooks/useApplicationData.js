@@ -1,5 +1,5 @@
 import { useReducer, useEffect } from "react";
-import reducer, { SET_USER, SET_GENRES, SET_LATER_MOVIES, SET_FRIENDS, SET_GROUP, SET_FAVORITE_MOVIES } from "../reducers/application";
+import reducer, { SET_USER, SET_GENRES, SET_LATER_MOVIES, SET_FRIENDS, SET_GROUP, SET_FAVORITE_MOVIES, SET_THEME } from "../reducers/application";
 import axios from 'axios'
 
 const initGenres = () => {
@@ -24,7 +24,8 @@ export default function useApplicationData() {
     favorited_movies: JSON.parse(localStorage.getItem('favoritedMovies')) || [],
     later_movies: JSON.parse(localStorage.getItem('laterMovies')) || [],
     friends: [],
-    group: JSON.parse(localStorage.getItem('group')) || []
+    group: JSON.parse(localStorage.getItem('group')) || [],
+    theme: false
   });
 
   useEffect(() => {
@@ -102,14 +103,17 @@ export default function useApplicationData() {
   };
 
   const setGroup = group => {
-    if (state.group.length === 0 && group.length === 1 ) {
-      setGenres([])
-    } else if (state.group.length === 1 && group.length === 0 ) {
-      getGenres()
+    if (state.group.length === 1 && group.length === 0 ) {
+      getGenres();
+      setTheme(false);
     }
     localStorage.setItem("group", JSON.stringify(group))
     dispatch({ type: SET_GROUP, value: group });
   };
 
-  return { state, setUser, setGenres, setLaterMovies, removeLaterMovie, setFriends, setGroup, setFavoriteMovies, removeFavoritedMovie };
+  const setTheme = value => {
+    dispatch({ type: SET_THEME, value: value });
+  }
+
+  return { state, setUser, setGenres, setLaterMovies, removeLaterMovie, setFriends, setGroup, setFavoriteMovies, removeFavoritedMovie, setTheme };
 };

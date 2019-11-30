@@ -3,7 +3,8 @@ export const SET_GENRES = "SET_GENRES";
 export const SET_FAVORITE_MOVIES = "SET_FAVORITE_MOVIES";
 export const SET_LATER_MOVIES = "SET_LATER_MOVIES";
 export const SET_FRIENDS = "SET_FRIENDS";
-export const SET_GROUP = "SET_GROUP"
+export const SET_GROUP = "SET_GROUP";
+export const SET_THEME = "SET_THEME";
 
 const reducerLookup = {
   SET_USER: (state, action) => {
@@ -40,6 +41,12 @@ const reducerLookup = {
     return {
       ...state,
       group: action.value
+    }
+  },
+  SET_THEME: (state, action) => {
+    return {
+      ...state,
+      theme: action.value
     }
   }
 };
