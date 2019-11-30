@@ -1,9 +1,11 @@
 import React from "react";
+import MovieBox from "./lists/MovieBox"
 
 export default function RecentMovieListItem(props) {
   return (
     <div className="recent-movie-display">
-       <a href={props.imdb_link} target="_blank">{props.title}</a>
+      <MovieBox id={props.id} index={props.index} title={props.title} img={props.img} />
+      {/* <a href={props.imdb_link} target="_blank">{props.title}</a> */}
     </div>
   );
 }

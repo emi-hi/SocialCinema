@@ -1,4 +1,6 @@
 import React from "react";
+import { Droppable } from 'react-beautiful-dnd'
+
 import MovieBox from "./MovieBox"
 import Empty from "./Empty"
 import AddFav from "./AddFav"
@@ -10,7 +12,7 @@ export default function List(props) {
 
   for (let x = 0; x < props.data.length; x++) {
     if (props.data.length > x) { 
-      boxes.push(<MovieBox key={props.data[x]['id']} id={props.data[x]['id']} title={props.data[x]['title']} img={props.data[x]['img']} removeLaterMovie={props.removeLaterMovie} />)
+      boxes.push(<MovieBox key={props.data[x]['id']} id={props.data[x]['id']} index={x} title={props.data[x]['title']} img={props.data[x]['img']} removeLaterMovie={props.removeLaterMovie} />)
     } else {
     }
   } 
@@ -20,6 +22,17 @@ export default function List(props) {
     boxes.push(<Empty key={-1} />)
   }
   return (
-    <article className="list">{boxes}</article>
+    <Droppable droppableId={props.type} type={props.type} direction="horizontal">
+      {(provided) => (
+        <article
+          className="list"
+          ref={provided.innerRef}
+          {...provided.droppableProps}
+        >
+          {boxes}
+          {provided.placeholder}
+        </article>
+      )}
+    </Droppable>
   )
 }

@@ -8,7 +8,7 @@ export default function PickFav(props) {
     <div>
       <main className="favSelector">
         <div onClick={() => setMovie(prev => prev === 0 ? prev : prev - 1)}>Left</div>
-        <MovieBox img = {props.searchedMovie[movie].poster} title = {props.searchedMovie[movie].title}/>
+        <MovieBox id={movie} index={movie} img = {props.searchedMovie[movie].poster} title = {props.searchedMovie[movie].title}/>
         <div onClick={() => setMovie(prev => prev === props.searchedMovie.length - 1 ? prev : prev + 1)}>Right</div>
       </main>
       <button onClick={()=>{props.saveToFavoriteList(props.user.name, props.searchedMovie[movie])}}>Yes, this one!</button>
