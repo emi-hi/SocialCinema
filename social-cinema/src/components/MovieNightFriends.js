@@ -1,6 +1,6 @@
 import React from "react";
 import FriendList from './FriendList';
-import '../styles/userstyles.css'
+import '../styles/userstyles.scss'
 
 export default function MovieNightFriends(props) {
   let theGroup = []

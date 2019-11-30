@@ -5,7 +5,7 @@ import MovieBox from "./MovieBox"
 import Empty from "./Empty"
 import AddFav from "./AddFav"
 
-import "./styles.css"
+import "./styles.scss"
 
 export default function List(props) {
   let boxes = [];

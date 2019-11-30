@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import './App.css';
+import './App.scss';
+
 import List from './lists/List.js'
 import Nav from './Nav'
 import { DragDropContext } from 'react-beautiful-dnd'

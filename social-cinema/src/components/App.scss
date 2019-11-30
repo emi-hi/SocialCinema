@@ -1,0 +1,133 @@
+.App {
+  text-align: center;
+}
+
+h4 {
+  margin-block-start: 0px;
+  margin-block-end: 5px;
+}
+
+
+
+
+.nav {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding-right: 10px;
+  /* background-color: rgb(92, 92, 92); */
+  max-height: 7vh;
+
+  .logo {
+    display: flex;
+    flex-direction: row;
+
+  }
+
+  .user-login{
+    display:flex;
+    flex-direction: row;
+  }
+  
+  .list-name {
+    /* background-color: rgb(158, 158, 158); */
+    border: .5px solid rgb(124, 121, 124);
+
+    &-show{
+      background-color: rgb(184, 180, 180);
+    }
+  }
+}
+
+
+
+
+
+.main-container{
+  display: flex;
+  flex-direction: row;
+  height: 70vh;
+  width: 100%;
+  .click-suggest{
+    padding:100px;
+  }
+  .friends-container{
+    width:20%;
+  }
+  .suggested-container{
+    width:60%;
+
+  
+    .suggestion-all {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+    }
+      
+    .suggestion-text{
+      height: 60vh;
+      width: 50%;
+    }
+  
+    .poster{
+      height: 65vh;
+    }
+  }
+  .recent-suggestion-list-container{
+    width:20%;
+    .recent-computer{
+      display:flex;
+      flex-direction: column;
+    }
+    .recent-movie-display{
+      /* border: 1px solid rgb(37, 59, 107); */
+      border-radius: 4px;
+    }
+    .recent-iphone{
+      display:none;
+    }
+  }
+  
+
+
+}
+
+
+
+
+
+
+
+
+
+/* IPHONE STYLES */
+@media only screen and (max-width: 560px) {
+  .main-container .suggested-container{
+    width:100%;
+  }
+
+  .suggestion-all {
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+  .suggestion-text{
+    font-size: x-small;
+    width: 100%;
+  }
+  
+
+  .poster {
+    height: 25vh;
+  }
+  .main-container {
+    flex-direction: column;
+  }
+
+  /* .recent{
+    display: none;
+  } */
+  .recent-iphone{
+    display: block;
+  }
+}

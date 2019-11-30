@@ -1,6 +1,6 @@
 import React from "react";
 import UserDisplay from "./UserDisplay"
-import './lists/styles.css'
+import './lists/styles.scss'
 
 export default function FriendList(props) {
   let friends = props.friends.map((friend) => {

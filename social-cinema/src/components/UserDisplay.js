@@ -1,6 +1,6 @@
 import React from "react";
-import './lists/styles.css'
-import '../styles/genre.css';
+import './lists/styles.scss'
+import '../styles/genre.scss';
 
 export default function UserDisplay(props) {
   const addOrRemove = function(action) {

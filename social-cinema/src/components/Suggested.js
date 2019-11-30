@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import './App.css';
+// import './App.css';
 
 export default function Suggested(props) {
   const [suggestedMovie, setSuggestedMovie] = useState("");
