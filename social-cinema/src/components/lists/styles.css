@@ -59,6 +59,19 @@
   flex-direction: row;
 }
 
+.close-modal{
+  position: absolute;
+  display: block;
+  padding: 2px 5px;
+  line-height: 20px;
+  right: -10px;
+  top: -10px;
+  font-size: 24px;
+  background: #ffffff;
+  border-radius: 18px;
+  border: 1px solid #cfcece;
+}
+
 /* IPHONE STYLES */
 @media only screen and (max-width: 767px) {
   .list {
@@ -66,3 +79,5 @@
   }
   /* cursor: pointer; */
 }
+
+
