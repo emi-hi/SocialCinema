@@ -136,7 +136,7 @@ function App() {
   }
 
   const setGenre = (id, value) => {
-    if (state.user && state.user.name !== "") {
+    if (state.user && state.user.name !== "" && state.group.length === 0) {
       axios.post(`http://localhost:5000/api/${state.user.name}/genres`, { id, preference: value })
         .then(response => {
           setGenres(response.data.genres)
@@ -170,6 +170,7 @@ function App() {
         setFriendList={setFriendList}
         favList={favList}
         friendList={friendList}
+        group={group}
         laterList={laterList}
         genreList={genreList}
       />

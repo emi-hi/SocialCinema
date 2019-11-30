@@ -52,6 +52,13 @@ export default function useApplicationData() {
     dispatch({ type: SET_USER, value: user });
   };
 
+  const getGenres = () => {
+    axios.get(`http://localhost:5000/api/${state.user.name}/genres`)
+    .then(res => {
+      setGenres(res.data.genres)
+    })
+  }
+
   const setGenres = genres => {
     if (genres.length === 0) {
       initGenres()
@@ -72,7 +79,6 @@ export default function useApplicationData() {
     console.log(id);
     axios.delete(`http://localhost:5000/api/${state.user.name}/latermovies`, { data: { "id": id } })
     .then(response => {
-      console.log("THIS", response.data)
       setLaterMovies(response.data.later_movies)
     })
   }
@@ -86,7 +92,6 @@ export default function useApplicationData() {
     console.log(id);
     axios.delete(`http://localhost:5000/api/${state.user.name}/favmovies`, { data: { "id": id } })
     .then(response => {
-      console.log("THIS", response.data)
       setFavoriteMovies(response.data.favorited_movies)
     })  
   }
@@ -96,6 +101,11 @@ export default function useApplicationData() {
   }
 
   const setGroup = group => {
+    if (state.group.length === 0 && group.length === 1 ) {
+      setGenres([])
+    } else if (state.group.length === 1 && group.length === 0 ) {
+      getGenres()
+    }
     localStorage.setItem("group", JSON.stringify(group))
     dispatch({ type: SET_GROUP, value: group });
   }
