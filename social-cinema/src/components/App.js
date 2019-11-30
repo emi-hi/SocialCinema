@@ -196,13 +196,12 @@ function App() {
       </div> 
       <div>
       {friendList === "show" &&
-        <FriendList friends={friends} useMovieNight={useMovieNight} group={group} action="add" classname="list"/>
+        <FriendList friends={friends} useMovieNight={useMovieNight} group={group} action="add" classname="list" type="All Friends  - click + on a friend to add them to your movie night"/>
       }
       </div>
       <div className="main-container">
         <div className="friends-container">
-          FRIENDS FOR MOVIE NIGHT!
-          <MovieNightFriends  group={group} action="remove" classname="columnlist" useMovieNight={useMovieNight}/>
+          <MovieNightFriends  group={group} action="remove" classname="columnlist" useMovieNight={useMovieNight} />
         </div>
         <div className="suggested-container">
           <Suggested
@@ -217,7 +216,6 @@ function App() {
           />
         </div>
         <div className="recent-suggestion-list-container">
-          RECENTLY SUGGESTED LIST
           <RecentSuggestion recent={recentSuggestions}/>
         </div>
       </div>
