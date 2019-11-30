@@ -7,7 +7,13 @@ export default function Suggested(props) {
   const [suggested, setSuggested] = useState("hide")
 
   const newMovie = () => {
-    axios.post(`http://localhost:5000/suggestion`, { userGenrePreferences: props.userGenres, group: props.group, recentSuggestions: props.recentSuggestions, minimumRuntime: props.minimumRuntime, maximumRuntime: props.maximumRuntime })
+    let group;
+    if (props.theme) {
+      group = [];
+    } else {
+      group = props.group;
+    }
+    axios.post(`/suggestion`, { userGenrePreferences: props.userGenres, group, recentSuggestions: props.recentSuggestions, minimumRuntime: props.minimumRuntime, maximumRuntime: props.maximumRuntime })
       .then(response => {
         setSuggestedMovie({
           "title": response.data.title,
@@ -26,7 +32,7 @@ export default function Suggested(props) {
   };
 
   const saveToLaterList = (userName, suggestedMovie) => {
-    axios.post(`http://localhost:5000/api/${userName}/latermovies`, { suggestedMovie })
+    axios.post(`/api/${userName}/latermovies`, { suggestedMovie })
     .then(response => {
       props.setLaterMovies(response.data.later_movies)
     })
@@ -37,6 +43,13 @@ export default function Suggested(props) {
 
   if (suggestedMovie.runtime) {
     runtime = suggestedMovie.runtime + ' minutes'
+  }
+
+  let error = ""
+  if(suggestedMovie.error === "group") {
+    error = "As a group, you hate all movie genres. To receive a curated movie suggestion, try setting a theme night. Otherwise, we suggest you watch Bob Ross! No one hates Bob Ross."
+  } else if(suggestedMovie.error === "solo") {
+    error = "You currently hate all movie genres. Update your preferences to receive a curated movie suggestion. Otherwise, we suggest you watch Bob Ross! No one hates Bob Ross."
   }
 
   return (
@@ -53,7 +66,7 @@ export default function Suggested(props) {
       }
       {suggested === "show" && 
         <div>
-          <h5>{suggestedMovie.error}</h5>
+          <h5>{error}</h5>
           <div className="suggestion-all">
             <img alt={suggestedMovie.title} src={suggestedMovie.poster} className="poster"></img>
             <div className="suggestion-text">

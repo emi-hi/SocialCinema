@@ -9,7 +9,7 @@ export default function Genres(props) {
   const [genres, setGenres] = useState([])
 
   useEffect(()=> {
-    axios.get("http://localhost:5000/api/genres")
+    axios.get("/api/genres")
     .then(response => {
       setGenres(response.data);
     })
@@ -48,6 +48,7 @@ export default function Genres(props) {
       <h4>My Preferences</h4>
       <section className="genres">
         {genreOptions}
+        <button onClick={x => props.resetGenres()}>Reset Preferences</button>
       </section>
     </div>
   );

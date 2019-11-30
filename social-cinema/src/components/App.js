@@ -26,13 +26,15 @@ function App() {
     setFavoriteMovies,
     removeFavoritedMovie,
     setFriends,
-    setGroup
+    setGroup,
+    setTheme
   } = useApplicationData();
 
   const user = state.user;
   const userGenres = state.genres;
   const friends = state.friends
   const group = state.group
+  const theme = state.theme
 
   const [favList, setFavList] = useState("hide")
   const [laterList, setLaterList] = useState("hide")
@@ -44,6 +46,10 @@ function App() {
   const [maximumRuntime, setMaximumRuntime] = useState(300)
 
   const useMovieNight = function(friend, action) {
+    if (group.length === 0 && action === "add") {
+      setGenreList("hide");
+    }
+
     if (action === "add") {
       setGroup([
         ...group, {
@@ -110,7 +116,7 @@ function App() {
 
       new_later_movies.splice(destination.index, 0, moved_movie)
 
-      axios.post(`http://localhost:5000/api/${state.user.name}/latermovies`, { "suggestedMovie": { ...moved_movie }  })
+      axios.post(`/api/${state.user.name}/latermovies`, { "suggestedMovie": { ...moved_movie }  })
       .then(response => {
         setLaterMovies(response.data.later_movies)
       })
@@ -119,7 +125,7 @@ function App() {
   };
 
   const createUser = (name, password) => {
-    return axios.post(`http://localhost:5000/signup`, { name, password, genres: userGenres })
+    return axios.post(`/signup`, { name, password, genres: userGenres })
     .then(response => {
       setUser(response.data.user);
     })
@@ -127,7 +133,7 @@ function App() {
   };
 
   const getUser = (name, password) => {
-    return axios.post("http://localhost:5000/login", { name, password })
+    return axios.post("/login", { name, password })
       .then(response => {
         setUser(response.data.user);
         setGenres(response.data.genres);
@@ -139,7 +145,7 @@ function App() {
 
   const setGenre = (id, value) => {
     if (state.user && state.user.name !== "" && state.group.length === 0) {
-      axios.post(`http://localhost:5000/api/${state.user.name}/genres`, { id, preference: value })
+      axios.post(`/api/${state.user.name}/genres`, { id, preference: value })
         .then(response => {
           setGenres(response.data.genres)
         })
@@ -152,6 +158,28 @@ function App() {
     }
   };
 
+  const resetGenres = (id) => {
+    if (state.user && state.user.name !== "" && state.group.length === 0) {
+      axios.post(`http://localhost:5000/api/${state.user.name}/genresreset`)
+        .then(response => {
+          setGenres(response.data.genres)
+        })
+        .catch(error => {console.log(error)})
+    } else {
+      setGenres([]);
+    }
+  }
+
+  const setThemeNight = (value) => {
+    setTheme(value)
+    console.log("teme", value)
+
+    if (value) {
+      console.log("Rst")
+      setGenres([])
+    }
+  }
+
   const removeUser = () => {
     setUser("");
     setGenres([]);
@@ -159,6 +187,9 @@ function App() {
     setFavoriteMovies([]);
     setFriends([]);
     setGroup([]);
+    setFavList("hide");
+    setLaterList("hide");
+    setFriendList("hide");
   }
 
   return (
@@ -176,6 +207,8 @@ function App() {
         group={group}
         laterList={laterList}
         genreList={genreList}
+        themeNight={theme}
+        setThemeNight={setThemeNight}
       />
       <DragDropContext
         onDragEnd={onDragEnd}
@@ -194,7 +227,7 @@ function App() {
       <div>
       {genreList === "show" &&
         <div>
-          <Genres userGenres = {userGenres} setGenre={setGenre} />
+          <Genres userGenres = {userGenres} setGenre={setGenre} resetGenres={resetGenres}/>
           <RuntimeSelector minimumRuntime={minimumRuntime} setMinimumRuntime={setMinimumRuntime} maximumRuntime={maximumRuntime} setMaximumRuntime={setMaximumRuntime}/>
         </div>
       }
@@ -215,6 +248,7 @@ function App() {
             user={user}
             group={group}
             userGenres={userGenres}
+            theme={theme}
             setLaterMovies={setLaterMovies}
             minimumRuntime={minimumRuntime}
             maximumRuntime={maximumRuntime}
