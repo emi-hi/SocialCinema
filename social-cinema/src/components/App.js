@@ -152,6 +152,18 @@ function App() {
     }
   };
 
+  const resetGenres = (id) => {
+    if (state.user && state.user.name !== "" && state.group.length === 0) {
+      axios.post(`http://localhost:5000/api/${state.user.name}/genresreset`)
+        .then(response => {
+          setGenres(response.data.genres)
+        })
+        .catch(error => {console.log(error)})
+    } else {
+      setGenres([]);
+    }
+  }
+
   const removeUser = () => {
     setUser("");
     setGenres([]);
@@ -194,7 +206,7 @@ function App() {
       <div>
       {genreList === "show" &&
         <div>
-          <Genres userGenres = {userGenres} setGenre={setGenre} />
+          <Genres userGenres = {userGenres} setGenre={setGenre} resetGenres={resetGenres}/>
           <RuntimeSelector minimumRuntime={minimumRuntime} setMinimumRuntime={setMinimumRuntime} maximumRuntime={maximumRuntime} setMaximumRuntime={setMaximumRuntime}/>
         </div>
       }
