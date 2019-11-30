@@ -14,19 +14,20 @@ TMDB_key = os.getenv('TMDB_KEY')
 
 CORS(app)
 
+# Route for generating a movie suggestion
 @app.route("/suggestion", methods=['GET', 'POST'])
 def suggestions():
   req = json.loads(request.data)
   min_runtime = req['minimumRuntime']
   max_runtime = req['maximumRuntime']
+  user_genre_preferences = req['userGenrePreferences']
 
+  # Make list of previously suggested movie ids
   suggested_ids = []
   for suggestion in req['recentSuggestions']:
     suggested_ids.append(suggestion['newSuggestion']['tmdb_id'])
-  
-  user_genre_preferences = req['userGenrePreferences']
 
-  # Confert user preferences to more useable object
+  # Convert user preferences to more useable object
   preferences = {}
   for user_preference in user_genre_preferences:
     preferences[user_preference['id']] = user_preference['preference']
@@ -42,7 +43,7 @@ def suggestions():
         elif genre.preference == True:
           preferences[genre.genre.genre_api_id] = True
 
-  # Do some things to the lists to make them in a thing
+  # Break-up all preferences into lists for each preference
   user_loved_genres = []
   user_meh_genres = []
   user_hated_genres = []
@@ -55,16 +56,14 @@ def suggestions():
     elif preferences[genre] == False:
       user_hated_genres.append(str(genre))
 
+# Check if no genres are in meh or loved, thus all are hated and we return Bob Ross movie
   if len(user_meh_genres) == 0 and len(user_loved_genres) == 0:
+
     full_hate_info = {
-      "title": "No Movie For You",
-      "description": "It seems you are not the moving watching kind",
-    }
-  
-    full_hate_info = {
+    "error": "You don't have any preferred genres!",
     "title": "Bob Ross: The Happy Painter",
     "poster": "https://image.tmdb.org/t/p/w500/yhV6rSv8Ry80lyDL8sjZpu8hzph.jpg",
-    "description": "We couldn't find an appropriate movie to recommend based on the current genre prefernces. However, we believe everyone will enjoy this!",
+    "description": "A behind-the-scenes look at the beloved public television personality's journey from humble beginnings to an American pop-culture icon. \"The Happy Painter\" reveals the public and private sides of Bob Ross through loving accounts from close friends and family, childhood photographs and rare archival footage.  Interviewees recount his gentle, mild-mannered demeanor and unwavering dedication to wildlife, and disclose little-known facts about his hair, his fascination with fast cars and more.  Film clips feature Bob Ross with mentor William Alexander and the rough-cut of the first \"Joy of Painting\" episode from 1982. Famous Bob Ross enthusiasts, including talk-show pioneer Phil Donahue, film stars Jane Seymour and Terrence Howard, chef Duff Goldman and country music favorites Brad Paisley and Jerrod Niemann, provide fascinating insights into the man, the artist and his legacy.",
     "release_date": "2011",
     "tmdb_id": "238959",
     "imdb_link": "https://www.imdb.com/title/tt2155259/"
@@ -73,6 +72,7 @@ def suggestions():
     full_hate_info_json = json.dumps(full_hate_info)
     return full_hate_info_json
 
+# Make hated genre query string
   if len(user_hated_genres) > 1:
     hated_list = (",".join(user_hated_genres))
   elif len(user_hated_genres) == 1:
@@ -89,28 +89,29 @@ def suggestions():
 
     if len(user_loved_genres_loop_copy) != 0:
       index = random.randint(0, (len(user_loved_genres_loop_copy) - 1))
-      r = requests.get("https://api.themoviedb.org/3/discover/movie?api_key={}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page={}&with_genres={}&without_genres={}&with_runtime.gte={}&with_runtime.lte={}".format(TMDB_key, page_num, user_loved_genres[index], hated_list, min_runtime, max_runtime))
+      r = requests.get("https://api.themoviedb.org/3/discover/movie?api_key={}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page={}&with_genres={}&without_genres={}&with_runtime.gte={}&with_runtime.lte={}&release_date.lte=2020-04-01".format(TMDB_key, page_num, user_loved_genres_loop_copy[index], hated_list, min_runtime, max_runtime))
+      this_one = ["PAGE", page_num, "INDEX", index, "A LOVED"]
       del user_loved_genres_loop_copy[index]
     elif len(user_meh_genres_loop_copy) != 0:
       index = random.randint(0, (len(user_meh_genres_loop_copy) - 1))
-      r = requests.get("https://api.themoviedb.org/3/discover/movie?api_key={}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page={}&with_genres={}&without_genres={}&with_runtime.gte={}&with_runtime.lte={}".format(TMDB_key, page_num, user_meh_genres[index], hated_list, min_runtime, max_runtime))
+      r = requests.get("https://api.themoviedb.org/3/discover/movie?api_key={}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page={}&with_genres={}&without_genres={}&with_runtime.gte={}&with_runtime.lte={}&release_date.lte=2020-04-01".format(TMDB_key, page_num, user_meh_genres_loop_copy[index], hated_list, min_runtime, max_runtime))
+      this_one = ["PAGE", page_num, "INDEX", index, "A MEH'D"]      
       del user_meh_genres_loop_copy[index]
     else:
-      index = 0
-      r = requests.get("https://api.themoviedb.org/3/discover/movie?api_key={}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page={}&with_genres={}&without_genres={}&with_runtime.gte={}&with_runtime.lte={}".format(TMDB_key, page_num, user_meh_genres[index], hated_list, min_runtime, max_runtime))
-
+      index = random.randint(0, (len(user_loved_genres) - 1))
+      this_one = ["PAGE", page_num, "INDEX", index, "A RANDO"]
+      r = requests.get("https://api.themoviedb.org/3/discover/movie?api_key={}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page={}&with_genres={}&with_runtime.gte={}&with_runtime.lte={}&release_date.lte=2020-04-01".format(TMDB_key, page_num, user_loved_genres[index], min_runtime, max_runtime))
 
     tmdb_result = json.loads(r.text)
     results = tmdb_result["results"]
     
     for index, result in enumerate(results):
       if result['id'] in suggested_ids:
-        print("it was in here!")
-        print(result['title'])
         del results[index]
         
     all_results += results
 
+  print("IT SUCCESSFULLY SEARCHED", this_one)
   selected_result = all_results[(random.randint(0, (len(all_results) - 1)))]
 
   details_r = requests.get("https://api.themoviedb.org/3/movie/{}?api_key={}&language=en-US".format(selected_result["id"], TMDB_key))
