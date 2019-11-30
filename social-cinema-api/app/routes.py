@@ -19,9 +19,6 @@ def suggestions():
   req = json.loads(request.data)
   min_runtime = req['minimumRuntime']
   max_runtime = req['maximumRuntime']
-  print(min_runtime)
-  print(max_runtime)
-
 
   suggested_ids = []
   for suggestion in req['recentSuggestions']:
@@ -68,7 +65,7 @@ def suggestions():
     "title": "Bob Ross: The Happy Painter",
     "poster": "https://image.tmdb.org/t/p/w500/yhV6rSv8Ry80lyDL8sjZpu8hzph.jpg",
     "description": "We couldn't find an appropriate movie to recommend based on the current genre prefernces. However, we believe everyone will enjoy this!",
-    "release_date": "2011-12-03",
+    "release_date": "2011",
     "tmdb_id": "238959",
     "imdb_link": "https://www.imdb.com/title/tt2155259/"
     }
@@ -107,8 +104,6 @@ def suggestions():
     results = tmdb_result["results"]
     
     for index, result in enumerate(results):
-      # print('result: ', result['id'])
-      # print('index: ', index)
       if result['id'] in suggested_ids:
         print("it was in here!")
         print(result['title'])
@@ -136,7 +131,7 @@ def suggestions():
     "title": selected_result["title"],
     "poster": poster,
     "description": selected_result["overview"],
-    "release_date": selected_result["release_date"],
+    "release_date": selected_result["release_date"][:4],
     "tmdb_id": selected_result["id"],
     "imdb_link": imdb_link,
     "runtime" : runtime
@@ -225,10 +220,7 @@ def userFavmovies(user):
     image = req['movie']['poster']
     movie_api_id = req['movie']['tmdbId']
 
-    
-    
     new_movie = Movie.query.filter(Movie.movie_api_id == str(movie_api_id)).first()
-    print(new_movie)
 
     if new_movie == None:
       new_movie = Movie(title = title, movie_api_id = movie_api_id, image = image)    
@@ -325,10 +317,19 @@ def userLatemovies(user):
 @app.route("/movies/title/")
 def title():
   movie_title = request.args['title']
+
   movies = requests.get("https://api.themoviedb.org/3/search/movie?api_key={}&language=en-US&query={}&page=1&include_adult=false".format(TMDB_key, movie_title))
   movies_dict = movies.json()
-  results = movies_dict["results"]
+  
+  if movies_dict['total_results'] == 0:
+    no_movies = {
+      'error': 'No movies were found for your search'
+    }
 
+    no_movies_json = json.dumps(no_movies)
+    return no_movies_json
+  
+  results = movies_dict["results"]
   movies = []
 
   for result in results: 
@@ -337,8 +338,14 @@ def title():
       result_poster = "https://image.tmdb.org/t/p/w500" + result["poster_path"]
     else:
       result_poster = "Nope"
+
+
+    if 'release_date' not in result:
+      result_release_date = ""
+    else:
+      result_release_date = result["release_date"][:4]
+  
     result_description = result["overview"]
-    result_release_date = result["release_date"]
     result_tmdb_id = result["id"]
 
     movie_info = {
@@ -356,7 +363,6 @@ def title():
     }
 
   movies_json = json.dumps(res)
-
   return movies_json
 
 @app.route("/signup", methods=['POST'])
