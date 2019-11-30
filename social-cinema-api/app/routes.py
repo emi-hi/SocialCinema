@@ -19,9 +19,6 @@ def suggestions():
   req = json.loads(request.data)
   min_runtime = req['minimumRuntime']
   max_runtime = req['maximumRuntime']
-  print(min_runtime)
-  print(max_runtime)
-
 
   suggested_ids = []
   for suggestion in req['recentSuggestions']:
@@ -107,8 +104,6 @@ def suggestions():
     results = tmdb_result["results"]
     
     for index, result in enumerate(results):
-      # print('result: ', result['id'])
-      # print('index: ', index)
       if result['id'] in suggested_ids:
         print("it was in here!")
         print(result['title'])
@@ -225,10 +220,7 @@ def userFavmovies(user):
     image = req['movie']['poster']
     movie_api_id = req['movie']['tmdbId']
 
-    
-    
     new_movie = Movie.query.filter(Movie.movie_api_id == str(movie_api_id)).first()
-    print(new_movie)
 
     if new_movie == None:
       new_movie = Movie(title = title, movie_api_id = movie_api_id, image = image)    
