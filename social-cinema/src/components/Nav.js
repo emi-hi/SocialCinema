@@ -49,7 +49,7 @@ export default function Nav(props) {
           Later Movies
         </button>
         <button className={buttonClass3} onClick={() => props.setGenreList(toggleList)}>
-          My Preferences
+          {props.group.length === 0 ? "My Preferences" : "Theme Night!"}
         </button>
         <button className={buttonClass4} disabled={!props.user} onClick={() => props.setFriendList(toggleList)}>
           My Friends
@@ -58,7 +58,6 @@ export default function Nav(props) {
       <div className="user-login"> 
         {props.user === "" ? <><Form onLogin={logOn} /> <Form createUser={props.createUser} /></> : <User user={props.user} logout={() => logOut()} />}
       </div>
-
     </div>
   );
 }

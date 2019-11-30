@@ -61,7 +61,7 @@ export default function Suggested(props) {
               <p>{suggestedMovie.description}</p>
               
               <p>{runtime}</p>
-              <a href={suggestedMovie.imdb_link} target="_blank">Learn more at IMDB</a>
+              <a href={suggestedMovie.imdb_link} target="_blank" rel="noopener noreferrer">Learn more at IMDB</a>
             </div>
           </div>
           <div className="suggestion-buttons">
