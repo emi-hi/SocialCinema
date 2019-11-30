@@ -20,15 +20,19 @@ export default function Suggested(props) {
         });
         props.getRecentSuggestions(response.data);
       })
-  }
+      .catch(error => {console.log(error)})
+  };
 
   const saveToLaterList = (userName, suggestedMovie) => {
     axios.post(`http://localhost:5000/api/${userName}/latermovies`, { suggestedMovie })
     .then(response => {
       props.setLaterMovies(response.data.later_movies)
     })
-  }
+    .catch(error => {console.log(error)})
+  };
+
   let runtime;
+
   if (suggestedMovie.runtime) {
     runtime = suggestedMovie.runtime + ' minutes'
   }
