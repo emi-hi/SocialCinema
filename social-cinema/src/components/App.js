@@ -219,7 +219,7 @@ function App() {
         </div>
         <div className="recent-suggestion-list-container">
           RECENTLY SUGGESTED LIST
-          <RecentSuggestion recent={recentSuggestions}/>
+          <RecentSuggestion id={"recent"} type={"laters"} recent={recentSuggestions}/>
         </div>
       </div>
       </DragDropContext>
