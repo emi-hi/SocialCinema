@@ -177,7 +177,7 @@ def genres():
   genres_json = json.dumps(genre_arr)
   return genres_json
 
-@app.route("/api/<user>/genres", methods=['GET', 'POST'])
+@app.route("/api/<user>/genres", methods=['GET', 'POST', ])
 def userGenres(user):
   user = User.query.filter(User.name == user).one_or_none()
 
@@ -216,6 +216,33 @@ def userGenres(user):
   res_json = json.dumps(res)
 
   return res_json
+
+@app.route("/api/<user>/genresreset", methods=['POST'])
+def resetGenres(user):
+  user = User.query.filter(User.name == user).one_or_none()
+  
+  genres = []
+
+  for genre in user.user_genres:
+    genre.preference = None
+    db.session.add(genre)
+    db.session.commit()
+    
+    genres.append(
+      {
+        "id": genre.genre.genre_api_id,
+        "preference": genre.preference
+      }
+    )
+
+  res = {
+    "genres": genres
+  }
+
+  res_json = json.dumps(res)
+
+  return res_json
+
 
 @app.route("/api/<user>/favmovies", methods=['GET', 'POST', 'DELETE'])
 def userFavmovies(user):

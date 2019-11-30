@@ -48,6 +48,7 @@ export default function Genres(props) {
       <h4>My Preferences</h4>
       <section className="genres">
         {genreOptions}
+        <button onClick={x => props.resetGenres()}>Reset Preferences</button>
       </section>
     </div>
   );
