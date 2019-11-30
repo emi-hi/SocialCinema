@@ -1,16 +1,24 @@
 import React from "react";
+import { Droppable } from 'react-beautiful-dnd'
+
 import RecentMovieListItem from './RecentMovieListItem'
 
 export default function RecentSuggestion(props) {
-  let recents = props.recent.map((movie) => {
-    return <RecentMovieListItem title={movie.newSuggestion.title} imdb_link={movie.newSuggestion.imdb_link}/>
+  let recents = props.recent.map((movie, index) => {
+    return <RecentMovieListItem key={index} id={movie.newSuggestion.tmdb_id} index={index} title={movie.newSuggestion.title} img={movie.newSuggestion.poster} imdb_link={movie.newSuggestion.imdb_link}/>
   })
 
   return (
-    <article>
-      <div className="recent"> 
-       {recents}
+    <Droppable droppableId={props.id} type={props.type} >
+    {(provided) => (
+      <div className="recent"
+        ref={provided.innerRef}
+        {...provided.droppableProps}
+      > 
+        {recents}
+        {provided.placeholder}
       </div>
-    </article>
+    )}
+    </Droppable>
     )
 }
