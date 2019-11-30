@@ -11,7 +11,7 @@ export default function PickFav(props) {
         <h6>{props.searchedMovie[props.movie].release_date}</h6>
         <div onClick={() => props.setMovie(prev => prev === props.searchedMovie.length - 1 ? prev : prev + 1)}>Right</div>
       </main>
-      <button onClick={()=>{props.saveToFavoriteList(props.user.name, props.searchedMovie[props.movie])}}>Yes, this one!</button>
+      <button onClick={()=>{props.saveToFavoriteList(props.user.name, props.searchedMovie[props.movie]); props.close()}}>Yes, this one!</button>
     </div>
   );
 }

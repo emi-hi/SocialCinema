@@ -39,6 +39,9 @@ export default function FavoriteForm(props) {
 
   return(
     <main className="favorite-form">
+       <a className="close-modal" onClick={props.close}>
+      &times;
+    </a>
       <h3>Add a New Favorite</h3>
       <form onSubmit={movieSearch}>
         <label>
@@ -53,7 +56,7 @@ export default function FavoriteForm(props) {
       </form>
       <br/>
       {error && <p>Your search returned no results.</p>}
-      {searchedMovie && <PickFav user={props.user} searchedMovie={searchedMovie} saveToFavoriteList={saveToFavoriteList} movie={movie} setMovie={setMovie} />}
+      {searchedMovie && <PickFav user={props.user} searchedMovie={searchedMovie} saveToFavoriteList={saveToFavoriteList} movie={movie} setMovie={setMovie} close={props.close}  />}
     </main>
   )
 }
