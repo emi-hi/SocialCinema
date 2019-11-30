@@ -121,7 +121,6 @@ function App() {
   const createUser = (name, password) => {
     return axios.post(`http://localhost:5000/signup`, { name, password, genres: userGenres })
     .then(response => {
-      console.log("WEE RES!", response)
       setUser(response.data.user);
     })
     .catch(error => {console.log(error)})
