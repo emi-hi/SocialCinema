@@ -11,7 +11,7 @@ export default function RecentSuggestion(props) {
   return (
     <Droppable droppableId={props.id} type={props.type} >
     {(provided) => (
-      <aside className="recent recent-suggestion-list-container"
+      <aside className="recent-suggestion-list-container"
         ref={provided.innerRef}
         {...provided.droppableProps}
       > 
