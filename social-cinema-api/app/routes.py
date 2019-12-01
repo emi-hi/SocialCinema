@@ -127,15 +127,17 @@ def suggestions():
   else:
     poster = "images/noposter.png"
 
+  ratingText = ''
   if imdb_id:
     imdb_link = "https://www.imdb.com/title/{}/".format(imdb_id)
     imdb_details = requests.get(imdb_link)
     tree = html.fromstring(imdb_details.content)
     rating = tree.xpath('//*[@id="title-overview-widget"]/div[1]/div[2]/div/div[1]/div[1]/div[1]/strong/span/text()')
-    rating = str(rating[0]) + '/10 on IMDB'
+    if len(rating) > 0:
+      ratingText = str(rating[0]) + '/10 on IMDB'
   else:
     imdb_link = "https://www.imdb.com/"
-    rating = 'no rating info!'
+    
 
   movie_info = {
     "title": selected_result["title"],
@@ -145,7 +147,7 @@ def suggestions():
     "tmdb_id": selected_result["id"],
     "imdb_link": imdb_link,
     "runtime" : runtime,
-    "rating" : rating
+    "rating" : ratingText
   }
 
   movie_info_json = json.dumps(movie_info)
