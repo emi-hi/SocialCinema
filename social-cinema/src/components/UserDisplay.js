@@ -7,7 +7,7 @@ import Popup from "reactjs-popup";
 
 
 const contentStyle = {
-  // width: "200px",
+  // maxWidth: "300px",
   // height: "200px",
   borderRadius: "20px"
 };
@@ -35,7 +35,6 @@ export default function UserDisplay(props) {
       }
     }
     
-
   return (
     <div className="friend-card">
        <img className="user-icon" src={props.friend.icon} alt={props.friend.name}/>
@@ -46,10 +45,11 @@ export default function UserDisplay(props) {
       {props.action ==="remove" &&
        <img className="friend-night" id="trash" src="./images/trash.png" alt="Delete" onClick={()=>addOrRemove("remove")}/>
       }
-      <Popup trigger=
+      <Popup className="popup" trigger=
         {
           <img className="friend-night" id="eye" src="./images/eye.svg" alt="info"/>
-        } modal
+        }
+        modal
         contentStyle={contentStyle}
         >
        {close =>   <FriendInfo friend={props.friend.name} close={close}/>}

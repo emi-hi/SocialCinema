@@ -27,10 +27,10 @@ export default function FriendInfo(props) {
     </a>
     <h4>{props.friend}</h4>
     {loves.length>0? <p>Loves</p> : ""}
-      {loves.map(pref => <img className="friend-info-image" src={pref} alt={pref}/>)}
+      {loves.map(pref => <img className="friend-info-image" src={pref} key={pref} alt={pref}/>)}
     {loves.length>0 && hates.length>0?  <hr></hr> :'' }
     {hates.length>0? <p>Hates</p> : ""}
-      {hates.map(pref => <img className="friend-info-image" src={pref} alt={pref}/> )}
+      {hates.map(pref => <img className="friend-info-image" src={pref} key={pref} alt={pref}/> )}
   </main>
   )
 }
