@@ -12,7 +12,7 @@ export default function FavoriteForm(props) {
 
 
   const saveToFavoriteList = (userName, movie) => {
-    axios.post(`http://localhost:5000/api/${userName}/favmovies`, { movie })
+    axios.post(`/api/${userName}/favmovies`, { movie })
     .then(response => {
       props.setFavoriteMovies(response.data.favorited_movies)
     })
@@ -23,7 +23,7 @@ export default function FavoriteForm(props) {
     event.preventDefault();
     const queryStringTitle = title.trim().split(" ").join("%20"); 
   
-    axios.get(`http://localhost:5000/movies/title/?title=${queryStringTitle}`)
+    axios.get(`/movies/title/?title=${queryStringTitle}`)
     .then(response => {
       setMovie(0);
       if (response.data.movies) {
