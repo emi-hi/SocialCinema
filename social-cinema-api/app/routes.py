@@ -125,7 +125,7 @@ def suggestions():
   if selected_result["poster_path"]:
     poster = "https://image.tmdb.org/t/p/w500" + selected_result["poster_path"]
   else:
-    poster = ""
+    poster = "images/noposter.png"
 
   if imdb_id:
     imdb_link = "https://www.imdb.com/title/{}/".format(imdb_id)
@@ -388,7 +388,7 @@ def title():
     if result["poster_path"]:
       result_poster = "https://image.tmdb.org/t/p/w500" + result["poster_path"]
     else:
-      result_poster = "Nope"
+      result_poster = "images/noposter.png"
 
 
     if 'release_date' not in result:
