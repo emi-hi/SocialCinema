@@ -20,7 +20,6 @@ h4 {
   .logo {
     display: flex;
     flex-direction: row;
-
   }
 
   .user-login{
@@ -29,11 +28,14 @@ h4 {
   }
   
   .list-name {
+    background-color: transparent;
+    color: $text-color;
     /* background-color: rgb(158, 158, 158); */
-    border: .5px solid rgb(124, 121, 124);
+    border: 0px;
 
     &-show{
-      background-color: rgb(184, 180, 180);
+      // background-color: rgb(184, 180, 180);
+      border-bottom: 3px solid rgb(222,110,10);
     }
   }
 }
