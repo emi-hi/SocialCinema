@@ -7,6 +7,7 @@ export default function Suggested(props) {
   const [suggested, setSuggested] = useState("hide")
 
   const newMovie = () => {
+    setSuggested("waiting")
     let group;
     if (props.theme) {
       group = [];
@@ -15,6 +16,7 @@ export default function Suggested(props) {
     }
     axios.post(`/suggestion`, { userGenrePreferences: props.userGenres, group, recentSuggestions: props.recentSuggestions, minimumRuntime: props.minimumRuntime, maximumRuntime: props.maximumRuntime })
       .then(response => {
+        setSuggested("show")
         setSuggestedMovie({
           "title": response.data.title,
           "description": response.data.description,
@@ -56,13 +58,18 @@ export default function Suggested(props) {
     <section>
       {suggested === "hide" &&
         <div className="click-suggest" onClick={() => {
-          setSuggested("show")
           newMovie()
         }}>
           <img src="images/film-reel.png" height="300px" alt="click to generate a suggestion!"/>
           <h1>{props.user.name}</h1>
           <h1>Click to Generate Your First Movie Suggestion</h1>
         </div>
+      }
+      {suggested === "waiting" &&
+      <div>
+        <h1>Looking 4 Ur Movie</h1>
+        <img className="spinner" src="images/film-reel.png" height="300px" alt="spinning film wheel"/>
+      </div>
       }
       {suggested === "show" && 
         <div>
