@@ -5,7 +5,7 @@ import axios from "axios";
 export default function FriendInfo(props) {
   const [prefs, setPrefs] = useState('')
   useEffect(() => {
-    axios.get(`http://localhost:5000/api/friend${props.friend}/genres`)
+    axios.get(`/api/friend${props.friend}/genres`)
     .then(res => {   
       setPrefs(res.data)
     })
@@ -14,15 +14,17 @@ export default function FriendInfo(props) {
   let loves=[]
   let hates=[]
   for (let each in prefs["love"]){
-    loves.push(`images/genreicons/${prefs["love"][each]}.svg`)
+    loves.push(`images/genreicons/${prefs["love"][each]}.svg`.replace(' ', ''))
   }
   for (let each in prefs["hate"]){
-    hates.push(`images/genreicons/${prefs["hate"][each]}.svg`)
+    hates.push(`images/genreicons/${prefs["hate"][each]}.svg`.replace(' ', ''))
   }
-
 
   return(
   <main className="friend-info-form">
+    <a className="close-modal" onClick={props.close}>
+      &times;
+    </a>
     <h4>{props.friend}</h4>
     {loves.length>0? <p>Loves</p> : ""}
       {loves.map(pref => <img className="friend-info-image" src={pref} alt={pref}/>)}
