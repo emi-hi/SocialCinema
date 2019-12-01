@@ -23,20 +23,20 @@ export default function List(props) {
     boxes.push(<Empty key={-1} />)
   }
   return (
-    <article>
+    <>
     <h4>{listName}</h4>
     <Droppable droppableId={props.type} type={props.type} direction="horizontal">
       {(provided) => (
-        <article
+        <section
           className="list"
           ref={provided.innerRef}
           {...provided.droppableProps}
         >
           {boxes}
           {provided.placeholder}
-        </article>
+        </section>
       )}
     </Droppable>
-    </article>
+    </>
   )
 }

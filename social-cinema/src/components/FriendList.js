@@ -10,9 +10,9 @@ export default function FriendList(props) {
   return (
     <article>
       {friends.length>0? <h4>{props.type}</h4>: ""}
-      <div className={props.classname}>
+      <section className={props.classname}>
         {friends}
-      </div>
+      </section>
     </article>
   )
 }

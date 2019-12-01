@@ -9,9 +9,8 @@ export default function MovieNightFriends(props) {
   }
 
   return (
-    <article className="columnlist">
+    <article className="columnlist friends-container">
     <FriendList friends={theGroup} group={props.group} action={props.action} useMovieNight={props.useMovieNight} type="Friends for Movie Night"/>
     </article>
-
   )
 }

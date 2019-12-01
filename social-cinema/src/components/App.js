@@ -193,7 +193,7 @@ function App() {
   }
 
   return (
-    <div className="App">
+    <main className="App">
       <Nav user={user} 
         createUser={createUser} 
         getUser={getUser} 
@@ -213,35 +213,23 @@ function App() {
       <DragDropContext
         onDragEnd={onDragEnd}
       >
-      <div>
-        {favList === "show" &&   
-          <List type="favorites" data={state.favorited_movies} user={user} setFavoriteMovies={setFavoriteMovies} removeLaterMovie={removeFavoritedMovie} /> 
-        } 
-      </div>
-      <div>
-        {laterList === "show" &&
-          <List type="laters" removeLaterMovie={removeLaterMovie} data={state.later_movies} /> 
-        }
-      </div>
-
-      <div>
+      {favList === "show" &&   
+        <List type="favorites" data={state.favorited_movies} user={user} setFavoriteMovies={setFavoriteMovies} removeLaterMovie={removeFavoritedMovie} /> 
+      } 
+      {laterList === "show" &&
+        <List type="laters" removeLaterMovie={removeLaterMovie} data={state.later_movies} /> 
+      }
       {genreList === "show" &&
-        <div>
+        <>
           <Genres userGenres = {userGenres} setGenre={setGenre} resetGenres={resetGenres}/>
           <RuntimeSelector minimumRuntime={minimumRuntime} setMinimumRuntime={setMinimumRuntime} maximumRuntime={maximumRuntime} setMaximumRuntime={setMaximumRuntime}/>
-        </div>
+        </>
       }
-      </div> 
-      <div>
       {friendList === "show" &&
         <FriendList friends={friends} useMovieNight={useMovieNight} group={group} action="add" classname="list" type="All Friends  - click + on a friend to add them to your movie night"/>
       }
-      </div>
-      <div className="main-container">
-        <div className="friends-container">
+      <section className="main-container">
           <MovieNightFriends  group={group} action="remove" classname="columnlist" useMovieNight={useMovieNight} />
-        </div>
-        <div className="suggested-container">
           <Suggested
             recentSuggestions={recentSuggestions}
             getRecentSuggestions={getRecentSuggestions}
@@ -253,13 +241,13 @@ function App() {
             minimumRuntime={minimumRuntime}
             maximumRuntime={maximumRuntime}
           />
-        </div>
-        <div className="recent-suggestion-list-container">
           <RecentSuggestion id={"recent"} type={"laters"} recent={recentSuggestions}/>
-        </div>
-      </div>
+      </section>
       </DragDropContext>
-    </div>
+      <footer>
+        <p>REFERENCING US AND TMDB AND THE ICONS AND STUFF</p>
+      </footer>
+    </main>
   );
 }
 
