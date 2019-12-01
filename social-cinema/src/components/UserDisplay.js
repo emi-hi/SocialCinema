@@ -49,7 +49,7 @@ export default function UserDisplay(props) {
         {
           <img className="friend-night" id="eye" src="./images/eye.svg" alt="info"/>
         }
-        // modal
+        modal
         contentStyle={contentStyle}
         >
        {close =>   <FriendInfo friend={props.friend.name} close={close}/>}
