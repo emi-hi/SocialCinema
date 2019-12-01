@@ -71,25 +71,25 @@ export default function Suggested(props) {
       }
       {suggested === "show" && 
         <>
-          <h5>{error}</h5>
-          <section className="suggestion-all">
+          <section className="suggestion">
             <header>
+              <h5>{error}</h5>
               <h2 className="movie-title">{suggestedMovie.title}</h2>
             </header>
-            <main className="suggestion-text">
-              <img alt={suggestedMovie.title} src={suggestedMovie.poster} className="poster"></img>
+            <main className="suggestion-info">
+              <img alt={suggestedMovie.title} src={suggestedMovie.poster} className="movie-poster"></img>
               <article>
                 <h4>{suggestedMovie.releaseDate}</h4>
                 <p>{suggestedMovie.description}</p>
                 <p>{suggestedMovie.rating}</p>
                 <p>{runtime}</p>
                 <a href={suggestedMovie.imdb_link} target="_blank" rel="noopener noreferrer">Learn more at IMDB</a>
+                <footer className="suggestion-buttons">
+                {props.user.name && <button type="button" onClick={()=>{saveToLaterList(props.user.name, suggestedMovie)}}>Add This to Later List</button>}
+                <button type="button" onClick={()=>newMovie()}>Suggest a Different Movie</button>
+                </footer>
               </article>
             </main>
-            <footer className="suggestion-buttons">
-              {props.user.name && <button type="button" onClick={()=>{saveToLaterList(props.user.name, suggestedMovie)}}>Add This to Later List</button>}
-              <button type="button" onClick={()=>newMovie()}>Suggest a Different Movie</button>
-            </footer>
           </section>
         </>
       }
