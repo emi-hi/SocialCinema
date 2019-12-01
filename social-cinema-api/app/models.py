@@ -57,10 +57,10 @@ class User_genre(db.Model):
 class Movie(db.Model):
   __tablename__ = 'movies'
   id = db.Column(db.Integer, primary_key=True)
-  title = db.Column(db.String(64))
+  title = db.Column(db.String(128))
   movie_api_id = db.Column(db.String(64), unique=True)
   imdb_id = db.Column(db.String(64))
-  image = db.Column(db.String(64))
+  image = db.Column(db.String(128))
   description = db.Column(db.Text)
   user_favs = db.relationship('User', secondary='favorited_movies')
   user_laters = db.relationship('User', secondary='later_movies')
