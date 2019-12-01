@@ -10,37 +10,6 @@ h4 {
   margin-block-end: 5px;
 }
 
-.nav {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  padding-right: 10px;
-  /* background-color: rgb(92, 92, 92); */
-  max-height: 7vh;
-
-  .logo {
-    display: flex;
-    flex-direction: row;
-  }
-
-  .user-login{
-    display:flex;
-    flex-direction: row;
-  }
-  
-  .list-name {
-    background-color: transparent;
-    color: $text-color;
-    /* background-color: rgb(158, 158, 158); */
-    border: 0px;
-
-    &-show{
-      // background-color: rgb(184, 180, 180);
-      border-bottom: 3px solid rgb(222,110,10);
-    }
-  }
-}
-
 .main-container{
   display: grid;
   grid-template-columns: 1fr 3fr 1fr;
@@ -51,42 +20,6 @@ h4 {
     justify-content: flex-start;
     max-height: 80vh;
     overflow: scroll;
-  }
-  .suggested-container{
-    .suggestion{
-      display: grid;
-      grid-template-rows: 10% 90%;
-
-      .suggestion-info{
-        display: flex;
-        flex-direction: row;
-        height: 80vh;
-        .movie-poster{
-          object-fit: contain;
-        }
-        article{
-          display: flex;
-          flex-direction: column;
-          justify-content: space-between;
-          font-size: 15px;
-        }
-    }
-  }
-    .spinner{
-      animation-name: spin;
-      animation-duration: 3000ms;
-      animation-iteration-count: infinite;
-      animation-timing-function: linear; 
-    }
-
-    @keyframes spin {
-      from {
-          transform:rotate(0deg);
-      }
-      to {
-          transform:rotate(360deg);
-      }
-    }
   }
 
   .recent-suggestion-list-container{

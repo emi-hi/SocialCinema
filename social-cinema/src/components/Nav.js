@@ -1,3 +1,4 @@
+import './Nav.scss'
 import React from "react";
 import User from "./User"
 import Form from "./Form";
