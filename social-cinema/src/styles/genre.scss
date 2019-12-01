@@ -21,7 +21,7 @@ section.genres {
   overflow: hidden;
 }
 
-div.genre {
+section.genre {
   width: 9.2vw;
   min-width: 75px;
   height:7vw;
@@ -39,7 +39,7 @@ div.genre {
   height:33%;
 }
 
-div.genre:hover .genre-choices{
+section.genre:hover .genre-choices{
   opacity:.91;
   position: absolute;
   z-index: 100;
