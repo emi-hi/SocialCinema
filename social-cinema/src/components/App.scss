@@ -2,6 +2,7 @@
 
 .App {
   text-align: center;
+  font-family: 'Hind Vadodara', sans-serif;
 }
 
 h4 {
@@ -41,35 +42,36 @@ h4 {
 }
 
 .main-container{
-  display: flex;
-  flex-direction: row;
-  height: 70vh;
-  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 3fr 1fr;
 
-  .click-suggest{
-    padding:100px;
-  }
   .friends-container{
-    width:20%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    max-height: 80vh;
+    overflow: scroll;
   }
   .suggested-container{
-    width:60%;
+    .suggestion{
+      display: grid;
+      grid-template-rows: 10% 90%;
 
-    .suggestion-all {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
+      .suggestion-info{
+        display: flex;
+        flex-direction: row;
+        height: 80vh;
+        .movie-poster{
+          object-fit: contain;
+        }
+        article{
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          font-size: 15px;
+        }
     }
-      
-    .suggestion-text{
-      height: 60vh;
-      width: 50%;
-    }
-  
-    .poster{
-      height: 65vh;
-    }
-
+  }
     .spinner{
       animation-name: spin;
       animation-duration: 3000ms;
@@ -88,18 +90,10 @@ h4 {
   }
 
   .recent-suggestion-list-container{
-    width:20%;
-    .recent-computer{
-      display:flex;
-      flex-direction: column;
-    }
-    .recent-movie-display{
-      /* border: 1px solid rgb(37, 59, 107); */
-      border-radius: 4px;
-    }
-    .recent-iphone{
-      display:none;
-    }
+    display: flex;
+    flex-direction: column;
+    max-height: 80vh;
+    overflow: scroll;
   }
 }
 
