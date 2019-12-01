@@ -31,6 +31,7 @@ export default function FriendInfo(props) {
     {loves.length>0 && hates.length>0?  <hr></hr> :'' }
     {hates.length>0? <p>Hates</p> : ""}
       {hates.map(pref => <img className="friend-info-image" src={pref} key={pref} alt={pref}/> )}
+    {loves.length===0 && hates.length===0? `has no preferences!`: ''}
   </main>
   )
 }
