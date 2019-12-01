@@ -85,6 +85,18 @@ h4 {
   }
 }
 
+.friend-info-form{
+  .friend-info-image{
+    height: 25px;
+    margin: 4px;
+  }
+
+  p {
+    margin: 1px;
+  }
+
+}
+
 /* IPHONE STYLES */
 @media only screen and (max-width: 560px) {
   .main-container .suggested-container{

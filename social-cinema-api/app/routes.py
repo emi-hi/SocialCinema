@@ -180,7 +180,20 @@ def genres():
   genres_json = json.dumps(genre_arr)
   return genres_json
 
-@app.route("/api/<user>/genres", methods=['GET', 'POST', ])
+@app.route("/api/friend<user>/genres")
+def friendGenres(user):
+  name = User.query.filter(User.name == user).one_or_none()
+  genres = {"love":[], "hate":[]}
+
+  for genre in name.user_genres:
+    if genre.preference == True:
+      genres["love"].append(genre.genre.genre_name)
+    if genre.preference == False:
+       genres["hate"].append(genre.genre.genre_name)
+  res_json = json.dumps(genres)
+  return res_json
+
+@app.route("/api/<user>/genres", methods=['GET', 'POST'])
 def userGenres(user):
   user = User.query.filter(User.name == user).one_or_none()
 

@@ -1,8 +1,21 @@
 import React from "react";
 import './lists/styles.scss'
 import '../styles/genre.scss';
+import FriendInfo from '././FriendInfo'
+import Popup from "reactjs-popup";
+
+
+
+const contentStyle = {
+  // width: "200px",
+  // height: "200px",
+  borderRadius: "20px"
+};
+
+
 
 export default function UserDisplay(props) {
+
   const addOrRemove = function(action) {
     let addEnabled = true;
     //for each object in the group that's passsed in 
@@ -21,6 +34,7 @@ export default function UserDisplay(props) {
         return props.useMovieNight(props.friend, "remove")
       }
     }
+    
 
   return (
     <div className="friend-card">
@@ -32,7 +46,14 @@ export default function UserDisplay(props) {
       {props.action ==="remove" &&
        <img className="friend-night" id="trash" src="./images/trash.png" alt="Delete" onClick={()=>addOrRemove("remove")}/>
       }
-      <img className="friend-night" id="eye" src="./images/eye.svg" alt="info" onClick={()=>console.log(props.friend)}/>
+      <Popup trigger=
+        {
+          <img className="friend-night" id="eye" src="./images/eye.svg" alt="info"/>
+        } modal
+        contentStyle={contentStyle}
+        >
+       {close =>   <FriendInfo friend={props.friend.name} close={close}/>}
+      </Popup>
     </div>
   );
 }

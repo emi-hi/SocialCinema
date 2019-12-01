@@ -160,7 +160,7 @@ function App() {
 
   const resetGenres = (id) => {
     if (state.user && state.user.name !== "" && state.group.length === 0) {
-      axios.post(`http://localhost:5000/api/${state.user.name}/genresreset`)
+      axios.post(`/api/${state.user.name}/genresreset`)
         .then(response => {
           setGenres(response.data.genres)
         })
