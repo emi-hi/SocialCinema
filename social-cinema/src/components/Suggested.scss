@@ -22,8 +22,13 @@
           text-align: left;
           font-size: 15px;
           p{
-            overflow: scroll;
+            overflow-x: auto;
+            overflow-y: auto;
+            ::-webkit-scrollbar {
+              display: none;
+            }
           }
+    
           span{
             text-align: center;
           }
