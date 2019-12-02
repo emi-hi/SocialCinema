@@ -2,19 +2,23 @@
 
 .App {
   text-align: center;
-  font-family:  'Lora', serif;
+  font-family:  'Raleway', sans-serif;
   display: flex;
   flex-direction: column;
 
 }
 
 button{
-  font-family: 'Lora', serif;
+  font-family: 'Raleway', sans-serif;
 }
+
+
 
 h4 {
   margin-block-start: 0px;
   margin-block-end: 5px;
+  margin-bottom: -1px;
+  margin-top: 8px;
 }
 
 .main-container{
