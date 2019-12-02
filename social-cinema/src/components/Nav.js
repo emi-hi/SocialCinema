@@ -30,7 +30,7 @@ export default function Nav(props) {
     "list-name": props.favList==="hide"
   });
   const buttonClass5 = classnames("list-name", {
-    "list-name-show": props.genreList==="show",
+    "list-name-show": props.themeList==="show",
     "list-name": props.favList==="hide"
   });
 
@@ -62,7 +62,7 @@ export default function Nav(props) {
         <button className={buttonClass2} disabled={!props.user} onClick={() => props.setLaterList(toggleList)}>
           Later Movies
         </button>
-        <button className={props.themeNight ? "list-name" : buttonClass3} disabled={props.group.length > 0} onClick={() => props.setGenreList(toggleList)}>
+        <button className={buttonClass3} onClick={() => props.setGenreList(toggleList)}>
           My Preferences
         </button>
         <button className={buttonClass4} disabled={!props.user} onClick={() => props.setFriendList(toggleList)}>
