@@ -6,11 +6,9 @@ section.genres {
   flex-wrap: wrap;
   margin: 5px;
   overflow-y:auto;
-  // background: rgba(255, 255, 255, 0.9);
   background: transparent;
-  border-radius: 20px;
-  margin: 10px;
-  box-shadow: 5px 5px 10px grey;
+  @include bubble();
+
   z-index: 5px;
 
   button.reset{

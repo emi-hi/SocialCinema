@@ -18,3 +18,10 @@ $movie-box-height: 120px;
 // $text-color: #ffff;
 $text-color: #222f3e;
 $nav-text-color: white;
+
+@mixin bubble(){
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 20px;
+  margin: 10px;
+  box-shadow: 5px 5px 10px grey;
+}
