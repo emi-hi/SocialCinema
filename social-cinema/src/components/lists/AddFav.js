@@ -4,8 +4,8 @@ import Popup from "reactjs-popup";
 import FavoriteForm from './FavoriteForm'
 
 const contentStyle = {
-  width: "300px",
-  height: "300px",
+  // width: "300px",
+  // height: "300px",
   borderRadius: "20px"
 };
 
@@ -27,4 +27,3 @@ export default function AddFav(props) {
     </main>
   );
 }
-
