@@ -6,6 +6,7 @@
   display: flex;
   flex-direction: column;
 
+
   // footer{
 
   // }
@@ -24,17 +25,31 @@ h4 {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
+    align-items: center;
     max-height: 80vh;
     overflow: scroll;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 20px;
+    margin: 10px;
+    box-shadow: 5px 5px 10px grey;
+    
   }
 
   .recent-suggestion-list-container{
     display: flex;
     flex-direction: column;
     max-height: 80vh;
-    overflow: scroll;
+    overflow-y: auto;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 20px;
+    margin: 10px;
+    box-shadow: 5px 5px 10px grey;
+  }
+  .recent-suggestion-list-container::-webkit-scrollbar {
+    display: none;
   }
 }
+
 
 .friend-info-form{
   .friend-info-image{

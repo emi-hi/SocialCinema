@@ -219,10 +219,10 @@ function App() {
         <List type="laters" removeLaterMovie={removeLaterMovie} data={state.later_movies} /> 
       }
       {genreList === "show" &&
-        <>
+        <article className="preferences-list">
           <Genres userGenres = {userGenres} setGenre={setGenre} resetGenres={resetGenres}/>
-          <RuntimeSelector minimumRuntime={minimumRuntime} setMinimumRuntime={setMinimumRuntime} maximumRuntime={maximumRuntime} setMaximumRuntime={setMaximumRuntime}/>
-        </>
+          {/* <RuntimeSelector minimumRuntime={minimumRuntime} setMinimumRuntime={setMinimumRuntime} maximumRuntime={maximumRuntime} setMaximumRuntime={setMaximumRuntime}/> */}
+        </article>
       }
       {friendList === "show" &&
         <FriendList friends={friends} useMovieNight={useMovieNight} group={group} action="add" classname="list" type="All Friends  - click + on a friend to add them to your movie night"/>

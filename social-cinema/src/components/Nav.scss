@@ -1,12 +1,17 @@
 @import "variables.scss";
 
 .nav {
+  width: 100%;
+
+  margin: 0;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   padding-right: 10px;
-  background-image: url("/images/navbar.png");
+  // background-image: url("/images/navbar.png");
+  background-color: rgb(42, 35, 61);
   overflow: scroll;
+
 
   .logo {
     img{
@@ -56,6 +61,10 @@
     }
   }
 
+}
+
+.nav::-webkit-scrollbar {
+  display: none;
 }
 
 @media only screen and (max-width: 767px) {
