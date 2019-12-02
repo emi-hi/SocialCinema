@@ -3,6 +3,7 @@
   flex-direction: column;
   align-items: center;
   overflow-y:auto;
+  overflow-x: hidden ;
   max-height: 90%;
 }
 
@@ -15,15 +16,6 @@
   position: relative;
 }
 
-/* .user-icon{
-  
-  border: 2px dotted rgb(184, 121, 111);
-} */
-
-
-.columnlist::-webkit-scrollbar {
-  display: none;
-}
 
 .friend-night{
   display:none;

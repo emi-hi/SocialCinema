@@ -27,14 +27,11 @@
   justify-content: flex-start;
   width: 98.5%;
   height: 19vh;
-  overflow-x: auto;
   align-content: center;
-  margin-top:1px
+  margin-top:1px;
+  overflow-x: scroll;
 }
 
-.list::-webkit-scrollbar {
-  display: none;
-}
 
 .favSelector {
   display: flex;

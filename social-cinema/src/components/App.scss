@@ -28,7 +28,7 @@ h4 {
     justify-content: flex-start;
     align-items: center;
     max-height: 80vh;
-    overflow: scroll;
+    overflow-y: scroll;
     @include bubble();
   }
 
@@ -40,9 +40,7 @@ h4 {
     @include bubble();
     font-family:  $font-title; 
   }
-  .recent-suggestion-list-container::-webkit-scrollbar {
-    display: none;
-  }
+
 }
 
 
