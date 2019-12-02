@@ -67,7 +67,7 @@ export default function Suggested(props) {
       }
       {suggested === "waiting" &&
       <>
-        <h1>Looking 4 Ur Movie</h1>
+        <h1>Searching for a Movie Match...</h1>
         <img className="spinner" src="images/spinner2.png" height="300px" alt="spinning film wheel"/>
       </>
       }
