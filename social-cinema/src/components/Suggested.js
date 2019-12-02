@@ -83,8 +83,8 @@ export default function Suggested(props) {
               <article>
                 <h4>{suggestedMovie.releaseDate}</h4>
                 <p>{suggestedMovie.description}</p>
-                <p>{suggestedMovie.rating}</p>
-                <p>{runtime}</p>
+                <span>{suggestedMovie.rating}</span>
+                <span>{runtime}</span>
                 <a href={suggestedMovie.imdb_link} target="_blank" rel="noopener noreferrer">Learn more at IMDB</a>
                 <footer className="suggestion-buttons">
                 {props.user.name && <button type="button" onClick={()=>{saveToLaterList(props.user.name, suggestedMovie)}}>Add This to Later List</button>}
