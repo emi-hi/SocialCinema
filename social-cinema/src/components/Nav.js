@@ -13,25 +13,33 @@ export default function Nav(props) {
     props.removeUser();
   }
 
-  const buttonClass1 = classnames("list-name", {
-    "list-name-show": props.favList==="show",
-    "list-name": props.favList==="hide"
+
+  const favListButton = classnames("list-name", {
+    "list-name-disabled": !props.user,
+    "list-name-show": props.favList==="show"&& props.user,
+    "list-name": props.favList==="hide" && props.user
   });
-  const buttonClass2 = classnames("list-name", {
-    "list-name-show": props.laterList==="show",
-    "list-name": props.favList==="hide"
+  const laterListButton = classnames("list-name", {
+    "list-name-disabled": !props.user,
+    "list-name-show": props.laterList==="show" && props.user,
+    "list-name": props.favList==="hide" && props.user
   });
-  const buttonClass3 = classnames("list-name", {
-    "list-name-show": props.genreList==="show",
-    "list-name": props.favList==="hide"
+  const genreButton = classnames("list-name", {
+    "list-name-disabled": props.themeNight === true,
+    "enabled"  : props.themeNight        === false, 
+    "list-name-show": props.genreList==="show" && props.themeNight === false,
+    "list-name": props.favList==="hide" && props.themeNight === false
   });
-  const buttonClass4 = classnames("list-name", {
-    "list-name-show": props.friendList==="show",
-    "list-name": props.favList==="hide"
+
+  const friendListButton = classnames("list-name", {
+    "list-name-disabled": !props.user,
+    "list-name-show": props.friendList==="show" && props.user,
+    "list-name": props.favList==="hide" && props.user
   });
-  const buttonClass5 = classnames("list-name", {
-    "list-name-show": props.themeList==="show",
-    "list-name": props.favList==="hide"
+  const themeNightButton = classnames("list-name", {
+    "list-name-disabled": !props.user,
+    "list-name-show": props.themeList==="show" && props.user,
+    "list-name": props.favList==="hide" && props.user
   });
 
   const toggleList = function(status) {
@@ -58,21 +66,21 @@ export default function Nav(props) {
       <section className="logo">
         <img id="cinema-logo"  src="/images/popcornlogo.png" alt="Social Cinema" />
         <h1>SOCIAL<br/>CINEMA</h1>
-        <button className={buttonClass1} disabled={!props.user} onClick={() => props.setFavList(toggleList)}>
+        <button className={favListButton} disabled={!props.user} onClick={() => props.setFavList(toggleList)}>
           Favorite Movies
         </button>
-        <button className={buttonClass2} disabled={!props.user} onClick={() => props.setLaterList(toggleList)}>
+        <button className={laterListButton} disabled={!props.user}  onClick={() => props.setLaterList(toggleList)}>
           Later Movies
         </button>
-        <button className={buttonClass3} disabled={props.themeNight} onClick={() => props.setGenreList(toggleList)}>
+        <button className={genreButton} disabled={props.themeNight} onClick={() => props.setGenreList(toggleList)}>
           My Preferences
         </button>
-        <button className={buttonClass4} disabled={!props.user} onClick={() => props.setFriendList(toggleList)}>
+        <button className={friendListButton} disabled={!props.user} onClick={() => props.setFriendList(toggleList)}>
           My Friends
         </button>
       </section>
         { props.group.length !== 0 &&
-          <button className={buttonClass5} onClick={() => toggleThemeNight()}>
+          <button className={themeNightButton} onClick={() => toggleThemeNight()}>
             {props.themeNight === false ? "Activate a Theme Night!" : "Remove Theme Night"}
           </button>
         }
