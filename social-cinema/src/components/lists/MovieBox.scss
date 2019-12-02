@@ -1,7 +1,7 @@
 @import "../variables.scss";
 
 .movie_box {
-  width: $movie-box-width;
+  // width: $movie-box-width;
   height: $movie-box-height;
   margin-left: .75vw;
   margin-right: .75vw;
@@ -9,7 +9,6 @@
   display: inline-block;
   margin-top:auto;
   margin-bottom:auto;
-  min-height: 83vh; 
 }
 
 .movie_box .poster {

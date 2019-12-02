@@ -40,6 +40,7 @@ function App() {
   const [laterList, setLaterList] = useState("hide")
   const [genreList, setGenreList] = useState("hide")
   const [friendList, setFriendList] = useState("hide")
+  const [themeList, setThemeList] = useState("hide")
 
   const [recentSuggestions, setRecentSuggestions] = useState([])
   const [minimumRuntime, setMinimumRuntime] = useState(30)
@@ -142,7 +143,7 @@ function App() {
   };
 
   const setGenre = (id, value) => {
-    if (state.user && state.user.name !== "" && state.group.length === 0) {
+    if (state.user && state.user.name !== "" && !state.theme) {
       axios.post(`/api/${state.user.name}/genres`, { id, preference: value })
         .then(response => {
           setGenres(response.data.genres)
@@ -170,10 +171,8 @@ function App() {
 
   const setThemeNight = (value) => {
     setTheme(value)
-    console.log("teme", value)
 
     if (value) {
-      console.log("Rst")
       setGenres([])
     }
   }
@@ -200,11 +199,13 @@ function App() {
         setLaterList={setLaterList}
         setGenreList={setGenreList}
         setFriendList={setFriendList}
+        setThemeList={setThemeList}
         favList={favList}
         friendList={friendList}
         group={group}
         laterList={laterList}
         genreList={genreList}
+        themeList={themeList}
         themeNight={theme}
         setThemeNight={setThemeNight}
       />
