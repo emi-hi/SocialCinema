@@ -60,7 +60,7 @@ export default function Suggested(props) {
     <section className="suggested-container">
       {suggested === "hide" &&
         <section className="click-suggest" onClick={() => {newMovie()}}>
-          <img src="images/film-reel.png" height="300px" alt="click to generate a suggestion!"/>
+          <img src="images/spinner2.png" height="300px" alt="click to generate a suggestion!"/>
           <h1>{props.user.name}</h1>
           <h1>Click to Generate Your First Movie Suggestion</h1>
         </section>
@@ -68,7 +68,7 @@ export default function Suggested(props) {
       {suggested === "waiting" &&
       <>
         <h1>Looking 4 Ur Movie</h1>
-        <img className="spinner" src="images/film-reel.png" height="300px" alt="spinning film wheel"/>
+        <img className="spinner" src="images/spinner2.png" height="300px" alt="spinning film wheel"/>
       </>
       }
       {suggested === "show" && 

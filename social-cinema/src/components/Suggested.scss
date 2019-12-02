@@ -5,10 +5,12 @@
   border-radius: 20px;
   margin: 10px;
   box-shadow: 5px 5px 10px grey;
+  min-height: 500px;
+
   .suggestion{
     display: grid;
     // grid-template-rows: 10% 90%;
-    max-height: 30vh;
+    min-height: 50vh;
 
 
     .suggestion-info{
