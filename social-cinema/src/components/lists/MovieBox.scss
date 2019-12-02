@@ -7,11 +7,15 @@
   margin-right: .75vw;
   position: relative;
   display: inline-block;
+  margin-top:auto;
+  margin-bottom:auto;
+  min-height: 83vh; 
 }
 
 .movie_box .poster {
   display: block;
   z-index: 50;
+  
 }
 
 .movie_box .remove {

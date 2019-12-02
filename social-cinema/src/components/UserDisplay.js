@@ -36,7 +36,8 @@ export default function UserDisplay(props) {
     }
     
   return (
-    <div className="friend-card">
+    <section className="friend-card">
+    
        <img className="user-icon" src={props.friend.icon} alt={props.friend.name}/>
        <p className="user-name-text">{props.friend.name}</p>
        {props.action==="add" && 
@@ -54,6 +55,6 @@ export default function UserDisplay(props) {
         >
        {close =>   <FriendInfo friend={props.friend.name} close={close}/>}
       </Popup>
-    </div>
+    </section>
   );
 }
