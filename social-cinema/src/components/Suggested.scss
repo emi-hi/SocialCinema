@@ -4,10 +4,10 @@
   @include bubble();
   min-height: 500px;
 
-  h1 h2 {
+  h1, h2 {
     font-family: $font-title;
   }
-
+ 
   .suggestion{
     display: grid;
 
@@ -32,9 +32,9 @@
           p{
             overflow-x: auto;
             overflow-y: auto;
-            ::-webkit-scrollbar {
-              display: none;
-            }
+            // ::-webkit-scrollbar {
+            //   display: ;
+            // }
           }
     
           span{
