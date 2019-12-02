@@ -16,7 +16,8 @@ export default function AddFav(props) {
       <Popup trigger=
         {
           <img
-            src="images/add.png"
+            src="images/plus.png"
+            height="55px"
             alt="Add" 
           />
         } modal
