@@ -93,7 +93,7 @@ def suggestions():
 
     if len(user_loved_genres_loop_copy) != 0:
       index = random.randint(0, (len(user_loved_genres_loop_copy) - 1))
-      r = requests.get("https://api.themoviedb.org/3/discover/movie?api_key={}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page={}&with_genres={}&without_genres={}&with_runtime.gte={}&with_runtime.lte={}&release_date.lte=2020-04-01".format(TMDB_key, page_num, user_loved_genres_loop_copy[index], hated_list, min_runtime, max_runtime))
+      r = requests.get("https://api.themoviedb.org/3/discover/movie?api_key={}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page={}&with_genres={}&without_genres={}&with_runtime.gte={}&with_runtime.lte={}&release_date.lte=2022-04-01".format(TMDB_key, page_num, user_loved_genres_loop_copy[index], hated_list, min_runtime, max_runtime))
       this_one = ["PAGE", page_num, "INDEX", index, "A LOVED"]
       del user_loved_genres_loop_copy[index]
     elif len(user_meh_genres_loop_copy) != 0:
@@ -132,11 +132,17 @@ def suggestions():
     imdb_link = "https://www.imdb.com/title/{}/".format(imdb_id)
     imdb_details = requests.get(imdb_link)
     tree = html.fromstring(imdb_details.content)
-    rating = tree.xpath('//*[@id="title-overview-widget"]/div[1]/div[2]/div/div[1]/div[1]/div[1]/strong/span/text()')
+
+    try:
+      rating = tree.xpath('//*[@id="title-overview-widget"]/div[1]/div[2]/div/div[1]/div[1]/div[1]/strong/span/text()')
+    except:
+      print("A scraping error occured")
+      ratingText = "No IMDB rating available."
+
     if len(rating) > 0:
       ratingText = str(rating[0]) + '/10 on IMDB'
   else:
-    imdb_link = "https://www.imdb.com/"
+    imdb_link = "No IMDB link available."
     
 
   movie_info = {
@@ -336,7 +342,6 @@ def userLatemovies(user):
 
     previously_latered = Later_movie.query.filter(Later_movie.user_id == dbUser.id, Later_movie.movie_id == new_movie.id).one_or_none()
     if previously_latered == None:
-      print("WOOOOO")
       new_later_movie = Later_movie(user_id = dbUser.id, movie_id = new_movie.id)
       db.session.add(new_later_movie)
       db.session.commit()
@@ -423,7 +428,6 @@ def signup():
   req = json.loads(request.data)
 
   user = User.query.filter(User.name == req['name']).one_or_none()
-
   if user != None:
     return make_response(jsonify({ "error": "Username already exists." })), 401
 
@@ -468,9 +472,7 @@ def login():
   req = json.loads(request.data)
 
   user = User.query.filter(User.name == req['name']).one_or_none()
-  print(user)
   if user == None or not user.check_password(req['password']):
-    print("WE MADE IT")
     return make_response(jsonify({ "error": "Invalid password." })), 401
 
   genres = []
