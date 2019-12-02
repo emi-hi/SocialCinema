@@ -4,9 +4,9 @@ import React from "react";
 export default function User(props) {
 
   return (
-    <div className="user-login">
+    <section className="user-login">
       <h4>{props.user.name}</h4>
-      <button type="button" onClick={props.logout}>Logout</button>
-    </div>
+      <button className="list-name" onClick={props.logout}>Logout</button>
+    </section>
   );
 }
