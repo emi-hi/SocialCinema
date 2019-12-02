@@ -4,7 +4,9 @@ import './lists/styles.scss'
 
 export default function FriendList(props) {
   let friends = props.friends.map((friend) => {
-    return <UserDisplay key={friend.id} friend={friend} useMovieNight={props.useMovieNight} group={props.group} action={props.action} />
+    if (friend.name !== props.name) {
+      return <UserDisplay key={friend.id} friend={friend} useMovieNight={props.useMovieNight} group={props.group} action={props.action} />
+    }
   });
   
   return (

@@ -59,16 +59,15 @@ export default function Suggested(props) {
   return (
     <section className="suggested-container">
       {suggested === "hide" &&
-        <section className="click-suggest" onClick={() => {newMovie()}}>
-          <img src="images/spinner2.png" height="300px" alt="click to generate a suggestion!"/>
-          <h1>{props.user.name}</h1>
-          <h1>Click to Generate Your First Movie Suggestion</h1>
-        </section>
+        <>
+          <h1>Click the Reel to Generate Your First Movie Suggestion</h1>
+          <img src="images/roundreel.png" alt="click to generate a suggestion!" className="reel" onClick={() => {newMovie()}}/>
+        </>
       }
       {suggested === "waiting" &&
       <>
         <h1>Searching for a Movie Match...</h1>
-        <img className="spinner" src="images/spinner2.png" height="300px" alt="spinning film wheel"/>
+        <img className="spinner" src="images/roundreel.png" alt="spinning film wheel"/>
       </>
       }
       {suggested === "show" && 
@@ -81,15 +80,14 @@ export default function Suggested(props) {
             <main className="suggestion-info">
               <img alt={suggestedMovie.title} src={suggestedMovie.poster} className="movie-poster"></img>
               <article>
+                <h6 className="next">New Suggestion</h6>
+                <img className="next" src="images/roundreel.png" alt="click to generate another suggestion" onClick={()=>newMovie()}></img>
                 <h4>{suggestedMovie.releaseDate}</h4>
                 <p>{suggestedMovie.description}</p>
                 <span>{suggestedMovie.rating}</span>
                 <span>{runtime}</span>
-                <a href={suggestedMovie.imdb_link} target="_blank" rel="noopener noreferrer">Learn more at IMDB</a>
-                <footer className="suggestion-buttons">
-                {props.user.name && <button type="button" onClick={()=>{saveToLaterList(props.user.name, suggestedMovie)}}>Add This to Later List</button>}
-                <button type="button" onClick={()=>newMovie()}>Suggest a Different Movie</button>
-                </footer>
+                <a href={suggestedMovie.imdb_link} target="_blank" rel="noopener noreferrer"><b>Learn more at IMDB</b></a>
+                {props.user.name && <><h6 className="later">Watch Later</h6><img className="later" src="images/later.png" onClick={()=>{saveToLaterList(props.user.name, suggestedMovie)}}></img></>}
               </article>
             </main>
           </section>
