@@ -3,20 +3,30 @@
 .suggested-container{
   .suggestion{
     display: grid;
-    grid-template-rows: 10% 90%;
+    // grid-template-rows: 10% 90%;
+    max-height: 30vh;
 
     .suggestion-info{
       display: flex;
       flex-direction: row;
       height: 80vh;
       .movie-poster{
+        align-self: flex-start;
+        max-width: 30vw;
         object-fit: contain;
+        margin-right: 30px;
       }
         article{
           display: flex;
           flex-direction: column;
-          justify-content: space-between;
+          text-align: left;
           font-size: 15px;
+          p{
+            overflow: scroll;
+          }
+          span{
+            text-align: center;
+          }
         }
     }
   }

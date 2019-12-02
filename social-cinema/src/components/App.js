@@ -129,7 +129,6 @@ function App() {
     .then(response => {
       setUser(response.data.user);
     })
-    .catch(error => {console.log(error)})
   };
 
   const getUser = (name, password) => {
@@ -140,7 +139,6 @@ function App() {
         setLaterMovies(response.data.later_movies);
         setFavoriteMovies(response.data.favorited_movies);
       })
-      .catch(error => {console.log(error)})
   };
 
   const setGenre = (id, value) => {
