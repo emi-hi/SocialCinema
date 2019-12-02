@@ -5,28 +5,54 @@
   flex-direction: row;
   justify-content: space-between;
   padding-right: 10px;
-  /* background-color: rgb(92, 92, 92); */
-  max-height: 7vh;
+  background-image: url("/images/navbar.png");
 
   .logo {
+    img{
+      width: 200px;
+    }
     display: flex;
     flex-direction: row;
   }
 
   .user-login{
-    display:flex;
+    display: flex;
     flex-direction: row;
+    background-color: transparent;
+
+    h4{
+      color:white;
+    }
+
+    .list-name {
+      background-color: transparent;
+      color: $nav-text-color;
+      font-size: small;
+      border: 0px;
+      margin: 2px;
+  
+      &-show{
+        // background-color: rgb(184, 180, 180);
+        border-bottom: 5px solid rgb(222,110,10);
+      }
+    }
+  }
+
+  button:focus {
+    outline:none;
   }
   
   .list-name {
     background-color: transparent;
-    color: $text-color;
-    /* background-color: rgb(158, 158, 158); */
+    color: $nav-text-color;
+    font-size: small;
     border: 0px;
+    margin: 2px;
 
     &-show{
       // background-color: rgb(184, 180, 180);
-      border-bottom: 3px solid rgb(222,110,10);
+      border-bottom: 5px solid rgb(222,110,10);
     }
   }
+
 }

@@ -55,7 +55,7 @@ export default function Nav(props) {
   return (
     <nav className="nav">
       <section className="logo">
-        <img id="cinema-logo"  src="" width="150px" alt="Social Cinema" />
+        <img id="cinema-logo"  src="/images/logo2.png" alt="Social Cinema" />
         <button className={buttonClass1} disabled={!props.user} onClick={() => props.setFavList(toggleList)}>
           Favorite Movies
         </button>
@@ -69,13 +69,11 @@ export default function Nav(props) {
           My Friends
         </button>
       </section>
-      <section>
         { props.group.length !== 0 &&
           <button className={buttonClass5} onClick={() => toggleThemeNight()}>
             {props.themeNight === false ? "Activate a Theme Night!" : "Remove Theme Night"}
           </button>
         }
-      </section>
       <section className="user-login"> 
         {props.user === "" ? <><Form onLogin={logOn} /> <Form createUser={props.createUser} /></> : <User user={props.user} logout={() => logOut()} />}
       </section>
