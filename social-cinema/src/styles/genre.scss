@@ -1,24 +1,35 @@
-
 section.genres {
-  z-index:1;
   height: 100%;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   margin: 5px;
   overflow-y:auto;
-  background: rgba(255, 255, 255, 0.9);
+  // background: rgba(255, 255, 255, 0.9);
+  background: transparent;
   border-radius: 20px;
   margin: 10px;
   box-shadow: 5px 5px 10px grey;
+  z-index: 5px;
+
+  button.reset{
+    background-color: transparent;
+    border: none;
+    color: black;
+    font-size: small;
+    
+  }
+  button.reset:focus {
+    outline:none;
+  }
 }
 .section.genres::-webkit-scrollbar {
   display: none;
 }
 
 .genre-name{
-  font-family: 'Bitter', serif;
-  color: rgb(81, 85, 88);
+  font-family: 'Lora', serif;
+  color:black;
   margin:1px;
   font-size: small;
   font-weight: bold;
@@ -29,20 +40,19 @@ section.genres {
 section.genre {
   width: 9.2vw;
   min-width: 75px;
-  height:7vw;
-  position:relative;
+  height: 7vw;
+  position: relative;
   margin: 1px;
 }
 
 .genre-choices{
-  display:none;
-  height:33%;
+  display: none;
+  height: 33%;
 }
 
 section.genre:hover .genre-choices{
   opacity:.91;
   position: absolute;
-  z-index: 100;
   right: 5%;
   bottom: 5%;
   width:90%;
@@ -58,16 +68,14 @@ section.genre:hover .genre-choices{
   margin-top: 4px;
   height: 4vw;
   width: 6vw;
-  z-index:100; 
-
 }
 
 .genre-feeling-hate{
   height: 100%;
   width: 100%;
   position: absolute;
-  opacity: 2;
-  z-index:-1;
+  opacity: 0.6;
+  z-index: -1;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -75,8 +83,8 @@ section.genre:hover .genre-choices{
 .genre-feeling-love{
   height: 100%;
   position: absolute;
-  // opacity: .1;
-  z-index:-1;
+  opacity: 0.8;
+  z-index: -1;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -134,7 +142,7 @@ button#mehgenre:hover{
 }
 
 
-@media only screen and (max-width: 1000px) {
+@media only screen and (max-width: 700px) {
   .genre-name{
     font-size: x-small;
 

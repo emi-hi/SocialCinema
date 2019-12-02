@@ -55,7 +55,7 @@ export default function Nav(props) {
   return (
     <nav className="nav">
       <section className="logo">
-        <img id="cinema-logo"  src="/images/logo2.png" alt="Social Cinema" />
+        <img id="cinema-logo"  src="/images/popcornlogo.png" alt="Social Cinema" />
         <button className={buttonClass1} disabled={!props.user} onClick={() => props.setFavList(toggleList)}>
           Favorite Movies
         </button>

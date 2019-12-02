@@ -5,28 +5,29 @@
   border-radius: 20px;
   margin: 10px;
   box-shadow: 5px 5px 10px grey;
+  min-height: 500px;
+
   .suggestion{
     display: grid;
-    // grid-template-rows: 10% 90%;
-    max-height: 30vh;
-
 
     .suggestion-info{
       display: flex;
       flex-direction: row;
-      height: 80vh;
+
       .movie-poster{
         align-self: flex-start;
         max-width: 30vw;
         object-fit: contain;
         margin-right: 30px;
         margin-left:15px;
+        margin-bottom: 15px;
       }
         article{
           display: flex;
           flex-direction: column;
           text-align: left;
           font-size: 15px;
+          margin-right: 15px;
           p{
             overflow-x: auto;
             overflow-y: auto;

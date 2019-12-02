@@ -8,14 +8,14 @@
   flex-direction: row;
   justify-content: space-between;
   padding-right: 10px;
-  // background-image: url("/images/navbar.png");
-  background-color: rgb(42, 35, 61);
+  background-color: black;
+  // background-color: rgb(42, 35, 61);
   overflow: scroll;
 
 
   .logo {
     img{
-      width: 30vw;
+      width: 10vw;
     }
     display: flex;
     flex-direction: row;
@@ -39,7 +39,7 @@
   
       &-show{
         // background-color: rgb(184, 180, 180);
-        border-bottom: 5px solid rgb(222,110,10);
+        border-bottom: 5px solid #ff0000;
       }
     }
   }
@@ -57,7 +57,7 @@
 
     &-show{
       // background-color: rgb(184, 180, 180);
-      border-bottom: 5px solid rgb(222,110,10);
+      border-bottom: 5px solid #ff0000;
     }
   }
 

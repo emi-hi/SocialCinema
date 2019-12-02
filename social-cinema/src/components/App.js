@@ -159,12 +159,14 @@ function App() {
 
   const resetGenres = (id) => {
     if (state.user && state.user.name !== "" && state.group.length === 0) {
+      console.log("IT GOT HERE");
       axios.post(`/api/${state.user.name}/genresreset`)
         .then(response => {
           setGenres(response.data.genres)
         })
         .catch(error => {console.log(error)})
     } else {
+      console.log("OOPS IT GOT HERE BY ACCIDENT");
       setGenres([]);
     }
   }
@@ -228,7 +230,7 @@ function App() {
         <FriendList friends={friends} useMovieNight={useMovieNight} group={group} action="add" classname="list" type="All Friends  - click + on a friend to add them to your movie night"/>
       }
       <section className="main-container">
-          <MovieNightFriends  group={group} action="remove" classname="columnlist" useMovieNight={useMovieNight} />
+      <RecentSuggestion id={"recent"} type={"laters"} recent={recentSuggestions}/>
           <Suggested
             recentSuggestions={recentSuggestions}
             getRecentSuggestions={getRecentSuggestions}
@@ -240,7 +242,9 @@ function App() {
             minimumRuntime={minimumRuntime}
             maximumRuntime={maximumRuntime}
           />
-          <RecentSuggestion id={"recent"} type={"laters"} recent={recentSuggestions}/>
+          {state.group.length > 0 ?
+          <MovieNightFriends  group={group} action="remove" classname="columnlist" useMovieNight={useMovieNight} />:<div></div>
+          }
       </section>
       </DragDropContext>
       <footer>
