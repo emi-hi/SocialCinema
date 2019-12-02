@@ -1,5 +1,6 @@
 @import "../components/variables.scss";
 section.genres {
+  font-family: $font-title;
   height: 100%;
   display: flex;
   flex-direction: row;
