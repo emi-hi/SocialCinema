@@ -44,10 +44,11 @@ export default function Nav(props) {
 
   const toggleThemeNight = () => {
     if (props.themeNight) {
-      props.setGenreList(toggleList)
+      props.setThemeList(toggleList)
       props.setThemeNight(false)
     } else {
-      props.setGenreList(toggleList)
+      props.setThemeList(toggleList)
+      props.setGenreList("hide");
       props.setThemeNight(true);
     }
   }
@@ -62,7 +63,7 @@ export default function Nav(props) {
         <button className={buttonClass2} disabled={!props.user} onClick={() => props.setLaterList(toggleList)}>
           Later Movies
         </button>
-        <button className={buttonClass3} onClick={() => props.setGenreList(toggleList)}>
+        <button className={buttonClass3} disabled={props.themeNight} onClick={() => props.setGenreList(toggleList)}>
           My Preferences
         </button>
         <button className={buttonClass4} disabled={!props.user} onClick={() => props.setFriendList(toggleList)}>

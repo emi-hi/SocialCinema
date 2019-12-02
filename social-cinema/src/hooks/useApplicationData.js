@@ -115,5 +115,5 @@ export default function useApplicationData() {
     dispatch({ type: SET_THEME, value: value });
   }
 
-  return { state, setUser, setGenres, setLaterMovies, removeLaterMovie, setFriends, setGroup, setFavoriteMovies, removeFavoritedMovie, setTheme };
+  return { state, setUser, getGenres, setGenres, setLaterMovies, removeLaterMovie, setFriends, setGroup, setFavoriteMovies, removeFavoritedMovie, setTheme };
 };
