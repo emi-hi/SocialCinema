@@ -2,19 +2,20 @@
 
 .App {
   text-align: center;
-  font-family:  'Lora', serif;
   display: flex;
   flex-direction: column;
-
 }
 
 button{
-  font-family: 'Lora', serif;
+  font-family: $font-title;
 }
+
 
 h4 {
   margin-block-start: 0px;
   margin-block-end: 5px;
+  margin-bottom: 3px;
+  margin-top: 8px;
 }
 
 .main-container{
@@ -28,11 +29,7 @@ h4 {
     align-items: center;
     max-height: 80vh;
     overflow: scroll;
-    background: rgba(255, 255, 255, 0.9);
-    border-radius: 20px;
-    margin: 10px;
-    box-shadow: 5px 5px 10px grey;
-    
+    @include bubble();
   }
 
   .recent-suggestion-list-container{
@@ -40,10 +37,8 @@ h4 {
     flex-direction: column;
     max-height: 80vh;
     overflow-y: auto;
-    background: rgba(255, 255, 255, 0.9);
-    border-radius: 20px;
-    margin: 10px;
-    box-shadow: 5px 5px 10px grey;
+    @include bubble();
+    font-family:  $font-title; 
   }
   .recent-suggestion-list-container::-webkit-scrollbar {
     display: none;
