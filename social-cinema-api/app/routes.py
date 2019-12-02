@@ -159,11 +159,6 @@ def suggestions():
   movie_info_json = json.dumps(movie_info)
   return movie_info_json
 
-@app.route("/hello")
-def hello():
-  u = User.query.all()[0]
-  return "Hello World! {}".format(u.name)
-
 @app.route("/api/users")
 def users():
   users = User.query.all()
@@ -207,7 +202,6 @@ def userGenres(user):
 
   if request.method == 'POST':
     req = json.loads(request.data)
-
     genre = Genre.query.filter(Genre.genre_api_id == req['id']).first()
 
     update_genre = User_genre.query.filter(User_genre.user_id == user.id, User_genre.genre_id == genre.id).first()
@@ -485,9 +479,13 @@ def login():
       }
     )
 
+  token = user.generate_token(user.id)
+
   userInfo = {
+    "id": user.id,
     "name": user.name,
-    "avatar": user.icon
+    "avatar": user.icon,
+    "token": token.decode()
   }
 
   later_movies = []
