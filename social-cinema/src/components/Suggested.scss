@@ -7,6 +7,10 @@
   box-shadow: 5px 5px 10px grey;
   min-height: 500px;
 
+  h1 h2 {
+    font-family: $font-title;
+  }
+
   .suggestion{
     display: grid;
 

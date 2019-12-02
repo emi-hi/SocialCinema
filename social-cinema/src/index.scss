@@ -2,7 +2,7 @@
 
 body {
   margin: 0;
-  font-family: $font-family;
+  font-family: $font-text;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: whitesmoke;
@@ -10,5 +10,5 @@ body {
 }
 
 code {
-  font-family: $font-family;
+  font-family: $font-text;
 }
