@@ -7,6 +7,11 @@
   h1, h2 {
     font-family: $font-title;
   }
+
+  img.reel{
+    height: 60vh;
+  }
+
  
   .suggestion{
     display: grid;
@@ -23,27 +28,61 @@
         margin-left:15px;
         margin-bottom: 15px;
       }
-        article{
-          display: flex;
-          flex-direction: column;
-          text-align: left;
-          font-size: 15px;
-          margin-right: 15px;
-          p{
-            overflow-x: auto;
-            overflow-y: auto;
-            // ::-webkit-scrollbar {
-            //   display: ;
-            // }
-          }
-    
-          span{
-            text-align: center;
-          }
+      article{
+        display: flex;
+        flex-direction: column;
+        text-align: left;
+        font-size: 15px;
+        margin-right: 15px;
+        p{
+          overflow-x: auto;
+          overflow-y: auto;
+          // ::-webkit-scrollbar {
+          //   display: ;
+          // }
         }
+
+        h6.next{
+          margin-left: auto;
+          font-size: small;
+          text-align: center;
+          color: black;
+        }
+
+        h6.later{
+          font-size: medium;
+          text-align: center;
+          color: black;
+        }
+
+        img.next{
+          height: 95px;
+          width: 95px;
+          margin-left: auto;
+        }
+
+        img.later{
+          height: 70px;
+          width: 70px;
+          margin-left: auto;
+          margin-right: auto;
+        }
+
+        a{
+          text-align: center;
+          text-decoration: none;
+          color: black;
+          margin: 20px;
+        }
+  
+        span{
+          text-align: center;
+        }
+      }
     }
   }
   .spinner{
+    height: 60vh;
     animation-name: spin;
     animation-duration: 3000ms;
     animation-iteration-count: infinite;
