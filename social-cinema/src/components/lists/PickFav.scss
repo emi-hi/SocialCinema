@@ -1,0 +1,12 @@
+@import "../variables.scss";
+
+.favSelector {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+
+  .navButton {
+    margin-top: auto;
+    margin-bottom: auto;
+  }
+}

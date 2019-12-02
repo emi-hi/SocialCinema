@@ -159,7 +159,7 @@ function App() {
   };
 
   const resetGenres = (id) => {
-    if (state.user && state.user.name !== "" && state.group.length === 0) {
+    if (state.user && state.user.name !== "" && !state.themeNight) {
       console.log("IT GOT HERE");
       axios.post(`/api/${state.user.name}/genresreset`)
         .then(response => {
