@@ -11,6 +11,7 @@ button{
 }
 
 
+
 h4 {
   margin-block-start: 0px;
   margin-block-end: 5px;
@@ -29,7 +30,7 @@ h4 {
     justify-content: flex-start;
     align-items: center;
     max-height: 80vh;
-    overflow-y: scroll;
+    
     @include bubble();
   }
 
