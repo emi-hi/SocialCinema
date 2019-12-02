@@ -1,13 +1,18 @@
 @import "../variables.scss";
 
 .favorite_add {
-  margin: 25px;
+  margin-top: auto;
+  margin-bottom: auto;
+  margin-left: 6px;
 }
 
 .empty {
   width: $movie-box-width;
   height: $movie-box-height;
   background-color: brown;
+  margin-top: auto;
+  margin-bottom: auto;
+  margin-left: 6px;
 }
 
 .favorite-form {

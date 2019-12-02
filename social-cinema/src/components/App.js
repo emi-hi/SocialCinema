@@ -20,6 +20,7 @@ function App() {
   const { 
     state,
     setUser,
+    getGenres,
     setGenres,
     setLaterMovies,
     removeLaterMovie,
@@ -176,6 +177,8 @@ function App() {
 
     if (value) {
       setGenres([])
+    } else {
+      getGenres();
     }
   }
 
@@ -220,7 +223,7 @@ function App() {
       {laterList === "show" &&
         <List type="laters" removeLaterMovie={removeLaterMovie} data={state.later_movies} /> 
       }
-      {genreList === "show" &&
+      {(genreList === "show" || themeList === "show") &&
         <article className="preferences-list">
           <Genres userGenres = {userGenres} setGenre={setGenre} resetGenres={resetGenres}/>
           {/* <RuntimeSelector minimumRuntime={minimumRuntime} setMinimumRuntime={setMinimumRuntime} maximumRuntime={maximumRuntime} setMaximumRuntime={setMaximumRuntime}/> */}
@@ -230,21 +233,23 @@ function App() {
         <FriendList friends={friends} useMovieNight={useMovieNight} group={group} action="add" classname="list" type="All Friends  - click + on a friend to add them to your movie night"/>
       }
       <section className="main-container">
-      <RecentSuggestion id={"recent"} type={"laters"} recent={recentSuggestions}/>
-          <Suggested
-            recentSuggestions={recentSuggestions}
-            getRecentSuggestions={getRecentSuggestions}
-            user={user}
-            group={group}
-            userGenres={userGenres}
-            theme={theme}
-            setLaterMovies={setLaterMovies}
-            minimumRuntime={minimumRuntime}
-            maximumRuntime={maximumRuntime}
-          />
-          {state.group.length > 0 ?
+        {recentSuggestions.length > 0 ?
+          <RecentSuggestion id={"recent"} type={"laters"} recent={recentSuggestions}/> : <div></div>
+        }
+        <Suggested
+          recentSuggestions={recentSuggestions}
+          getRecentSuggestions={getRecentSuggestions}
+          user={user}
+          group={group}
+          userGenres={userGenres}
+          theme={theme}
+          setLaterMovies={setLaterMovies}
+          minimumRuntime={minimumRuntime}
+          maximumRuntime={maximumRuntime}
+        />
+        {state.group.length > 0 ?
           <MovieNightFriends  group={group} action="remove" classname="columnlist" useMovieNight={useMovieNight} />:<div></div>
-          }
+        }
       </section>
       </DragDropContext>
       <footer>
