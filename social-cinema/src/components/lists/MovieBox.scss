@@ -7,20 +7,20 @@
   margin-right: .75vw;
   position: relative;
   display: inline-block;
-}
 
-.movie_box .poster {
-  display: block;
-  z-index: 50;
-}
+  .poster {
+    display: block;
+    z-index: 50;
+  }
 
-.movie_box .remove {
-  position: absolute;
-  right: 5px;
-  bottom: 5px;
-  z-index: 100;
-
-  visibility: hidden;
+  .remove {
+    position: absolute;
+    right: 5px;
+    bottom: 5px;
+    z-index: 100;
+  
+    visibility: hidden;
+  }
 }
 
 .movie_box:hover .remove {
