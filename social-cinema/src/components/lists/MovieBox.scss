@@ -7,13 +7,15 @@
   margin-right: .75vw;
   position: relative;
   display: inline-block;
-  margin-top:auto;
+  margin-top: 7px;
   margin-bottom:auto;
-  height: 19vh;
+  height: 22vh;
+
   .tiny_poster {
     img {
-      height: 18.5vh;
-
+      height: 22vh;
+      margin-bottom:  0;
+      margin-top: auto;
     }
   }
 }
