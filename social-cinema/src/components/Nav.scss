@@ -7,7 +7,7 @@
   flex-direction: row;
   justify-content: space-between;
   padding-right: 10px;
-  background-color: black;
+  background-color: $black;
   // background-color: rgb(42, 35, 61);
   // overflow: scroll;
 
@@ -25,7 +25,7 @@
 
   h1 {
     font-family:$font-title;
-    color: white;
+    color: $nav-text-color;
     font-size: xx-large;
     padding-right: 15px;
   }
@@ -36,7 +36,7 @@
     background-color: transparent;
 
     h4{
-      color:white;
+      color: $nav-text-color;
       margin-top: auto;
       margin-bottom: auto;
     }
