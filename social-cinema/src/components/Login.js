@@ -14,7 +14,7 @@ export default function Signup(props) {
   }
 
   return (
-    <main className="">
+    <main className="userForm">
       <a className="close-modal" onClick={props.close}>
         &times;
       </a>
