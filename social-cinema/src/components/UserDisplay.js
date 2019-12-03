@@ -34,7 +34,7 @@ export default function UserDisplay(props) {
         return props.useMovieNight(props.friend, "remove")
       }
     }
-    
+  
   return (
     <section className="friend-card">
        <img className="user-icon" src={props.friend.icon} alt={props.friend.name}/>
