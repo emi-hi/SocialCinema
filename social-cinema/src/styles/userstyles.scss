@@ -4,16 +4,25 @@
   align-items: center;
   overflow-y:auto;
   overflow-x: hidden ;
-  max-height: 90%;
+  // max-height: 90%;
 }
 
 .friend-card{
-  background-color: #e3b04b;
-  height: 13vh;
+  background-color: #ffd500;
+  min-height: 12vh;
+  max-height: 15vh;
+  min-width: 12vh;
+  max-width: 12vh;
   margin: 5px;
-  border-radius: 15px;
-  border: 2px solid rgb(37, 59, 107);
+  border-radius: 5px;
+  border: 2px solid black;
   position: relative;
+  font-family: "Raleway", sans-serif;
+
+  img{
+    padding-top: 5px;
+    height: 40px;
+  }
 }
 
 
