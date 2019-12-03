@@ -34,20 +34,20 @@ export default function UserDisplay(props) {
         return props.useMovieNight(props.friend, "remove")
       }
     }
-    
+  
   return (
     <section className="friend-card">
        <img className="user-icon" src={props.friend.icon} alt={props.friend.name}/>
        <p className="user-name-text">{props.friend.name}</p>
        {props.action==="add" && 
-      <img className="friend-night" id="add" src="./images/plusfriend.svg" alt="Delete" onClick={()=>addOrRemove("add")}/>
+      <img className="friend-night" id="add" src="./images/blackplus.png" alt="Delete" onClick={()=>addOrRemove("add")}/>
       }
       {props.action ==="remove" &&
-       <img className="friend-night" id="trash" src="./images/trash.png" alt="Delete" onClick={()=>addOrRemove("remove")}/>
+       <img className="friend-night" id="trash" src="./images/trashcan.png" alt="Delete" onClick={()=>addOrRemove("remove")}/>
       }
       <Popup className="popup" trigger=
         {
-          <img className="friend-night" id="eye" src="./images/eye.svg" alt="info"/>
+          <img className="friend-night" id="eye" src="./images/information.png" alt="info"/>
         }
         modal
         contentStyle={contentStyle}

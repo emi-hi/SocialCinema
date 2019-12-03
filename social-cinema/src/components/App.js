@@ -44,8 +44,8 @@ function App() {
   const [themeList, setThemeList] = useState("hide");
 
   const [recentSuggestions, setRecentSuggestions] = useState([]);
-  const minimumRuntime = 30;
-  const maximumRuntime = 300;
+  const [suggestedMovie, setSuggestedMovie] = useState("");
+  const [suggested, setSuggested] = useState("hide");
 
   const useMovieNight = function(friend, action) {
     if (group.length === 0 && action === "add") {
@@ -192,6 +192,9 @@ function App() {
     setFavList("hide");
     setLaterList("hide");
     setFriendList("hide");
+    setRecentSuggestions([]);
+    setSuggestedMovie("");
+    setSuggested("hide");
   }
 
   return (
@@ -225,7 +228,7 @@ function App() {
       }
       {(genreList === "show" || themeList === "show") &&
         <article className="preferences-list">
-          <Genres userGenres = {userGenres} setGenre={setGenre} resetGenres={resetGenres}/>
+          <Genres userGenres = {userGenres} setGenre={setGenre} resetGenres={resetGenres} themeNight={theme}/>
           {/* <RuntimeSelector minimumRuntime={minimumRuntime} setMinimumRuntime={setMinimumRuntime} maximumRuntime={maximumRuntime} setMaximumRuntime={setMaximumRuntime}/> */}
         </article>
       }
@@ -244,8 +247,10 @@ function App() {
           userGenres={userGenres}
           theme={theme}
           setLaterMovies={setLaterMovies}
-          minimumRuntime={minimumRuntime}
-          maximumRuntime={maximumRuntime}
+          suggestedMovie={suggestedMovie}
+          setSuggestedMovie={setSuggestedMovie}
+          suggested={suggested}
+          setSuggested={setSuggested}
         />
         {state.group.length > 0 ?
           <MovieNightFriends  group={group} action="remove" classname="columnlist" useMovieNight={useMovieNight} />:<div></div>

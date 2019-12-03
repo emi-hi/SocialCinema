@@ -1,0 +1,14 @@
+  .movie-info-form {
+    display: flex;
+    flex-direction: row;
+
+    .info-img {
+      margin: 5px;
+      max-width: 25vw;
+    }
+
+    .description {
+      margin: 5px;
+      text-align: left;
+    }
+  }

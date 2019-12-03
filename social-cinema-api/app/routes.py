@@ -10,6 +10,8 @@ import dotenv
 import os
 from lxml import html
 
+CORS(app, resources={r"/*": {"origins": [os.getenv('ORIGIN')]}})
+
 dotenv.load_dotenv()
 TMDB_key = os.getenv('TMDB_KEY')
 
@@ -17,8 +19,6 @@ TMDB_key = os.getenv('TMDB_KEY')
 @app.route("/suggestion", methods=['GET', 'POST'])
 def suggestions():
   req = json.loads(request.data)
-  min_runtime = req['minimumRuntime']
-  max_runtime = req['maximumRuntime']
   user_genre_preferences = req['userGenrePreferences']
 
   # Make list of previously suggested movie ids
@@ -93,24 +93,25 @@ def suggestions():
 
     if len(user_loved_genres_loop_copy) != 0:
       index = random.randint(0, (len(user_loved_genres_loop_copy) - 1))
-      r = requests.get("https://api.themoviedb.org/3/discover/movie?api_key={}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page={}&with_genres={}&without_genres={}&with_runtime.gte={}&with_runtime.lte={}&release_date.lte=2020-04-01".format(TMDB_key, page_num, user_loved_genres_loop_copy[index], hated_list, min_runtime, max_runtime))
+      r = requests.get("https://api.themoviedb.org/3/discover/movie?api_key={}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page={}&with_genres={}&without_genres={}&with_runtime.gte=20&release_date.lte=2020-04-01".format(TMDB_key, page_num, user_loved_genres_loop_copy[index], hated_list))
       this_one = ["PAGE", page_num, "INDEX", index, "A LOVED"]
       del user_loved_genres_loop_copy[index]
     elif len(user_meh_genres_loop_copy) != 0:
       index = random.randint(0, (len(user_meh_genres_loop_copy) - 1))
-      r = requests.get("https://api.themoviedb.org/3/discover/movie?api_key={}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page={}&with_genres={}&without_genres={}&with_runtime.gte={}&with_runtime.lte={}&release_date.lte=2020-04-01".format(TMDB_key, page_num, user_meh_genres_loop_copy[index], hated_list, min_runtime, max_runtime))
+      r = requests.get("https://api.themoviedb.org/3/discover/movie?api_key={}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page={}&with_genres={}&without_genres={}&with_runtime.gte=20&release_date.lte=2020-04-01".format(TMDB_key, page_num, user_meh_genres_loop_copy[index], hated_list))
       this_one = ["PAGE", page_num, "INDEX", index, "A MEH'D"]      
       del user_meh_genres_loop_copy[index]
     else:
       index = random.randint(0, (len(user_loved_genres) - 1))
       this_one = ["PAGE", page_num, "INDEX", index, "A RANDO"]
-      r = requests.get("https://api.themoviedb.org/3/discover/movie?api_key={}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page={}&with_genres={}&with_runtime.gte={}&with_runtime.lte={}&release_date.lte=2020-04-01".format(TMDB_key, page_num, user_loved_genres[index], min_runtime, max_runtime))
+      r = requests.get("https://api.themoviedb.org/3/discover/movie?api_key={}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page={}&with_genres={}&with_runtime.gte=20&release_date.lte=2020-04-01".format(TMDB_key, page_num, user_loved_genres[index]))
 
     tmdb_result = json.loads(r.text)
     results = tmdb_result["results"]
     
     for index, result in enumerate(results):
       if result['id'] in suggested_ids:
+        print("I WAS IN HERE", result["title"])
         del results[index]
         
     all_results += results
@@ -272,12 +273,13 @@ def userFavmovies(user):
 
     title = req['movie']['title']
     image = req['movie']['poster']
+    description = req['movie']['description']
     movie_api_id = req['movie']['tmdbId']
 
     new_movie = Movie.query.filter(Movie.movie_api_id == str(movie_api_id)).first()
 
     if new_movie == None:
-      new_movie = Movie(title = title, movie_api_id = movie_api_id, image = image)    
+      new_movie = Movie(title = title, movie_api_id = movie_api_id, image = image, description = description)    
       db.session.add(new_movie)
       db.session.commit()
 
@@ -303,6 +305,7 @@ def userFavmovies(user):
       {
         "id": fave_movie.movie.id,
         "title": fave_movie.movie.title,
+        "description": fave_movie.movie.description,
         "img": fave_movie.movie.image
       }
     )
@@ -323,7 +326,6 @@ def userLatemovies(user):
 
   if request.method == 'POST':
     req = json.loads(request.data)
-    print(req)
     title = req['suggestedMovie']['title']
     image = req['suggestedMovie']['poster']
     description = req['suggestedMovie']['description']
@@ -427,9 +429,8 @@ def signup():
   if user != None:
     return make_response(jsonify({ "error": "Username already exists." })), 401
 
-  # num = random.randint(1, 4)
-  # print("NUM", num)
-  user = User(name=req['name'], icon="images/user{}.png".format(4))
+  num = random.randint(1, 4)
+  user = User(name=req['name'], icon="images/user{}.png".format(num))
   user.set_password(req['password'])
 
   db.session.add(user)
