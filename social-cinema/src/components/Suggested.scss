@@ -98,3 +98,32 @@
     }
   }
 }
+
+
+/* IPHONE STYLES */
+@media only screen and (max-width: 551px) {
+  .suggested-container{
+    img.reel {
+      height: 20vh;
+    }
+    .spinner{
+      height: 20vh;
+    }
+    }
+
+  }
+
+  
+  
+  @media only screen and (min-width: 551px) and (max-width: 900px) {
+    .suggested-container{
+      img.reel {
+        height: 30vh;
+      }
+      .spinner{
+        height: 30vh;
+      }
+      }
+  }
+
+
