@@ -11,15 +11,11 @@
   img.reel{
     height: 60vh;
   }
-
- 
   .suggestion{
     display: grid;
-
     .suggestion-info{
       display: flex;
       flex-direction: row;
-
       .movie-poster{
         align-self: flex-start;
         max-width: 30vw;
@@ -38,9 +34,6 @@
         p{
           overflow-x: auto;
           overflow-y: auto;
-          // ::-webkit-scrollbar {
-          //   display: ;
-          // }
         }
 
         h6.next{
@@ -136,11 +129,10 @@
           height: 50px;
           width: 50px;
         }
-        }
+       }
     }
-    }
-
   }
+}
 
   
   
@@ -152,7 +144,7 @@
       .spinner{
         height: 30vh;
       }
-      }
+    }
   }
 
 
