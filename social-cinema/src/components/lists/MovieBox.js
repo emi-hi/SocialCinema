@@ -30,7 +30,7 @@ export default function MovieBox(props) {
           <Popup className="popup" trigger=
             {
               <div className="info">
-                <img className="info" id="eye" src="./images/eye.svg" alt="info"/>
+                <img className="info" id="eye" src="./images/eyebackground.png" alt="info"/>
               </div>
             }
             modal
