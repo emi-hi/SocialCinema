@@ -21,23 +21,19 @@ export default function MovieBox(props) {
         >
           <div className="tiny_poster">
             <img src={props.img} alt={props.title}/>
-          </div>
           {props.removeLaterMovie &&
-            // <div className="remove" onClick={() => props.removeLaterMovie(props.id)}>
             <img className="remove" src="./images/trash-button.png" alt="Delete" onClick={() => props.removeLaterMovie(props.id)}/>
-            // </div>
           }
           <Popup className="popup" trigger=
             {
-              <div className="info">
-                <img className="info" id="eye" src="./images/information.png" alt="info"/>
-              </div>
+                <img className="info" src="./images/information.png" alt="info"/>
             }
             modal
             contentStyle={contentStyle}
           >
             {close => <MovieInfo img={props.img} title={props.title} description={props.description} close={close}/>}
           </Popup>
+          </div>
         </div>
       )}
     </Draggable>
