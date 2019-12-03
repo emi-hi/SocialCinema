@@ -425,7 +425,9 @@ def signup():
   if user != None:
     return make_response(jsonify({ "error": "Username already exists." })), 401
 
-  user = User(name=req['name'], icon="https://ui-avatars.com/api/?background=e3b04b&color=fff&size=50&rounded=true&bold=true&name={}".format(req['name']))
+  # num = random.randint(1, 4)
+  # print("NUM", num)
+  user = User(name=req['name'], icon="images/user{}.png".format(4))
   user.set_password(req['password'])
 
   db.session.add(user)

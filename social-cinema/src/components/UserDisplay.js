@@ -37,7 +37,6 @@ export default function UserDisplay(props) {
     
   return (
     <section className="friend-card">
-    
        <img className="user-icon" src={props.friend.icon} alt={props.friend.name}/>
        <p className="user-name-text">{props.friend.name}</p>
        {props.action==="add" && 
