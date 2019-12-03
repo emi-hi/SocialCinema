@@ -10,7 +10,7 @@ export default function FriendInfo(props) {
       setPrefs(res.data)
     })
     .catch(error => {console.log(error)})
-  }, [])
+  }, [props.friend])
   let loves=[]
   let hates=[]
   for (let each in prefs["love"]){
@@ -22,9 +22,9 @@ export default function FriendInfo(props) {
 
   return(
   <main className="friend-info-form">
-    <a className="close-modal" onClick={props.close}>
+    <span className="close-modal" onClick={props.close}>
       &times;
-    </a>
+    </span>
     <h4>{props.friend}</h4>
     {loves.length>0? <p>Loves</p> : ""}
       {loves.map(pref => <img className="friend-info-image" src={pref} key={pref} alt={pref}/>)}

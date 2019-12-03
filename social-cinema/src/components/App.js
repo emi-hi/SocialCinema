@@ -14,7 +14,7 @@ import MovieNightFriends from './MovieNightFriends';
 
 import useApplicationData from "../hooks/useApplicationData";
 import RecentSuggestion from './RecentSuggestion';
-import RuntimeSelector from './RuntimeSelector';
+// import RuntimeSelector from './RuntimeSelector';
 
 function App() {
   const { 
@@ -33,19 +33,19 @@ function App() {
 
   const user = state.user;
   const userGenres = state.genres;
-  const friends = state.friends
-  const group = state.group
-  const theme = state.theme
+  const friends = state.friends;
+  const group = state.group;
+  const theme = state.theme;
 
-  const [favList, setFavList] = useState("hide")
-  const [laterList, setLaterList] = useState("hide")
-  const [genreList, setGenreList] = useState("hide")
-  const [friendList, setFriendList] = useState("hide")
-  const [themeList, setThemeList] = useState("hide")
+  const [favList, setFavList] = useState("hide");
+  const [laterList, setLaterList] = useState("hide");
+  const [genreList, setGenreList] = useState("hide");
+  const [friendList, setFriendList] = useState("hide");
+  const [themeList, setThemeList] = useState("hide");
 
-  const [recentSuggestions, setRecentSuggestions] = useState([])
-  const [minimumRuntime, setMinimumRuntime] = useState(30)
-  const [maximumRuntime, setMaximumRuntime] = useState(300)
+  const [recentSuggestions, setRecentSuggestions] = useState([]);
+  const minimumRuntime = 30;
+  const maximumRuntime = 300;
 
   const useMovieNight = function(friend, action) {
     if (group.length === 0 && action === "add") {
@@ -113,11 +113,11 @@ function App() {
       const moved_movie = {
         title: sugested_movie.title,
         poster: sugested_movie.poster,
+        description: sugested_movie.description,
         tmdbId: draggableId
       }
 
       new_later_movies.splice(destination.index, 0, moved_movie)
-
       axios.post(`/api/${state.user.name}/latermovies`, { "suggestedMovie": { ...moved_movie }  })
       .then(response => {
         setLaterMovies(response.data.later_movies)
@@ -253,8 +253,8 @@ function App() {
       </section>
       </DragDropContext>
       <footer>
-          <a href="https://icons8.com/" target="_blank"><img className="icon8" src="images/icon8.png" alt="icon8 logo"></img></a>
-          <a href="https://www.themoviedb.org/" target="_blank"><img className="tmdb" src="images/tmdb.png" alt="tmdb logo"></img></a>
+          <a href="https://icons8.com/" target="_blank" rel="noopener noreferrer"><img className="icon8" src="images/icon8.png" alt="icon8 logo"></img></a>
+          <a href="https://www.themoviedb.org/" target="_blank" rel="noopener noreferrer"><img className="tmdb" src="images/tmdb.png" alt="tmdb logo"></img></a>
       </footer>
     </main>
   );

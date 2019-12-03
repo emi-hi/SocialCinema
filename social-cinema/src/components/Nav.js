@@ -85,7 +85,8 @@ export default function Nav(props) {
           </button>
         }
       <section className="user-login"> 
-        {props.user === "" ? <><Form onLogin={logOn} /> <Form createUser={props.createUser} /></> : <User user={props.user} logout={() => logOut()} />}
+      {props.user === "" && <><Form onLogin={logOn} /> <Form createUser={props.createUser} /></> }
+      {props.user !== "" && <User user={props.user} logout={() => logOut()} />}
       </section>
     </nav>
   );

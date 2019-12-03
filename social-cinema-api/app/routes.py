@@ -269,6 +269,7 @@ def userFavmovies(user):
 
   if request.method == 'POST':
     req = json.loads(request.data)
+
     title = req['movie']['title']
     image = req['movie']['poster']
     movie_api_id = req['movie']['tmdbId']
@@ -322,15 +323,16 @@ def userLatemovies(user):
 
   if request.method == 'POST':
     req = json.loads(request.data)
-
+    print(req)
     title = req['suggestedMovie']['title']
     image = req['suggestedMovie']['poster']
+    description = req['suggestedMovie']['description']
     movie_api_id = req['suggestedMovie']['tmdbId']
 
     new_movie = Movie.query.filter(Movie.movie_api_id == str(movie_api_id)).first()
 
     if new_movie == None:
-      new_movie = Movie(title = title, movie_api_id = movie_api_id, image = image)    
+      new_movie = Movie(title = title, movie_api_id = movie_api_id, image = image, description = description)    
       db.session.add(new_movie)
       db.session.commit()
 
@@ -354,6 +356,7 @@ def userLatemovies(user):
       {
         "id": later_movie.movie.id,
         "title": later_movie.movie.title,
+        "description": later_movie.movie.description,
         "img": later_movie.movie.image
       }
     )
@@ -390,7 +393,6 @@ def title():
       result_poster = "https://image.tmdb.org/t/p/w500" + result["poster_path"]
     else:
       result_poster = "images/noposter.png"
-
 
     if 'release_date' not in result:
       result_release_date = ""
@@ -497,9 +499,11 @@ def login():
       {
         "id": later_movie.movie.id,
         "title": later_movie.movie.title,
+        "description": later_movie.movie.description,
         "img": later_movie.movie.image
       }
     )
+
   favorited_movies = []
 
   for fave_movie in user.favorited_movies:
@@ -507,9 +511,11 @@ def login():
       {
         "id": fave_movie.movie.id,
         "title": fave_movie.movie.title,
+        "description": fave_movie.movie.description,
         "img": fave_movie.movie.image
       }
     )
+
   res = {
     "user": userInfo,
     "genres": genres,
