@@ -1,8 +1,7 @@
 @import "variables.scss";
 
 .nav {
-  width: 100%;
-
+  // width: 100%;
   margin: 0;
   display: flex;
   flex-direction: row;
@@ -10,12 +9,12 @@
   padding-right: 10px;
   background-color: black;
   // background-color: rgb(42, 35, 61);
-  // overflow: scroll;
+  overflow: scroll;
 
 
   .logo {
     img{
-      height: 9vw;
+      height: 12vh;
       padding: 10px;
       align-self: center
     }
@@ -154,7 +153,6 @@
 
     .list-name{
       font-size: medium;
-      padding: 2px;
     }
 
     .logo {

@@ -25,11 +25,13 @@
   flex-direction: row;
   flex-wrap: nowrap;
   justify-content: flex-start;
-  width: 98.5%;
   height: 19vh;
   align-content: center;
   margin-top:1px;
   overflow-x:scroll;
+  align-items: center;    
+  padding-left: 10px;
+  padding-right: 10px;
 }
 
 
@@ -52,9 +54,21 @@
 }
 
 /* IPHONE STYLES */
-@media only screen and (max-width: 767px) {
+@media only screen and (max-width: 550px) {
   .list {
     -webkit-overflow-scrolling: touch;
+    height: 14vh;
+    padding-left: 4px;
+    padding-right: 4px;
   }
-  /* cursor: pointer; */
+}
+
+
+@media only screen and (min-width: 550px) and (max-width: 900px) {
+  .list {
+    -webkit-overflow-scrolling: touch;
+    height: 16vh;
+    padding-left: 6px;
+    padding-right: 6px;
+  }
 }

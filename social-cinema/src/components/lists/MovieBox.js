@@ -13,7 +13,7 @@ export default function MovieBox(props) {
           ref={provided.innerRef}
         >
           <div className="tiny_poster">
-            <img src={props.img} height="120px" alt={props.title}/>
+            <img src={props.img} alt={props.title}/>
           </div>
           {props.removeLaterMovie &&
             <div className="remove" onClick={() => props.removeLaterMovie(props.id)}>
