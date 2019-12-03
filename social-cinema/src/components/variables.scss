@@ -4,11 +4,8 @@ $font-text:'Roboto', sans-serif;
 $active-opacity: 1;
 $inactive-opacity: 0.15;
 
-$white: #fff;
-$black: #000;
+$black: #151414;
 
-// $dark-background: #222f3e;
-$dark-background: white;
 
 $spacing: 2rem;
 
@@ -17,7 +14,7 @@ $movie-box-height: 120px;
 
 // $text-color: #ffff;
 $text-color: black;
-$nav-text-color: white;
+$nav-text-color: whitesmoke;
 
 @mixin bubble(){
   background: rgba(255, 255, 255, 0.3);
