@@ -44,17 +44,18 @@ h4 {
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
+    max-height: 80vh;
+    
     @include bubble();
-    max-height: 700px;
   }
 
   .recent-suggestion-list-container{
     display: flex;
     flex-direction: column;
+    max-height: 80vh;
     overflow-y: auto;
     @include bubble();
     font-family:  $font-title; 
-    max-height: 700px;
   }
 
 }
@@ -72,23 +73,65 @@ h4 {
 
 }
 
-/* IPHONE STYLES */
-@media only screen and (max-width: 551px) {
-
+.mobile-title{
+  display:none;
 }
 
-  
-  
-  @media only screen and (min-width: 551px) and (max-width: 900px) {
-    .suggested-container{
-      img.reel {
-        height: 30vh;
+/* IPHONE STYLES */
+@media only screen and (max-width: 560px) {
+  h4.mobile-title {
+    display: inline-block;
+    align-self: center;
+  }
+  h4.computer-title {
+    display: none;
+  }
+
+  h4 {
+    font-size: small;
+  }
+  .main-container .suggested-container {
+    width:95%;
+    margin-right:auto;
+    margin-left:auto;
+  }
+
+  .suggestion-all {
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+  .suggestion-text{
+    font-size: x-small;
+    width: 100%;
+  }
+
+  .poster {
+    height: 25vh;
+  }
+  .main-container {
+    display:flex;
+    flex-direction: column;
+    text-align: center;
+    .recent-suggestion-list-container{
+      flex-direction: row;
+      max-height: 25vh;
+      overflow-x: auto;
+
+      h4{
+        font-size: xx-small;
       }
-      .spinner{
-        height: 30vh;
-      }
-      }
+ 
+    }
+    .friends-container{
+      flex-direction: row;
+      max-height: 25vh;
+      overflow-x: auto;
+    }
   }
 
 
-
+  .recent-iphone{
+    display: block;
+  }
+}

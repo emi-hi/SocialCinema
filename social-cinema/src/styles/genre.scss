@@ -129,13 +129,27 @@ button#mehgenre:hover{
 /* IPHONE STYLES */
 @media only screen and (max-width: 551px) {
   section.genres{
-      justify-content: flex-start;
-      padding-left: 10vw;
-      padding-right: 10vw;
+      justify-content: space-between;
+      padding-bottom: 20px;
+
+    button.reset{
+      margin-left: 40px;
+      margin-right: 15px;
+      font-family: $font-title;
+      font-size: x-small;
+    }
+  }
+  .genre-name{
+    font-size: x-small;
   }
 
+
   section.genre {
-    width: 24vw;
+    width: 26vw;
+
+    button {
+      font-size: x-small;
+    };
   }
 
   .genre-image{
@@ -143,7 +157,8 @@ button#mehgenre:hover{
 
   }
   div.genre {
-    width: 30vw;
+    width: 32vw;
+    
   }
 
   .genre-feeling-love{
@@ -158,21 +173,20 @@ button#mehgenre:hover{
 
   section.genre {
     width: 24vw;
+
+
   }
   .genre-name{
     font-size: x-small;
-
   }
 
   section.genres{
     margin-bottom: 2vh;
     z-index: 1000;
-    overflow-y:visible;
-    cursor: pointer;
 
     button.reset{
-      // align-self: flex-end;
       margin-left: 50px;
+      font-family: $font-title
     }
 
   }
@@ -181,8 +195,7 @@ button#mehgenre:hover{
     font-size: smaller;
   }
   .genre-choices{
-    z-index: 10000;
-    
+    z-index: 10000;    
   }
   span{
     z-index: 1;

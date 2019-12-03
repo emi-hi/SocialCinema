@@ -104,11 +104,39 @@
 /* IPHONE STYLES */
 @media only screen and (max-width: 551px) {
   .suggested-container{
+    .movie-title{
+      font-size: large;
+    }
     img.reel {
       height: 20vh;
     }
     .spinner{
       height: 20vh;
+    }
+    .suggestion{
+      display: grid;
+      width:100%;
+  
+      .suggestion-info{
+        flex-direction: column;
+
+
+
+        .movie-poster {
+          max-width: 60vw;
+          margin-left: auto;
+          margin-right: auto;
+        }
+       article h6.next{
+
+         font-size: x-small;
+        margin-bottom: 0px;
+       }
+       article img.next{
+          height: 50px;
+          width: 50px;
+        }
+        }
     }
     }
 

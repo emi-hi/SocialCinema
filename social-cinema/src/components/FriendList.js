@@ -11,7 +11,8 @@ export default function FriendList(props) {
   
   return (
     <article>
-      {friends.length>0? <h4>{props.type}</h4>: ""}
+      {friends.length>0? <h4 className="computer-title">{props.type}</h4>: ""}
+      {props.classname==="list"? <h4 className="mobile-title">{props.type}</h4>: ""}
       <section className={props.classname}>
         {friends}
       </section>

@@ -9,8 +9,11 @@ export default function MovieNightFriends(props) {
   }
 
   return (
+    <section >
+      {theGroup.length>0? <h4 className="mobile-title">Friends for Movie Night</h4>: ""}
     <article className="columnlist friends-container">
     <FriendList friends={theGroup} group={props.group} action={props.action} useMovieNight={props.useMovieNight} type="Friends for Movie Night"/>
     </article>
+    </section>
   )
 }
