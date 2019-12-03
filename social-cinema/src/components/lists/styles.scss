@@ -7,12 +7,14 @@
 }
 
 .empty {
-  width: $movie-box-width;
-  height: $movie-box-height;
-  background-color: brown;
-  margin-top: auto;
-  margin-bottom: auto;
-  margin-left: 6px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  p{
+    height: 20px;
+    padding-left: 10px;
+    font-style: italic;
+  }
 }
 
 .favorite-form {

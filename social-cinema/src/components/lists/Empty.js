@@ -4,7 +4,7 @@ import React from "react";
 export default function Empty(props) {
   return (
     <main className="empty">
-      <h1>Nothing for later</h1>
+      <p>To add a movie to your later list, generate a movie suggestion and click watch later.</p>
     </main>
   );
 }
