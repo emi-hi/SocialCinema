@@ -11,14 +11,17 @@ export default function RecentSuggestion(props) {
   return (
     <Droppable droppableId={props.id} type={props.type} >
     {(provided) => (
-      <aside className="recent-suggestion-list-container"
+      <section 
         ref={provided.innerRef}
         {...provided.droppableProps}
       > 
-        {recents.length>0? <h4>Recent Suggestions</h4> : ""}
+        {recents.length>0? <h4 className="mobile-title">Recent Suggestions</h4> : ""}
+        <aside className="recent-suggestion-list-container">
+        {recents.length>0? <h4 className="computer-title">Recent Suggestions</h4> : ""}
         {recents}
         {provided.placeholder}
       </aside>
+      </section>
     )}
     </Droppable>
     )

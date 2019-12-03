@@ -73,9 +73,24 @@ h4 {
 
 }
 
+.mobile-title{
+  display:none;
+}
+
 /* IPHONE STYLES */
 @media only screen and (max-width: 560px) {
-  .main-container .suggested-container{
+  h4.mobile-title {
+    display: inline-block;
+    align-self: center;
+  }
+  h4.computer-title {
+    display: none;
+  }
+
+  h4 {
+    font-size: small;
+  }
+  .main-container .suggested-container {
     width:100%;
   }
 
@@ -93,7 +108,24 @@ h4 {
     height: 25vh;
   }
   .main-container {
+    display:flex;
     flex-direction: column;
+    text-align: center;
+    .recent-suggestion-list-container{
+      flex-direction: row;
+      max-height: 25vh;
+      overflow-x: auto;
+
+      h4{
+        font-size: xx-small;
+      }
+ 
+    }
+    .friends-container{
+      flex-direction: row;
+      max-height: 25vh;
+      overflow-x: auto;
+    }
   }
 
 
