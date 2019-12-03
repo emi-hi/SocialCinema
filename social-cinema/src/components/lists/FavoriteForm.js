@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect, useRef} from "react";
 import axios from 'axios';
 
 import PickFav from "./PickFav";
@@ -10,6 +10,11 @@ export default function FavoriteForm(props) {
   const [error, setError] = useState(false);
   const [movie, setMovie] = useState(0)
 
+  const inputRef = useRef(null);
+
+  useEffect(() => {
+    inputRef.current.focus();
+  }, []);
 
   const saveToFavoriteList = (userName, movie) => {
     axios.post(`/api/${userName}/favmovies`, { movie })
@@ -49,6 +54,7 @@ export default function FavoriteForm(props) {
           <input 
             type="text" 
             value={title}
+            ref={inputRef}
             onChange={e => setTitle(e.target.value)}
           />
         </label>

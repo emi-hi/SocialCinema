@@ -47,7 +47,7 @@ export default function UserDisplay(props) {
       }
       <Popup className="popup" trigger=
         {
-          <img className="friend-night" id="eye" src="./images/blackeye.png" alt="info"/>
+          <img className="friend-night" id="eye" src="./images/information.png" alt="info"/>
         }
         modal
         contentStyle={contentStyle}
