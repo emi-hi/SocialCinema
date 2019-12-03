@@ -23,14 +23,14 @@ export default function MovieBox(props) {
             <img src={props.img} alt={props.title}/>
           </div>
           {props.removeLaterMovie &&
-            <div className="remove" onClick={() => props.removeLaterMovie(props.id)}>
-              <img src="./images/trash.png" alt="Delete" />
-            </div>
+            // <div className="remove" onClick={() => props.removeLaterMovie(props.id)}>
+            <img className="remove" src="./images/trash-button.png" alt="Delete" onClick={() => props.removeLaterMovie(props.id)}/>
+            // </div>
           }
           <Popup className="popup" trigger=
             {
               <div className="info">
-                <img className="info" id="eye" src="./images/eye.svg" alt="info"/>
+                <img className="info" id="eye" src="./images/eyebackground.png" alt="info"/>
               </div>
             }
             modal
