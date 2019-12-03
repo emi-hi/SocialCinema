@@ -23,7 +23,7 @@
 
   h1 {
     font-family:$font-title;
-    color: $white;
+    color: $font-white;
     font-size: xx-large;
     padding-right: 15px;
   }
@@ -33,14 +33,14 @@
     background-color: transparent;
 
     h4{
-      color: $white;
+      color: $font-white;
       margin-top: auto;
       margin-bottom: auto;
     }
 
     .list-name {
       background-color: transparent;
-      color: $white;
+      color: $font-white;
       font-size: small;
       border: 0px;
       margin: 2px;
@@ -61,7 +61,7 @@
   
   .list-name {
     background-color: transparent;
-    color: $white;
+    color: $font-white;
     font-size: medium;
     border: 0px;
     margin: 2px;
