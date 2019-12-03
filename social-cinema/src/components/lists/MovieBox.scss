@@ -28,9 +28,11 @@
 
 .movie_box .remove {
   position: absolute;
-  right: 5px;
-  bottom: 5px;
+  right: 10px;
+  bottom: 1px;
   z-index: 100;
+  height: 30px;
+
 
   visibility: hidden;
 }
