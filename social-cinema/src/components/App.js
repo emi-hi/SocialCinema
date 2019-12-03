@@ -253,7 +253,8 @@ function App() {
       </section>
       </DragDropContext>
       <footer>
-        <p>REFERENCING US AND TMDB AND THE ICONS AND STUFF</p>
+          <a href="https://icons8.com/" target="_blank"><img className="icon8" src="images/icon8.png" alt="icon8 logo"></img></a>
+          <a href="https://www.themoviedb.org/" target="_blank"><img className="tmdb" src="images/tmdb.png" alt="tmdb logo"></img></a>
       </footer>
     </main>
   );

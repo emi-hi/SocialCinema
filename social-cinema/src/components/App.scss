@@ -10,7 +10,22 @@ button{
   font-family: $font-title;
 }
 
+footer{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  padding: 10px;
 
+  img.tmdb{
+    height: 40px;
+    margin-left: 10px;
+  }
+  img.icon8{
+    height: 40px;
+    border: 1.25px solid black;
+    border-radius: 5px;
+  }
+}
 
 h4 {
   margin-block-start: 0px;
