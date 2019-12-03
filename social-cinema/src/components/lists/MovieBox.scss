@@ -9,6 +9,12 @@
   display: inline-block;
   margin-top:auto;
   margin-bottom:auto;
+
+  .tiny_poster {
+    img {
+      height: 120px;
+    }
+  }
 }
 
 .movie_box .poster {
@@ -28,4 +34,35 @@
 
 .movie_box:hover .remove {
   visibility: visible;
+}
+
+
+
+/* IPHONE STYLES */
+@media only screen and (max-width: 551px) {
+.movie_box{
+  height: 13vh;
+  .tiny_poster {
+    img {
+      height: 12vh;
+      margin-top:auto;
+      margin-bottom:auto;
+    }
+  }
+}
+ 
+}
+
+
+@media only screen and (min-width: 551px) and (max-width: 900px) {
+  .movie_box{
+    height: 15vh;
+    .tiny_poster {
+      img {
+        height: 14vh;
+        margin-top:auto;
+        margin-bottom:auto;
+      }
+    }
+  }
 }
