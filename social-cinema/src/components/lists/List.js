@@ -12,7 +12,6 @@ export default function List(props) {
   const listName = props.type==="favorites"? "Favorite Movies" : "Movies to Watch Later"
   for (let x = 0; x < props.data.length; x++) {
     if (props.data.length > x) {
-      console.log("MB", props.data[x])
       boxes.push(<MovieBox key={props.data[x]['id']} id={props.data[x]['id']} index={x} title={props.data[x]['title']} description={props.data[x]['description']} img={props.data[x]['img']} removeLaterMovie={props.removeLaterMovie} />)
     } else {
     }

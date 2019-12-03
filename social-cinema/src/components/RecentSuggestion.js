@@ -5,7 +5,6 @@ import RecentMovieListItem from './RecentMovieListItem'
 
 export default function RecentSuggestion(props) {
   let recents = props.recent.map((movie, index) => {
-    console.log(movie);
     return <RecentMovieListItem key={index} id={movie.newSuggestion.tmdb_id} description={movie.newSuggestion.description} index={index} title={movie.newSuggestion.title} img={movie.newSuggestion.poster} imdb_link={movie.newSuggestion.imdb_link}/>
   })
 
