@@ -47,6 +47,7 @@ section.genre {
 .genre-choices{
   display: none;
   height: 33%;
+  z-index: 100;
 }
 
 section.genre:hover .genre-choices{
@@ -127,6 +128,16 @@ button#mehgenre:hover{
 
 /* IPHONE STYLES */
 @media only screen and (max-width: 551px) {
+  section.genres{
+      justify-content: flex-start;
+      padding-left: 10vw;
+      padding-right: 10vw;
+  }
+
+  section.genre {
+    width: 24vw;
+  }
+
   .genre-image{
     display: none;
 
@@ -138,25 +149,32 @@ button#mehgenre:hover{
   .genre-feeling-love{
     opacity: 1;
   }
+
 }
 
 
 
 @media only screen and (min-width: 551px) and (max-width: 900px) {
+
+  section.genre {
+    width: 24vw;
+  }
   .genre-name{
     font-size: x-small;
 
   }
-  .genre-feeling-hate{
-     background-color: red;
-  }
-  
 
   section.genres{
     margin-bottom: 2vh;
     z-index: 1000;
     overflow-y:visible;
     cursor: pointer;
+
+    button.reset{
+      // align-self: flex-end;
+      margin-left: 50px;
+    }
+
   }
   label{
     z-index: 1;
