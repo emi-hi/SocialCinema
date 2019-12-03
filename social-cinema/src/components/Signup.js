@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef} from "react";
 
 export default function Signup(props) {
   const [name, setName] = useState("");
@@ -6,6 +6,12 @@ export default function Signup(props) {
   const [passwordConf, setPasswordConf] = useState("")
   const [error, setError] = useState("")
   
+  const inputRef = useRef(null);
+
+  useEffect(() => {
+    inputRef.current.focus();
+  }, []);
+
   const signup = (event) => {
     event.preventDefault();
     if (password !== "" && password === passwordConf) {
@@ -31,6 +37,7 @@ export default function Signup(props) {
         <input 
             type="text" 
             value={name}
+            ref={inputRef}
             placeholder="Enter Username"
             onChange={e => setName(e.target.value)}
         />
