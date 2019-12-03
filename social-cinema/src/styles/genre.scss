@@ -1,4 +1,6 @@
 @import "../components/variables.scss";
+
+
 section.genres {
   display: flex;
   flex-direction: row;
@@ -17,10 +19,12 @@ section.genres {
   }
 
   button.reset{
+    font-family: $font-title;
     background-color: transparent;
     border: none;
     color: black;
     font-size: small;
+    margin-left: 25px;
     &:focus {
       outline:none;
     }
@@ -40,32 +44,38 @@ section.genres {
   overflow: hidden;
 }
 
-section.genre {
+button.genre {
+  padding: 0;
+  border: none;
+  background: none;
   width: 9.2vw;
   height: 7vw;
   position: relative;
-  margin: 1px;
+  margin: 2px;
 
-  &:hover .genre-choices{
-    display:flex;
+  &:focus {
+    outline:none;
   }
-
-
-  
+  &:hover .genre-choices{
+    display:flex; 
+ }
 }
 
 .genre{
+  
   &-choices{
+    padding: 0;
+    border: none;
+    background: none;
     display: flex;
     flex-direction:column-reverse;
     display: none;
     z-index: 100;
-    opacity:.91;
     position: absolute;
-    right: 5%;
+    left: 5%;
     bottom: 30%;
-    width:80%;
     cursor: pointer;
+
   }
     &-image{
     margin-top: 4px;
@@ -94,7 +104,8 @@ section.genre {
 
 }
 
-button {
+.genre-choices button {
+  width:8vw;
   &:focus {
     outline:none;
   }
@@ -130,7 +141,6 @@ button {
 }
 
 
-/* IPHONE STYLES */
 @media only screen and (max-width: 551px) {
   section.genres{
       justify-content: space-between;
@@ -139,23 +149,11 @@ button {
 
     button.reset{
       margin-left: 40px;
-      margin-right: 15px;
-      font-family: $font-title;
+      margin-right: 32px;
       font-size: x-small;
     }
   }
-  .genre-name{
-    font-size: x-small;
-  }
 
-
-  section.genre {
-    width: 26vw;
-
-    button {
-      font-size: x-small;
-    };
-  }
 
   .genre-image{
     display: none;
@@ -166,11 +164,24 @@ button {
     
   }
   .genre-choices{
-    bottom: 0%;
+    bottom: -15%;
     z-index: 10000; 
+    width: 20vw;
+
+     & button {
+       width:20vw
+     }
   }
   .genre-feeling-love{
     opacity: 1;
+  }
+  button.genre {
+    width: 24vw;  
+    
+    .genre-name{
+      font-size: x-small;
+    }
+  
   }
 
 }
@@ -178,38 +189,37 @@ button {
 
 
 @media only screen and (min-width: 551px) and (max-width: 900px) {
-
-  section.genre {
-    width: 24vw;
-
-
-  }
-  .genre-name{
-    font-size: x-small;
-  }
-
   section.genres{
     margin-bottom: 2vh;
     z-index: 1000;
 
-    button.reset{
-      margin-left: 50px;
-      font-family: $font-title
-    }
+    button.reset {
+      margin-left: 11px;
 
+    }
   }
+
+  button.genre {
+    width: 9vw; 
+    }
+  
+  .genre-name{
+    font-size: x-small;
+  }
+
+  
   label{
     z-index: 1;
     font-size: smaller;
   }
   .genre-choices{
     bottom: 0%;
-    left: 30%;
-    width: 10vw;
+    left: 10%;
+    width: 8vw;
     z-index: 10000;    
   }
   span{
     z-index: 1;
     font-size: smaller;
   }
-}
+ }
