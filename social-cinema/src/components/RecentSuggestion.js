@@ -5,7 +5,8 @@ import RecentMovieListItem from './RecentMovieListItem'
 
 export default function RecentSuggestion(props) {
   let recents = props.recent.map((movie, index) => {
-    return <RecentMovieListItem key={index} id={movie.newSuggestion.tmdb_id} index={index} title={movie.newSuggestion.title} img={movie.newSuggestion.poster} imdb_link={movie.newSuggestion.imdb_link}/>
+    console.log(movie);
+    return <RecentMovieListItem key={index} id={movie.newSuggestion.tmdb_id} description={movie.newSuggestion.description} index={index} title={movie.newSuggestion.title} img={movie.newSuggestion.poster} imdb_link={movie.newSuggestion.imdb_link}/>
   })
 
   return (
@@ -17,10 +18,10 @@ export default function RecentSuggestion(props) {
       > 
         {recents.length>0? <h4 className="mobile-title">Recent Suggestions</h4> : ""}
         <aside className="recent-suggestion-list-container">
-        {recents.length>0? <h4 className="computer-title">Recent Suggestions</h4> : ""}
-        {recents}
-        {provided.placeholder}
-      </aside>
+          {recents.length>0? <h4 className="computer-title">Recent Suggestions</h4> : ""}
+          {recents}
+          {provided.placeholder}
+        </aside>
       </section>
     )}
     </Droppable>

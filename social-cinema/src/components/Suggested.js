@@ -87,7 +87,7 @@ export default function Suggested(props) {
                 <span>{suggestedMovie.rating}</span>
                 <span>{runtime}</span>
                 <a href={suggestedMovie.imdb_link} target="_blank" rel="noopener noreferrer"><b>Learn more at IMDB</b></a>
-                {props.user.name && <><h6 className="later">Watch Later</h6><img className="later" src="images/later.png" onClick={()=>{saveToLaterList(props.user.name, suggestedMovie)}}></img></>}
+                {props.user.name && <><h6 className="later">Watch Later</h6><img className="later" src="images/later.png" alt="Add to later" onClick={()=>{saveToLaterList(props.user.name, suggestedMovie)}}></img></>}
               </article>
             </main>
           </section>

@@ -5,8 +5,8 @@ import Signup from "./Signup"
 import Login from "./Login"
 
 const contentStyle = {
-  width: "300px",
-  height: "300px",
+  width: "200px",
+  height: "150px",
   borderRadius: "20px"
 };
 
