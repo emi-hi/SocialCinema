@@ -110,6 +110,19 @@
     .spinner{
       height: 20vh;
     }
+    .suggestion{
+      display: grid;
+      width:100%;
+  
+      .suggestion-info{
+        flex-direction: column;
+        
+       article img.next{
+          height: 40px;
+          width: 40px;
+        }
+        }
+    }
     }
 
   }
