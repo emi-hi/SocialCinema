@@ -272,12 +272,13 @@ def userFavmovies(user):
 
     title = req['movie']['title']
     image = req['movie']['poster']
+    description = req['movie']['description']
     movie_api_id = req['movie']['tmdbId']
 
     new_movie = Movie.query.filter(Movie.movie_api_id == str(movie_api_id)).first()
 
     if new_movie == None:
-      new_movie = Movie(title = title, movie_api_id = movie_api_id, image = image)    
+      new_movie = Movie(title = title, movie_api_id = movie_api_id, image = image, description = description)    
       db.session.add(new_movie)
       db.session.commit()
 
@@ -303,6 +304,7 @@ def userFavmovies(user):
       {
         "id": fave_movie.movie.id,
         "title": fave_movie.movie.title,
+        "description": fave_movie.movie.description,
         "img": fave_movie.movie.image
       }
     )
@@ -323,7 +325,6 @@ def userLatemovies(user):
 
   if request.method == 'POST':
     req = json.loads(request.data)
-    print(req)
     title = req['suggestedMovie']['title']
     image = req['suggestedMovie']['poster']
     description = req['suggestedMovie']['description']
@@ -427,9 +428,8 @@ def signup():
   if user != None:
     return make_response(jsonify({ "error": "Username already exists." })), 401
 
-  # num = random.randint(1, 4)
-  # print("NUM", num)
-  user = User(name=req['name'], icon="images/user{}.png".format(4))
+  num = random.randint(1, 4)
+  user = User(name=req['name'], icon="images/user{}.png".format(num))
   user.set_password(req['password'])
 
   db.session.add(user)
