@@ -16,9 +16,9 @@ export default function MovieBox(props) {
             <img src={props.img} alt={props.title}/>
           </div>
           {props.removeLaterMovie &&
-            <div className="remove" onClick={() => props.removeLaterMovie(props.id)}>
-              <img src="./images/trash.png" alt="Delete" />
-            </div>
+            // <div className="remove" onClick={() => props.removeLaterMovie(props.id)}>
+            <img className="remove" src="./images/trash-button.png" alt="Delete" onClick={() => props.removeLaterMovie(props.id)}/>
+            // </div>
           }
         </div>
       )}

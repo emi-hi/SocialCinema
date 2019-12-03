@@ -225,7 +225,7 @@ function App() {
       }
       {(genreList === "show" || themeList === "show") &&
         <article className="preferences-list">
-          <Genres userGenres = {userGenres} setGenre={setGenre} resetGenres={resetGenres}/>
+          <Genres userGenres = {userGenres} setGenre={setGenre} resetGenres={resetGenres} themeNight={theme}/>
           {/* <RuntimeSelector minimumRuntime={minimumRuntime} setMinimumRuntime={setMinimumRuntime} maximumRuntime={maximumRuntime} setMaximumRuntime={setMaximumRuntime}/> */}
         </article>
       }
