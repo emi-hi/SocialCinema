@@ -10,6 +10,8 @@ import dotenv
 import os
 from lxml import html
 
+CORS(app, resources={r"/*": {"origins": [os.getenv('ORIGIN')]}})
+
 dotenv.load_dotenv()
 TMDB_key = os.getenv('TMDB_KEY')
 
