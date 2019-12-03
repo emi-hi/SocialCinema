@@ -4,7 +4,6 @@
   align-items: center;
   overflow-y:auto;
   overflow-x: hidden ;
-
 }
 
 .friend-card{
@@ -14,6 +13,8 @@
   min-width: 12vh;
   max-width: 12vh;
   margin: 5px;
+  margin-left: auto;
+  margin-right: auto;
   border-radius: 5px;
   border: 2px solid black;
   position: relative;

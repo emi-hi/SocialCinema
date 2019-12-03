@@ -29,11 +29,15 @@
   justify-content: flex-start;
   height: 25vh;
   align-content: center;
-  margin-top:1px;
+  // margin-top:1px;
   overflow-x:scroll;
   align-items: center;    
   padding-left: 10px;
   padding-right: 10px;
+}
+
+.list-friends{
+  height: 16vh;
 }
 
 .favSelector {
