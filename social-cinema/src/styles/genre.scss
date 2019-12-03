@@ -9,22 +9,25 @@ section.genres {
   overflow-y:auto;
   background: transparent;
   @include bubble();
-
   z-index: 5px;
+  cursor: pointer;
+
+  ::-webkit-scrollbar {
+    display: none;
+  }
 
   button.reset{
     background-color: transparent;
     border: none;
     color: black;
     font-size: small;
-    
+    &:focus {
+      outline:none;
+    }
+    &:hover {
+      font-weight: bold;
+    }
   }
-  button.reset:focus {
-    outline:none;
-  }
-}
-.section.genres::-webkit-scrollbar {
-  display: none;
 }
 
 .genre-name{
@@ -42,87 +45,84 @@ section.genre {
   height: 7vw;
   position: relative;
   margin: 1px;
-}
 
-.genre-choices{
-  display: none;
-  height: 33%;
-  z-index: 100;
-}
-
-section.genre:hover .genre-choices{
-  opacity:.91;
-  position: absolute;
-  right: 5%;
-  bottom: 5%;
-  width:90%;
-  height: 90%;
-  display:flex;
-  flex-direction:column;
-  background-color: white;
-  border-radius: 10px;
-
-}
-
-.genre-image{
-  margin-top: 4px;
-  height: 4vw;
-  width: 6vw;
-}
-
-.genre-feeling-hate{
-  height: 100%;
-  width: 100%;
-  position: absolute;
-  opacity: 0.6;
-  z-index: -1;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-.genre-feeling-love{
-  height: 100%;
-  position: absolute;
-  opacity: 0.8;
-  z-index: -1;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
+  &:hover .genre-choices{
+    display:flex;
+  }
 
 
-
-button.unselected {
-  background-color:white;
-  border: 2px solid rgb(255, 255, 255);
-  -webkit-box-shadow:  0px 2px 5px 1px rgba(155, 155, 155, .5);
-  box-shadow:  0px 2px 5px 1px rgba(155, 155, 155, .5);
-}
-button.selected {
-  border: 2px solid rgb(0, 0, 0);
-  box-shadow: 1px 1px 5px grey;
-  -webkit-box-shadow: inset 0px 5px 5px 1px rgba(0, 0, 0, .3);
-  box-shadow: inset 0px 5px 5px 1px rgba(0, 0, 0, .3);
+  
 }
 
-button.selected#hategenre{
-  background-color: rgb(206, 95, 95);
-}
-button.selected#lovegenre{
-  background-color: rgb(116, 158, 116);
-}
-button.selected#mehgenre{
-  background-color: rgb(138, 138, 138);
+.genre{
+  &-choices{
+    display: flex;
+    flex-direction:column-reverse;
+    display: none;
+    z-index: 100;
+    opacity:.91;
+    position: absolute;
+    right: 5%;
+    bottom: 30%;
+    width:80%;
+    cursor: pointer;
+  }
+    &-image{
+    margin-top: 4px;
+    height: 4vw;
+    width: 6vw;
+  }
+  &-feeling-hate{
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    opacity: 0.6;
+    z-index: -1;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  &-feeling-love{
+    height: 100%;
+    position: absolute;
+    opacity: 0.8;
+    z-index: -1;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
 }
 
-button#hategenre:hover{
-  background-color: rgb(204, 119, 119);
-}
-button#lovegenre:hover{
-  background-color: rgb(143, 168, 143);
-}
-button#mehgenre:hover{
-  background-color: rgb(170, 168, 168);
+button {
+  cursor: pointer;
+  border-radius: 5px;
+  border: .5px solid #949494;
+  &.unselected {
+    background-color:white;
+  }
+  &.selected#hategenre{
+    background-color: #ff0000;
+    border: 2px solid #8d0000;
+  }
+  &.selected#lovegenre{
+    background-color: rgb(255, 227, 67);
+    border: 2px solid rgb(255, 209, 7);
+    
+  }
+  &.selected#mehgenre{
+    background-color: rgb(187, 187, 187);
+    border: 2px solid rgb(87, 87, 87);;
+  }
+  &#hategenre:hover{
+    background-color: #ff0000;
+  }
+  &#lovegenre:hover{
+    background-color: rgb(255, 227, 67);
+  }
+  &#mehgenre:hover{
+    background-color:rgb(187, 187, 187);
+  }
 }
 
 
@@ -131,6 +131,7 @@ button#mehgenre:hover{
   section.genres{
       justify-content: space-between;
       padding-bottom: 20px;
+      padding-top:20px;
 
     button.reset{
       margin-left: 40px;
@@ -160,7 +161,10 @@ button#mehgenre:hover{
     width: 32vw;
     
   }
-
+  .genre-choices{
+    bottom: 0%;
+    z-index: 10000; 
+  }
   .genre-feeling-love{
     opacity: 1;
   }
@@ -195,6 +199,9 @@ button#mehgenre:hover{
     font-size: smaller;
   }
   .genre-choices{
+    bottom: 0%;
+    left: 30%;
+    width: 10vw;
     z-index: 10000;    
   }
   span{
