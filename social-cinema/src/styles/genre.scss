@@ -95,6 +95,9 @@ section.genre {
 }
 
 button {
+  &:focus {
+    outline:none;
+  }
   cursor: pointer;
   border-radius: 5px;
   border: .5px solid #949494;
@@ -123,6 +126,7 @@ button {
   &#mehgenre:hover{
     background-color:rgb(187, 187, 187);
   }
+
 }
 
 
