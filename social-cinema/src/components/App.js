@@ -233,7 +233,7 @@ function App() {
         </article>
       }
       {friendList === "show" &&
-        <FriendList name={state.user.name} friends={friends} useMovieNight={useMovieNight} group={group} action="add" classname="list" type="All Friends  - click + on a friend to add them to your movie night"/>
+        <FriendList name={state.user.name} friends={friends} useMovieNight={useMovieNight} group={group} action="add" classname="list" type="All Friends"/>
       }
       <section className="main-container">
         {recentSuggestions.length > 0 ?

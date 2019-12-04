@@ -73,8 +73,7 @@ export default function Suggested(props) {
         <>
           <section className="suggestion">
             <header>
-              {error && <h5 className="suggestion-error">{error}</h5>}
-              <h2 className="movie-title">{props.suggestedMovie.title}</h2>
+              {error? <h5 className="suggestion-error">{error}</h5> : <h2 className="movie-title">{props.suggestedMovie.title}</h2>}
             </header>
             <main className="suggestion-info">
               <img alt={props.suggestedMovie.title} src={props.suggestedMovie.poster} className="movie-poster"></img>
