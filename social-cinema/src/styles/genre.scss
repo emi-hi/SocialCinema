@@ -1,6 +1,6 @@
 @import "../components/variables.scss";
 
-button.genre {
+section.genre {
   padding: 0;
   border: none;
   background: none;
@@ -110,6 +110,7 @@ section.genres {
   font-family: $font-title;
   flex-wrap: wrap;
   height: 100%;
+  padding: 2px;
   margin: 2px;
   overflow-y:auto;
   background: transparent;
@@ -127,7 +128,8 @@ section.genres {
     border: none;
     color: black;
     font-size: small;
-    margin-left: 25px;
+    font-weight:bold;
+    margin-left: 40px;
     &:focus {
       outline:none;
     }
@@ -151,14 +153,16 @@ section.genres {
       font-size: x-small;
     }
   }
+  section.genre{
+    width: 24vw;
+  }
   .genre-image{
     display: none;
   }
   .genre-choices{
-    bottom: -15%;
+    bottom: -20%;
     z-index: 10000; 
     width: 20vw;
-
      & button {
        width:20vw
      }
@@ -187,7 +191,7 @@ section.genres {
     }
   }
 
-  button.genre {
+  section.genre {
     width: 9vw; 
     }
   .genre-name{
