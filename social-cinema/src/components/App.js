@@ -1,20 +1,15 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import './App.scss';
-
 import List from './lists/List.js'
 import Nav from './Nav'
 import { DragDropContext } from 'react-beautiful-dnd'
-
-
 import Suggested from "./Suggested";
 import Genres from "./Genres";
 import FriendList from './FriendList';
 import MovieNightFriends from './MovieNightFriends';
-
 import useApplicationData from "../hooks/useApplicationData";
 import RecentSuggestion from './RecentSuggestion';
-// import RuntimeSelector from './RuntimeSelector';
 
 function App() {
   const { 

@@ -7,8 +7,6 @@ import Popup from "reactjs-popup";
 
 
 const contentStyle = {
-  // maxWidth: "300px",
-  // height: "200px",
   borderRadius: "20px"
 };
 
