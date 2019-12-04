@@ -109,10 +109,14 @@ def suggestions():
     tmdb_result = json.loads(r.text)
     results = tmdb_result["results"]
     
-    for index, result in enumerate(results):
-      if result['id'] in suggested_ids:
-        print("I WAS IN HERE", result["title"])
-        del results[index]
+    counter = 0
+
+    while counter < len(results):
+      if results[counter]['id'] in suggested_ids:
+        print("I WAS IN HERE", results[counter]["title"])
+        del results[counter]
+      else:
+        counter += 1
         
     all_results += results
 
