@@ -169,6 +169,7 @@
   
   @media only screen and (min-width: 551px) and (max-width: 790px) {
     .suggested-container{
+      max-height:none;
       .suggestion{
         margin-right: 10px;
         margin-left: 10px;
