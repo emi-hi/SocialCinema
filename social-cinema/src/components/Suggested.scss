@@ -13,6 +13,13 @@
   }
   .suggestion{
     display: grid;
+    h5.suggestion-error{
+      padding: 10px;
+      margin: 10px;
+      background-color: #fa9191;
+      border-radius: 15px;
+      font-size: medium;
+    }
     .suggestion-info{
       display: flex;
       flex-direction: row;
