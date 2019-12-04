@@ -28,7 +28,7 @@
       flex-direction: row;
       .movie-poster{
         align-self: flex-start;
-        // max-width: 25vw;
+        max-width: 25vw;
         max-height: 65vh;
         object-fit: contain;
         margin-right: 15px;
@@ -127,6 +127,7 @@
 /* IPHONE STYLES */
 @media only screen and (max-width: 551px) {
   .suggested-container{
+    max-height:none;
     .movie-title{
       font-size: large;
     }
@@ -166,7 +167,7 @@
 
   
   
-  @media only screen and (min-width: 551px) and (max-width: 900px) {
+  @media only screen and (min-width: 551px) and (max-width: 790px) {
     .suggested-container{
       .suggestion{
         margin-right: 10px;
@@ -176,6 +177,9 @@
     
         .suggestion-info{
           display:block;
+          .movie-poster{
+          max-height: 50vh;
+          }
 
           h6.later{
             position: absolute;
