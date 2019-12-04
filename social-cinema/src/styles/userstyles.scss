@@ -56,7 +56,6 @@
 
 .user-name-text{
   margin: 2px;
-  /* overflow-wrap: break-word; */
   overflow: hidden;
   text-overflow: ellipsis
 }
@@ -65,7 +64,7 @@
 /* IPHONE STYLES */
 @media only screen and (max-width: 551px) {
   article.friends-container article section {
-    display:flex;
     flex-direction: row;
   }
+
 }
