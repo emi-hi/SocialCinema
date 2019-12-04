@@ -60,6 +60,14 @@
           height: 95px;
           width: 95px;
           margin-left: auto;
+          &:hover{
+            animation-name: spin;
+            animation-duration: 3000ms;
+            animation-iteration-count: infinite;
+            animation-timing-function: linear; 
+            cursor:pointer;
+
+          }
         }
 
         img.later{
@@ -67,6 +75,11 @@
           width: 70px;
           margin-left: auto;
           margin-right: auto;
+          &:hover{
+            height: 77px;
+            width: 77px;
+            cursor:pointer;
+          }
         }
 
         a{
@@ -75,7 +88,10 @@
           color: black;
           margin: 20px;
         }
-  
+        a:hover{
+          font-size:medium;
+          margin-bottom: 19px;
+        }
         span{
           text-align: center;
         }
