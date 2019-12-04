@@ -3,6 +3,7 @@
 .suggested-container{
   @include bubble();
   min-height: 500px;
+  max-height: 80vh;
 
   h1, h2 {
     font-family: $font-title;
@@ -13,36 +14,43 @@
   }
   .suggestion{
     display: grid;
+    
     h5.suggestion-error{
       padding: 10px;
       margin: 10px;
       background-color: #fa9191;
       border-radius: 15px;
       font-size: medium;
+      
     }
     .suggestion-info{
       display: flex;
       flex-direction: row;
       .movie-poster{
         align-self: flex-start;
-        max-width: 30vw;
-        max-height: 90vh;
+        // max-width: 25vw;
+        max-height: 65vh;
         object-fit: contain;
-        margin-right: 30px;
+        margin-right: 15px;
         margin-left:15px;
         margin-bottom: 15px;
       }
       article{
+   
         display: flex;
         flex-direction: column;
         text-align: left;
         font-size: 15px;
         margin-right: 15px;
         p{
+          margin-top:2px;
           overflow-x: auto;
-          overflow-y: auto;
+          overflow-y: scroll;
+          max-height: 28vh;
         }
-
+        h4{
+          margin-top: 1px;
+        }
         h6.next{
           margin-left: auto;
           font-size: small;
@@ -57,8 +65,8 @@
         }
 
         img.next{
-          height: 95px;
-          width: 95px;
+          height: 10vh;
+          // width: 95px;
           margin-left: auto;
           &:hover{
             animation-name: spin;
@@ -71,8 +79,7 @@
         }
 
         img.later{
-          height: 70px;
-          width: 70px;
+          height: 8vh;
           margin-left: auto;
           margin-right: auto;
           &:hover{
@@ -86,11 +93,11 @@
           text-align: center;
           text-decoration: none;
           color: black;
-          margin: 20px;
+          margin: 10px;
         }
         a:hover{
           font-size:medium;
-          margin-bottom: 19px;
+          margin-bottom: 9px;
         }
         span{
           text-align: center;
@@ -159,6 +166,27 @@
   
   @media only screen and (min-width: 551px) and (max-width: 900px) {
     .suggested-container{
+      .suggestion{
+        margin-right: 10px;
+        margin-left: 10px;
+        display: grid;
+        width:100%;
+    
+        .suggestion-info{
+          display:block;
+
+          h6.later{
+            position: absolute;
+
+
+          }
+          img.later{
+            position: absolute;
+            margin-top:15px;
+          }
+
+        }
+      }  
       img.reel {
         height: 30vh;
       }
