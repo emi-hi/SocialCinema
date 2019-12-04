@@ -20,7 +20,7 @@ export default function Genre(props) {
   }
 
   return (
-    <button className="genre">
+    <section className="genre">
       {feelingImg && <img src={feelingImg} className={imgClassName} alt={feelingImg}/>}
       <img src={`images/genreicons/${props.name.replace(" ", "")}.svg`} className="genre-image" alt={`${props.name}`} />
       <h6 className="genre-name">{displayName}</h6>
@@ -29,6 +29,6 @@ export default function Genre(props) {
         <button type="button" id="mehgenre" className={props.meh_class} onClick={() => props.setGenre(props.id, null)}>Meh</button>
         <button type="button" id="lovegenre" className={props.love_class} onClick={() => props.setGenre(props.id, true)}>Love it!</button>
       </section>
-    </button>
+    </section>
   )
 }
