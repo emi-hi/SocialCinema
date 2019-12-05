@@ -26,10 +26,6 @@ A web application for receiving custom movie suggestions either for a single use
 
 !["Gif later list feature"]()
 
-*View Friend's Preferences*
+*View Friend's Preferences and Add to Movie Night*
 
 !["Gif view friend preferences"]()
-
-*Add friends to Movie Night*
-
-!["Gif add friends to movie night"]()
