@@ -1,6 +1,6 @@
 # Social Cinema API
 
-This is the API for Socail Cinema.
+This is the API for Social Cinema.
 
 ## Setup
 
