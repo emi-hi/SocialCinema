@@ -3,7 +3,7 @@ astroid==1.6.6
 certifi==2019.9.11
 chardet==3.0.4
 Click==7.0
-Flask==0.12.2
+Flask==1.0
 Flask-Cors==3.0.3
 Flask-Migrate==2.5.2
 Flask-SQLAlchemy==2.4.1
