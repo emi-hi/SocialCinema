@@ -16,7 +16,7 @@ A web application for receiving custom movie suggestions either for a single use
 
 *Setting Preferences*
 
-!["Gif preferences"]()
+!["Gif preferences"](https://github.com/emi-hi/SocialCinema/blob/master/screenshots/preferences.gif?raw=true)
 
 *Favourite Movies Feature*
 
