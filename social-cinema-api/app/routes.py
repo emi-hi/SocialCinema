@@ -147,7 +147,7 @@ def suggestions():
     if len(rating) > 0:
       ratingText = str(rating[0]) + '/10 on IMDB'
   else:
-    imdb_link = "No IMDB link available."
+    imdb_link = "https://www.imdb.com/"
     
 
   movie_info = {
