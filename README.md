@@ -20,12 +20,12 @@ A web application for receiving custom movie suggestions either for a single use
 
 *Favourite Movies Feature*
 
-!["Gif favourite movies bar"]()
+!["Gif favourite movies bar"](https://github.com/emi-hi/SocialCinema/blob/master/screenshots/favourite.gif?raw=true)
 
 *Adding movies to your Later List*
 
-!["Gif later list feature"]()
+!["Gif later list feature"](https://github.com/emi-hi/SocialCinema/blob/master/screenshots/later.gif?raw=true)
 
 *View Friend's Preferences and Add to Movie Night*
 
-!["Gif view friend preferences"]()
+!["Gif view friend preferences"](https://github.com/emi-hi/SocialCinema/blob/master/screenshots/movie_night.gif?raw=true)
