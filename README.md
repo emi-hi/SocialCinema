@@ -12,7 +12,7 @@ A web application for receiving custom movie suggestions either for a single use
 
 *Movie Suggestion Feature*
 
-!["Gif movie selector"]()
+!["Gif movie selector"](https://github.com/emi-hi/SocialCinema/blob/master/screenshots/movie_suggestion.gif?raw=true)
 
 *Setting Preferences*
 
