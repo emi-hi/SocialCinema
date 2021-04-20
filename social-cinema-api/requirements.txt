@@ -20,7 +20,7 @@ mccabe==0.6.1
 pipenv==2018.11.26
 psycopg2==2.8.4
 psycopg2-binary==2.8.4
-py==1.8.0
+py==1.10.0
 PyJWT==1.7.1
 pylint==1.8.2
 pymongo==3.3.1
